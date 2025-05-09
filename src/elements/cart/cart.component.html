@@ -1,0 +1,50 @@
+<!-- Modal Overlay -->
+<div  class="fixed inset-0 z-50 flex items-center justify-center ">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-6 flex flex-col relative">
+  
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-4  ">
+        <h2 class="text-xl font-semibold">Shopping Cart</h2>
+        <button (click)="close()" class="text-gray-500 hover:text-red-500 text-2xl absolute top-4 right-4">&times;</button>
+      </div>
+  
+      <!-- Body -->
+      <div class="overflow-y-auto h-[calc(100vh-35vh)]">
+        <div class="flex-1 flex items-center justify-center text-gray-500 text-center min-h-[150px]"
+      *ngIf="cartItems.length === 0">
+        No products in the cart.
+      </div>
+
+
+      <div *ngFor="let item of cartItems" class="cart-item p-4 border mb-3 rounded shadow ">
+        <div class="flex items-center gap-4">
+          <img 
+         
+          [src]="'http://localhost:3000/uploads/' + item.images"
+           class="w-20 h-20 object-cover rounded" />
+          <div>
+            <h3 class="text-lg font-semibold">{{ item.title }}</h3>
+            <p>Price: {{ item.price}}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <!-- <button (click)="decreaseQuantity(item)" class="bg-gray-200 px-2 rounded">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increaseQuantity(item)" class="bg-gray-200 px-2 rounded">+</button> -->
+            <p>Total: {{ item.price * item.quantity }}</p>
+          </div>
+        </div>
+      </div>
+      </div>
+  
+      <!-- Footer -->
+      <div class="mt-6 flex">
+        <button routerLink="" (click)="close()" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-full transition duration-300 mr-2">
+          CONTINUE SHOPPING
+        </button>
+        <button (click)="onBuyNow()" (click)="close()" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-full transition duration-300">
+          BUY NOW
+        </button>
+      </div>
+  
+    </div>
+  </div>
+  

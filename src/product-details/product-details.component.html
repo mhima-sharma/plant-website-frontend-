@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="">
+    <div class="flex pt-40 pr-20 pl-20 pb-20" *ngIf="product" >
+        <img src="" alt=""  
+        *ngFor="let img of product.images?.split(',')"
+        [src]="'http://localhost:3000/uploads/' + img"
+        class="bg-gray-400 h-80 w-60 rounded-2xl"/>
+        <div class="ml-10 mt-5 ">
+            <p class="text-l text-green-600 hover:text-red-500">{{ product.description }}</p>
+            <p class="text-gray-800 text-5xl pt-2">{{ product.title }}</p>
+            <p class="text-gray-800 text-xl pt-2">Rs.{{ product.price }} + Free dilivery</p>
+            <!-- not for change -->
+            <p class="pt-2 text-gray-500">Plants bring life, color, and freshness to any space—whether indoors or outdoors. From low-maintenance succulents to lush tropical greens, there’s a perfect plant for every lifestyle and environment. Not only do plants enhance the beauty of your surroundings, but they also purify the air, boost mood, and create a calming atmosphere.</p>
+            <button class="bg-red-500 p-2 w-40 mt-2 rounded-2xl hover:bg-green-600 text-white" (click)="addToCart()">Add to cart</button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

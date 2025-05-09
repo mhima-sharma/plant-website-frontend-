@@ -1,0 +1,151 @@
+<app-header></app-header>
+<div >
+    <div class="relative  bg-cover bg-center" style="background-image: url('https://img.freepik.com/premium-vector/abstract-background-pastel-colors_627230-60.jpg');">
+        <!-- Dark overlay (optional) -->
+      
+        <!-- Text content -->
+        <div class="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
+          <h1 class="text-green-900 text-4xl md:text-5xl font-bold mb-4 p-40">Contact Us</h1>
+        </div>
+      </div>
+</div>
+<div class="flex">
+    <div class="pt-10 pl-18 " >
+        <h1 class="font-bold text-3xl mb-8 ">Contact Details</h1>
+       <div>
+        <div class="flex">
+         
+            <div class="flex ">
+                <p class="text-red-500 text-2xl font-bold">જ⁀➴</p>
+               <div>
+                <h1 class="text-2xl font-semibold">Our Location</h1>
+                <p class="text-gray-400">1569 2nd Ave, New York,</p>
+                <p class="text-gray-400">NY 10028, USA</p>
+               </div>
+            </div>
+            <div class="flex">
+                <p class=" text-2xl font-bold">📞</p>
+                <div>
+                    <h1 class="text-2xl font-semibold">Call Us</h1>
+                    <p class="text-gray-400">+123 456 7890</p>
+                    <p class="text-gray-400">+123 456 7891</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex mt-8">
+            <p class="text-red-500 text-2xl font-bold">✉︎</p>
+            <div class="ml-7"><h1 class="text-2xl font-semibold ">Our Email</h1>
+                <p class="text-gray-400">info.com</p>
+                <p class="text-gray-400">support.com</p></div>
+        </div>
+       </div>
+       <hr class="text-gray-500 mt-5 w-120">
+       <section class="bg-gray-50 py-12 px-0">
+        <div class="w-full max-w-2xl">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-6">Send Us a Message</h2>
+          <!-- <form 
+          class="space-y-4"
+          action="https://getform.io/f/azywegjb" 
+          method="POST"
+        >
+          <input 
+            type="text" 
+            name="name" 
+            placeholder="Name" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" 
+            required 
+          />
+          
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Email" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" 
+            required 
+          />
+          
+          <input 
+            type="text" 
+            name="subject" 
+            placeholder="Subject" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" 
+          />
+          
+          <textarea 
+            name="message" 
+            placeholder="Message" 
+            rows="5" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            required
+          ></textarea>
+          
+          <button 
+            type="submit" 
+            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300"
+          >
+            SEND MESSAGE
+          </button>
+        </form>
+         -->
+         <form class="space-y-4" (ngSubmit)="onSubmit()" #contactForm="ngForm">
+          <input 
+            type="text" 
+            name="name" 
+            [(ngModel)]="formData.name" 
+            placeholder="Name" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" 
+            required 
+          />
+          
+          <input 
+            type="email" 
+            name="email" 
+            [(ngModel)]="formData.email" 
+            placeholder="Email" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" 
+            required 
+          />
+          
+          <input 
+            type="text" 
+            name="subject" 
+            [(ngModel)]="formData.subject" 
+            placeholder="Subject" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" 
+          />
+          
+          <textarea 
+            name="message" 
+            [(ngModel)]="formData.message" 
+            placeholder="Message" 
+            rows="5" 
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+            required
+          ></textarea>
+          
+          <button 
+            type="submit" 
+            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300"
+          >
+            SEND MESSAGE
+          </button>
+        
+          <p *ngIf="successMessage" class="text-green-600">{{ successMessage }}</p>
+          <p *ngIf="errorMessage" class="text-red-600">{{ errorMessage }}</p>
+        </form>
+        
+       
+        
+        </div>
+      </section>
+      
+       
+    </div>
+    <div class="pt-10 pl-18">
+        <h1 class="text-3xl font-bold mb-8 ">Find Us</h1>
+        <div class="map-container">
+          
+          </div>
+    </div>
+</div>
+<app-footer></app-footer>

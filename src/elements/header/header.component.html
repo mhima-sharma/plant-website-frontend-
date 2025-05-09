@@ -1,0 +1,16 @@
+<div class="bg-gradient-to-r from-lime-300 to-green-800 fixed w-full z-70 text-white text-xl font-bold pt-1 pb-1 text-center">
+    <p>"Work that speaks for itself."</p>
+</div>
+<div class="fixed bg-white z-50" >
+    <nav class="pt-12 flex w-500 shadow pb-4 ">
+        <h1 class="text-green-900 text-4xl font-bold pr-30 pl-18">🌿Little Leafy</h1>
+        <a routerLink="" class="text-gray-900 text-l font-medium pr-15 pt-2 pl-40 hover:text-green-800">Home</a>
+        <a routerLink="/store" class="text-gray-900 text-l font-medium pr-12 pt-2 hover:text-green-800">Store</a>
+        <a routerLink="/about" class="text-gray-900 text-l font-medium pr-12 pt-2 hover:text-green-800">About Us</a>
+        <a routerLink="/contact" class="text-gray-900 text-l font-medium pr-12 pt-2 hover:text-green-800" >Contact Us</a>
+        <!-- <a href="" class="text-gray-900 text-l font-medium pr-12 pt-2 hover:text-green-800">My Account</a> -->
+        <a (click)="openCart()" class="text-gray-900 text-l font-medium pr-12 pt-2 hover:text-green-800">Cart</a>
+        
+        <a class="text-gray-900 text-l font-medium pr-12 pt-2 hover:text-green-800" routerLink="/user-login" >User Profile</a>
+    </nav>
+</div>
