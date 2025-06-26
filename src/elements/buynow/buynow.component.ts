@@ -1,4 +1,113 @@
-import { Component, Inject, Optional } from '@angular/core';
+// import { Component, Inject, Optional } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+// import { CartService } from '../../app/service/cart.service';
+// import { CommonModule } from '@angular/common';
+// import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+// import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+// declare var Razorpay: any;
+
+
+// @Component({
+//   selector: 'app-buynow',
+//   imports:[CommonModule,ReactiveFormsModule],
+//   templateUrl: './buynow.component.html',
+//   styleUrl: './buynow.component.css',
+//   standalone: true, // only if using standalone component structure
+// })
+// export class BuynowComponent {
+//   cartItems: any[] = [];
+//   checkoutForm: FormGroup;
+//  showCartSummary = false;
+//  showcartItems: any[] = [];
+// //  const formData = this.checkoutForm.value;
+
+ 
+// // showCartSummary: any;
+//   constructor(@Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder,private http: HttpClient,private cartService: CartService) {
+//     this.cartItems = data?.cart;
+//     console.log('Received data:', this.cartItems); // ✅ Debug log
+//     this.checkoutForm = this.fb.group({
+//       fullName: ['', Validators.required],
+//       email: ['', [Validators.required, Validators.email]],
+//       phoneNumber: ['', Validators.required],
+//       shippingAddress: ['', Validators.required],
+//       paymentMethod: ['Credit / Debit Card', Validators.required]
+//     });
+//   }
+
+//     getTotal(): number {
+//       return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+//     }
+
+//     ngOnInit() {
+      
+//     }
+
+//   async startRazorpayCheckout() {
+//     const payload = {
+//       gateway: 'razorpay',
+//       amount: 610000, // ₹6100.00 in paise
+//       currency: 'INR',
+//       name: this.checkoutForm.value.fullName,
+//       email: this.checkoutForm.value.email,
+//       contact: this.checkoutForm.value.phoneNumber,
+//       address: this.checkoutForm.value.shippingAddress,
+//     };
+
+//     try {
+//       const response = await this.http
+//         .post<any>('https://api.thub.sanchidev.in/api/v1/payments/create-order', payload)
+//         .toPromise();
+
+//       const order = response.data;
+
+//       const options = {
+//         key: 'rzp_test_uEJqigl3qciRzl', // Replace with live key in prod
+//         amount: order.amount,
+//         currency: order.currency,
+//         name: 'My App',
+//         description: 'Order Payment',
+//         order_id: order.id,
+//         handler: (res: any) => {
+//         console.log('Razorpay Payment Success:', res);
+//           // TODO: Optionally call your backend to verify payment
+//         },
+//         prefill: {
+//           name: this.checkoutForm.value.fullName,
+//           email: this.checkoutForm.value.email,
+//           contact: this.checkoutForm.value.phoneNumber,
+//         },
+//         theme: {
+//           color: '#3399CC',
+//         },
+//       };
+
+//       const rzp = new Razorpay(options);
+//       rzp.open();
+//     } catch (error) {
+//       console.error('Error creating Razorpay order', error);
+//     }
+//   }
+// }
+
+
+
+// // cartItems: any[] = [];
+// // showCartSummary = false;
+
+
+// // onBuyNow() {
+// //   this.cartService.getCartData().subscribe((data) => {
+// //     this.cartItems = data;
+// //     this.showCartSummary = true;
+// //   });
+// // }
+
+// // getTotal(): number {
+// //   return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+// // }
+import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../app/service/cart.service';
 import { CommonModule } from '@angular/common';
@@ -7,26 +116,26 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 declare var Razorpay: any;
 
-
 @Component({
   selector: 'app-buynow',
-  imports:[CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './buynow.component.html',
   styleUrl: './buynow.component.css',
-  standalone: true, // only if using standalone component structure
+  standalone: true,
 })
 export class BuynowComponent {
   cartItems: any[] = [];
   checkoutForm: FormGroup;
- showCartSummary = false;
- showcartItems: any[] = [];
-//  const formData = this.checkoutForm.value;
 
- 
-// showCartSummary: any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder,private http: HttpClient,private cartService: CartService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private cartService: CartService
+  ) {
     this.cartItems = data?.cart;
-    console.log('Received data:', this.cartItems); // ✅ Debug log
+    console.log('Received data:', this.cartItems);
+
     this.checkoutForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -36,14 +145,13 @@ export class BuynowComponent {
     });
   }
 
-    getTotal(): number {
-      return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    }
+  getTotal(): number {
+    return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  }
 
-    ngOnInit() {
-      
-    }
+  ngOnInit() {}
 
+  // 🔵 Razorpay Payment (Existing Flow)
   async startRazorpayCheckout() {
     const payload = {
       gateway: 'razorpay',
@@ -63,15 +171,14 @@ export class BuynowComponent {
       const order = response.data;
 
       const options = {
-        key: 'rzp_test_uEJqigl3qciRzl', // Replace with live key in prod
+        key: 'rzp_test_uEJqigl3qciRzl',
         amount: order.amount,
         currency: order.currency,
         name: 'My App',
         description: 'Order Payment',
         order_id: order.id,
         handler: (res: any) => {
-        console.log('Razorpay Payment Success:', res);
-          // TODO: Optionally call your backend to verify payment
+          console.log('Razorpay Payment Success:', res);
         },
         prefill: {
           name: this.checkoutForm.value.fullName,
@@ -89,21 +196,34 @@ export class BuynowComponent {
       console.error('Error creating Razorpay order', error);
     }
   }
+
+  // 🟢 Easebuzz Payment (New Flow)
+  placeEasebuzzOrder() {
+    const totalAmount = this.getTotal();
+    const orderPayload = {
+      userId: 11, // Replace with actual logged-in user ID
+      billingDetails: {
+        fullName: this.checkoutForm.value.fullName,
+        email: this.checkoutForm.value.email,
+        phone: this.checkoutForm.value.phoneNumber,
+        shippingAddress: this.checkoutForm.value.shippingAddress
+      },
+      cartItems: this.cartItems,
+      paymentMethod: this.checkoutForm.value.paymentMethod,
+      totalAmount: totalAmount
+    };
+
+    // Create Order in Backend
+    this.http.post<any>('http://localhost:3000/api/orders', orderPayload).subscribe(orderRes => {
+      // Initiate Easebuzz Payment
+      this.http.post<any>('http://localhost:3000/api/easebuzz-order', {
+        orderId: orderRes.orderId,
+        totalAmount: totalAmount,
+        customer: orderPayload.billingDetails
+      }).subscribe(paymentRes => {
+        // Redirect to Easebuzz Payment Page
+        window.location.href = paymentRes.data.payment_link;
+      });
+    });
+  }
 }
-
-
-
-// cartItems: any[] = [];
-// showCartSummary = false;
-
-
-// onBuyNow() {
-//   this.cartService.getCartData().subscribe((data) => {
-//     this.cartItems = data;
-//     this.showCartSummary = true;
-//   });
-// }
-
-// getTotal(): number {
-//   return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-// }

@@ -12,11 +12,14 @@ import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.comp
 import { CreateproductComponent } from '../createproduct/createproduct.component';
 import { BuynowComponent } from '../elements/buynow/buynow.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { ChatComponent } from './chat/chat.component';
 
 export const routes: Routes = [
-    { path: '', component: ShowCaseOfMyProjectComponent },
+    { path: 'show', component: ShowCaseOfMyProjectComponent },
     { path: 'admin-login', component: LoginAdminComponent },
-    { path: 'user-login', component: LoginUserComponent },
+    
+    // { path: 'user-login', component: LoginAdminComponent },
+    { path: '', component: LoginUserComponent },
     { path: 'signup-admin', component: SignupAdminComponent },
     { path: 'signup-user', component: SignupUserComponent },
     { path: 'store', component: StoreComponent },
@@ -26,7 +29,9 @@ export const routes: Routes = [
     { path: 'admindash', component: AdminDashboardComponent },
     { path: 'addProduct', component: CreateproductComponent },
     { path: 'buynow', component: BuynowComponent },
-    { path: 'product/:id', component: ProductDetailsComponent }
+    { path: 'product/:id', component: ProductDetailsComponent },
+    { path: 'chat', component: ChatComponent }
+
     // { path: 'productDetail', component: ProductDetailsComponent }
 
 

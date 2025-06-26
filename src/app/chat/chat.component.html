@@ -1,0 +1,215 @@
+<div class="chat-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h3>Chat</h3>
+    <!-- Group Creation Form -->
+
+    <input type="text" placeholder="Search" class="search" [(ngModel)]="searchText" (ngModelChange)="filterUsers(searchText)" />
+    <div class="user-list">
+      <div *ngFor="let user of users " class="user" [class.active]="user === selectedUser"
+        (click)="selectUser(user,'one_to_one')">
+        <div class="avatar">{{ user.name[0] | uppercase }}</div>
+        <div class="info">
+          <strong>{{ user.name |titlecase }}</strong>
+          <span>Last message...</span>
+        </div>
+      </div>
+      <div *ngIf="!users.length && searchText">
+        <p class="text-align-center">No matching users found</p>
+      </div>
+    </div>
+
+    <!-- Group -->
+    <hr>
+    <div class="d-flex justify-content-between">
+      <div class="fw-bold">Groups</div>
+    <button type="button" class="btn btn-light p-1" data-bs-toggle="modal" data-bs-target="#groupModal" title="Create Group">
+  <i class="bi bi-people-fill fs-5"></i>
+</button>
+    </div>
+    <hr>
+    <!-- Group Creation Modal -->
+    <div class="modal fade" id="groupModal" tabindex="-1" aria-labelledby="groupModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="groupModalLabel">Create Group</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <input type="text" class="form-control mb-3" placeholder="Group Name" [(ngModel)]="groupName" />
+
+            <label class="form-label">Select Members:</label>
+            <div class="form-check" *ngFor="let user of users">
+              <input class="form-check-input" type="checkbox" [value]="user.name"
+                (change)="toggleUserSelection(user.name)" id="{{user.name}}">
+              <label class="form-check-label" [for]="user.name">
+                {{ user.name | titlecase }}
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <!-- (click)="createGroup()" -->
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Create
+              Group</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="user-list" *ngIf="groups.length ">
+      <div *ngFor="let user of groups" class="user"
+        [class.active]="user === selectedUser" (click)="selectUser(user,'group')">
+        <div class="avatar">{{ user.group_name[0] | uppercase }}</div>
+        <div class="info">
+          <strong>{{ user.group_name |titlecase }}</strong>
+          <span>Last message...</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Chat Panel -->
+  <main class="chat-panel">
+   <div class="chat-header d-flex justify-content-between align-items-center">
+  <div class="user-info d-flex align-items-center gap-2">
+    <div class="avatar">{{ receiverName[0] | uppercase }}</div>
+    <div>
+      <strong *ngIf="receiverName">{{ receiverName | titlecase }}</strong>
+      <span [class.online]="onlineUsers.includes(receiverName)"
+            [class.offline]="!onlineUsers.includes(receiverName)">
+         {{ onlineUsers.includes(receiverName) ? 'Online' : 'Offline' }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Action Icons -->
+  <div class="chat-actions d-flex align-items-center gap-3">
+<!-- Audio Call -->
+<button class="btn btn-light p-1" title="Audio Call" (click)="startAudioCall()">
+  <i class="bi bi-telephone-fill"></i>
+</button>
+
+<!-- Video Call -->
+<button class="btn btn-light p-1" title="Video Call" (click)="startVideoCall()">
+  <i class="bi bi-camera-video-fill"></i>
+</button>
+
+<!-- Menu (You can use three dots or menu icon) -->
+<button class="btn btn-light p-1" title="Menu" >
+  <i class="bi bi-three-dots-vertical"></i>
+</button>
+  </div>
+</div>
+
+    <div class="chat-messages" id="chatBox" *ngIf="groupedMessages">
+      <div *ngFor="let group of groupedMessages let gIndex = index" >
+        <!-- Date Header -->
+        <div class=" text-center mb-2">
+          <small class="date-header">{{ group.date }}</small>
+        </div>
+    
+        <!-- Messages -->
+        <div *ngFor="let msg of group.messages; let mIndex = index" class="message-container position-relative"
+          [class.me]="msg.sender === currentUser">
+    
+          <div class="message-bubble">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <ng-container *ngIf="chatType === 'group'">
+                  <strong>{{ msg.sender === currentUser ? 'You' : (msg.sender | titlecase) }}</strong>
+                </ng-container>
+                <div>
+                  {{ msg.message }}
+                  <span class="time">{{ msg.created_at | date: 'shortTime' }}</span>
+                </div>
+                <div class="d-flex justify-content-end" *ngIf="msg.isEdited">
+                  <small class="text-white" style="font-size: 10px;">
+                    Edited
+                  </small>
+                </div>
+              </div>
+    
+              <!-- Three Dot Menu for This Message -->
+              <div class="dropdown" *ngIf="msg.sender === currentUser">
+                <button class="btn btn-sm p-0 text-white" type="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>  
+                <ul class="dropdown-menu dropdown-menu-end" style="font-size: 12px !important; cursor: pointer;">
+                  <li>
+                    <a class="dropdown-item" (click)="copyMessage(msg.message)">
+                      <i class="bi bi-clipboard me-2"></i> Copy
+                    </a>
+                  </li>
+                  <li *ngIf="canEditMessage(msg.created_at)">
+                    <a class="dropdown-item" (click)="editMessage(gIndex, mIndex)">
+                      <i class="bi bi-pencil-square me-2"></i> Edit
+                    </a>
+                  </li>
+                  <li>
+                    <!--(click)="deleteMessage(gIndex, mIndex)"  -->
+                    <a class="dropdown-item text-danger" >
+                      <i class="bi bi-trash me-2"></i> Delete
+                    </a>
+                  </li>
+                </ul>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+  <div class="chat-input-wrapper position-relative">
+  <!-- Emoji Picker Popup -->
+  <!-- <emoji-mart 
+    (emojiSelect)="addEmoji($event)" 
+    *ngIf="showEmojiPicker" 
+    class="emoji-picker-popup">
+  </emoji-mart> -->
+
+  <!-- Chat Input Bar -->
+  <div class="chat-input-box d-flex align-items-center border rounded px-2 py-1">
+    <button class="btn p-0 me-2" (click)="toggleEmojiPicker()" title="Emoji">
+      <i class="bi bi-emoji-smile fs-5"></i>
+    </button>
+
+  <!-- Attachment Button -->
+    <label class="btn p-0 m-0" title="Attach File">
+      <i class="bi bi-paperclip fs-5"></i>
+      <input type="file" hidden (change)="onFileSelected($event)" />
+    </label>
+
+    <input 
+      [(ngModel)]="message" 
+      placeholder="Write your message..." 
+      class="form-control border-0 shadow-none" 
+      (keyup.enter)="sendMessage()"
+    />
+
+    <button class="btn p-0 ms-2" (click)="sendMessage()" title="Send">
+      <i class="bi bi-send-fill fs-5"></i>
+    </button>
+
+      <!-- Suggestion Dropdown -->
+  <ul *ngIf="filteredSuggestions.length && message"
+      class="list-group position-absolute bg-white shadow border rounded"
+      style="z-index: 1050; bottom: 60px; left: 10px; width: 300px;">
+    <li class="list-group-item list-group-item-action"
+        *ngFor="let suggestion of filteredSuggestions"
+        (click)="selectSuggestion(suggestion)">
+      {{ suggestion }}
+    </li>
+  </ul>
+
+  </div>
+</div>
+
+  </main>
+</div>

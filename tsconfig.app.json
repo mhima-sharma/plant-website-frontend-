@@ -4,14 +4,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [
-      "node"
-    ]
+    "types": []
   },
   "files": [
-    "src/main.ts",
-    "src/main.server.ts",
-    "src/server.ts"
+    "src/main.ts",        // Keep only your browser main file here
+    "src/polyfills.ts"
   ],
   "include": [
     "src/**/*.d.ts"
