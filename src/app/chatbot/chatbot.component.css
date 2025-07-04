@@ -1,0 +1,61 @@
+/* .chat-window {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  height: 500px;
+  overflow-y: auto;
+}
+
+.user-message {
+  text-align: right;
+  background-color: #e0f7fa;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.bot-message {
+  text-align: left;
+  background-color: #fce4ec;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.chat-form {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.chat-form button {
+  padding: 0 15px;
+} */
+.chat-window {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+input::placeholder {
+  color: #888;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in;
+}

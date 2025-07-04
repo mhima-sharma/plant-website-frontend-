@@ -1,14 +1,26 @@
 <app-header></app-header>
-<div >
-  <div class="relative  bg-cover bg-center" style="background-image: url('https://img.freepik.com/premium-vector/abstract-background-pastel-colors_627230-60.jpg');">
-      <!-- Dark overlay (optional) -->
+
+<!-- Store Banner -->
+<div>
+  <div class="relative bg-cover bg-center h-[300px] md:h-[400px]" style="background-image: url('https://img.freepik.com/premium-vector/abstract-background-pastel-colors_627230-60.jpg');">
     
-      <!-- Text content -->
-      <div class="relative z-10 flex flex-col items-center justify-center text-center h-full px-4">
-        <h1 class="text-green-900 text-4xl md:text-5xl font-bold mb-4 p-40">Store</h1>
-      </div>
+    <!-- Optional Dark Overlay for better text contrast -->
+    <div class="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
+    
+    <!-- Banner Text -->
+    <div class="relative z-20 flex flex-col items-center justify-center text-center h-full px-4">
+      <h1 class="text-green-900 text-4xl md:text-5xl font-bold mb-4">Store</h1>
     </div>
+  </div>
 </div>
-<app-plants-product></app-plants-product>
+
+<!-- Store Products -->
+<div class="px-4 md:px-10 lg:px-20 py-10 bg-gray-50 min-h-screen">
+  <app-plants-product></app-plants-product>
+</div>
+
+<!-- Need Help Section -->
 <app-need-help></app-need-help>
+
+<!-- Footer -->
 <app-footer></app-footer>

@@ -1,69 +1,74 @@
-<div class="container mx-auto p-6" [formGroup]="checkoutForm">
-  <h2 class="text-2xl font-bold mb-6 text-center">Checkout</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="w-full max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10" [formGroup]="checkoutForm">
+  <h2 class="text-2xl sm:text-3xl font-extrabold mb-8 sm:mb-10 text-center text-gray-800">Checkout</h2>
 
+  <!-- Force horizontal layout and allow scroll on small screens -->
+  <div class="flex flex-row gap-6 md:gap-10 overflow-x-auto">
     <!-- Billing Details -->
-    <div class="bg-white p-6 shadow-lg rounded-lg">
-      <h3 class="text-lg font-semibold mb-4">Billing Details</h3>
+    <div class="min-w-[320px] md:min-w-[400px] flex-1 bg-white p-6 sm:p-8 shadow-lg rounded-2xl">
+      <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-700">Billing Details</h3>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium">Full Name</label>
-        <input type="text" formControlName="fullName" class="w-full border rounded p-2" placeholder="John Doe">
-      </div>
+      <div class="space-y-4 sm:space-y-6">
+        <div>
+          <label class="block text-gray-600 font-medium mb-2">Full Name</label>
+          <input type="text" formControlName="fullName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition" placeholder="John Doe">
+        </div>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium">Email Address</label>
-        <input type="email" formControlName="email" class="w-full border rounded p-2" placeholder="john@example.com">
-      </div>
+        <div>
+          <label class="block text-gray-600 font-medium mb-2">Email Address</label>
+          <input type="email" formControlName="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition" placeholder="john@example.com">
+        </div>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium">Phone Number</label>
-        <input type="tel" formControlName="phoneNumber" class="w-full border rounded p-2" placeholder="9876543210">
-      </div>
+        <div>
+          <label class="block text-gray-600 font-medium mb-2">Phone Number</label>
+          <input type="tel" formControlName="phoneNumber" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition" placeholder="9876543210">
+        </div>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium">Shipping Address</label>
-        <textarea formControlName="shippingAddress" class="w-full border rounded p-2" rows="3" placeholder="Street, City, Pincode"></textarea>
+        <div>
+          <label class="block text-gray-600 font-medium mb-2">Shipping Address</label>
+          <textarea #addressInput formControlName="shippingAddress" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition" rows="4" placeholder="Street, City, Pincode"></textarea>
+        </div>
       </div>
     </div>
 
     <!-- Order Summary -->
-    <div class="bg-white p-6 shadow-lg rounded-lg">
-      <h3 class="text-lg font-semibold mb-4">Order Summary</h3>
+    <div class="min-w-[320px] md:min-w-[400px] flex-1 bg-white p-6 sm:p-8 shadow-lg rounded-2xl">
+      <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-700">Order Summary</h3>
 
-      <div class="border-b pb-4 mb-4">
-        <div class="flex justify-between" *ngFor="let item of cartItems">
-          <span>{{ item.title }}</span>
-          <span>{{ item.quantity }}</span>
-          <span>{{ item.price * item.quantity }}</span>
+      <div class="border-b pb-4 sm:pb-6 mb-4 sm:mb-6 divide-y divide-gray-200">
+        <div *ngIf="cartItems.length === 0" class="text-center text-gray-500 py-4">
+          No items in your cart.
+        </div>
+
+        <div *ngFor="let item of cartItems" class="flex justify-between py-3 text-gray-700 text-sm sm:text-base">
+          <span class="font-medium">{{ item.title }}</span>
+          <span>x{{ item.quantity }}</span>
+          <span>₹{{ item.price * item.quantity }}</span>
         </div>
       </div>
 
-      <div class="flex justify-between font-bold text-lg mb-4">
+      <div class="flex justify-between font-bold text-lg sm:text-xl text-gray-800 mb-4 sm:mb-6">
         <span>Total</span>
-        <span>{{ getTotal() }}</span>
+        <span>₹{{ getTotal() }}</span>
       </div>
 
       <!-- Payment Methods -->
-      <h3 class="text-lg font-semibold mb-4">Payment Method</h3>
-      <div class="flex flex-col gap-2">
-
-        <label class="flex items-center">
-          <input type="radio" formControlName="paymentMethod" value="Cash on Delivery" class="mr-2"> Cash on Delivery
+      <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-700">Payment Method</h3>
+      <div class="flex flex-col space-y-3 sm:space-y-4">
+        <label class="flex items-center cursor-pointer">
+          <input type="radio" formControlName="paymentMethod" value="Razorpay" class="mr-3 w-4 h-4 text-green-500 focus:ring-green-500">
+          <span>Razorpay</span>
         </label>
 
-        <label class="flex items-center">
-          <input type="radio" formControlName="paymentMethod" value="UPI / Google Pay / PhonePe" class="mr-2"> UPI / Google Pay / PhonePe
-        </label>
-
-        <label class="flex items-center">
-          <input type="radio" formControlName="paymentMethod" value="Credit / Debit Card" class="mr-2"> Credit / Debit Card
+        <label class="flex items-center cursor-pointer">
+          <input type="radio" formControlName="paymentMethod" value="Easebuzz" class="mr-3 w-4 h-4 text-green-500 focus:ring-green-500">
+          <span>Easebuzz</span>
         </label>
       </div>
 
-      <!-- Place Order Buttons -->
-      <button (click)="startRazorpayCheckout()" class="bg-green-500 text-white px-4 py-2 rounded mt-6">Pay with Razorpay</button>
-      <button (click)="placeEasebuzzOrder()" class="bg-blue-500 text-white px-4 py-2 rounded mt-4">Pay with Easebuzz</button>
+      <!-- Place Order Button -->
+      <button (click)="placeOrder()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl w-full mt-6 sm:mt-8 transition">
+        Place Order
+      </button>
     </div>
   </div>
 </div>

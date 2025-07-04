@@ -13,6 +13,10 @@ import { CreateproductComponent } from '../createproduct/createproduct.component
 import { BuynowComponent } from '../elements/buynow/buynow.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
 import { ChatComponent } from './chat/chat.component';
+import { SuccessPaymentComponent } from '../success-payment/success-payment.component';
+import { FaliedPaymentComponent } from '../falied-payment/falied-payment.component';
+import { ExtraComponent } from '../extra/extra.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 export const routes: Routes = [
     { path: 'show', component: ShowCaseOfMyProjectComponent },
@@ -30,7 +34,14 @@ export const routes: Routes = [
     { path: 'addProduct', component: CreateproductComponent },
     { path: 'buynow', component: BuynowComponent },
     { path: 'product/:id', component: ProductDetailsComponent },
-    { path: 'chat', component: ChatComponent }
+    { path: 'chat1', component: ChatComponent },
+    { path: 'paysucess', component: SuccessPaymentComponent },
+    { path: 'payfail', component: FaliedPaymentComponent},
+    { path: 'extra', component: ExtraComponent},
+    { path: 'chat', component: ChatbotComponent}
+
+
+
 
     // { path: 'productDetail', component: ProductDetailsComponent }
 

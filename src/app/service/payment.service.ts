@@ -9,11 +9,23 @@ export class PaymentService {
 
   constructor(private http: HttpClient) {}
 
+  // createOrder(orderData: any) {
+  //   return this.http.post(`${this.apiUrl}/orders`, orderData);
+  // }
+  
   createOrder(orderData: any) {
-    return this.http.post(`${this.apiUrl}/orders`, orderData);
+    return this.http.post<{ order_id: number, access_key: string }>(`${this.apiUrl}/payments/create-order`, orderData);
   }
 
   initiateEasebuzzPayment(orderId: number, totalAmount: number, customer: any) {
     return this.http.post(`${this.apiUrl}/easebuzz-order`, { orderId, totalAmount, customer });
   }
 }
+
+
+
+
+
+
+
+ 

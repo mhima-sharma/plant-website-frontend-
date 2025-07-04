@@ -1,118 +1,11 @@
-// import { Component, Inject, Optional } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { CartService } from '../../app/service/cart.service';
-// import { CommonModule } from '@angular/common';
-// import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-// import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
-// declare var Razorpay: any;
-
-
-// @Component({
-//   selector: 'app-buynow',
-//   imports:[CommonModule,ReactiveFormsModule],
-//   templateUrl: './buynow.component.html',
-//   styleUrl: './buynow.component.css',
-//   standalone: true, // only if using standalone component structure
-// })
-// export class BuynowComponent {
-//   cartItems: any[] = [];
-//   checkoutForm: FormGroup;
-//  showCartSummary = false;
-//  showcartItems: any[] = [];
-// //  const formData = this.checkoutForm.value;
-
- 
-// // showCartSummary: any;
-//   constructor(@Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder,private http: HttpClient,private cartService: CartService) {
-//     this.cartItems = data?.cart;
-//     console.log('Received data:', this.cartItems); // ✅ Debug log
-//     this.checkoutForm = this.fb.group({
-//       fullName: ['', Validators.required],
-//       email: ['', [Validators.required, Validators.email]],
-//       phoneNumber: ['', Validators.required],
-//       shippingAddress: ['', Validators.required],
-//       paymentMethod: ['Credit / Debit Card', Validators.required]
-//     });
-//   }
-
-//     getTotal(): number {
-//       return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-//     }
-
-//     ngOnInit() {
-      
-//     }
-
-//   async startRazorpayCheckout() {
-//     const payload = {
-//       gateway: 'razorpay',
-//       amount: 610000, // ₹6100.00 in paise
-//       currency: 'INR',
-//       name: this.checkoutForm.value.fullName,
-//       email: this.checkoutForm.value.email,
-//       contact: this.checkoutForm.value.phoneNumber,
-//       address: this.checkoutForm.value.shippingAddress,
-//     };
-
-//     try {
-//       const response = await this.http
-//         .post<any>('https://api.thub.sanchidev.in/api/v1/payments/create-order', payload)
-//         .toPromise();
-
-//       const order = response.data;
-
-//       const options = {
-//         key: 'rzp_test_uEJqigl3qciRzl', // Replace with live key in prod
-//         amount: order.amount,
-//         currency: order.currency,
-//         name: 'My App',
-//         description: 'Order Payment',
-//         order_id: order.id,
-//         handler: (res: any) => {
-//         console.log('Razorpay Payment Success:', res);
-//           // TODO: Optionally call your backend to verify payment
-//         },
-//         prefill: {
-//           name: this.checkoutForm.value.fullName,
-//           email: this.checkoutForm.value.email,
-//           contact: this.checkoutForm.value.phoneNumber,
-//         },
-//         theme: {
-//           color: '#3399CC',
-//         },
-//       };
-
-//       const rzp = new Razorpay(options);
-//       rzp.open();
-//     } catch (error) {
-//       console.error('Error creating Razorpay order', error);
-//     }
-//   }
-// }
-
-
-
-// // cartItems: any[] = [];
-// // showCartSummary = false;
-
-
-// // onBuyNow() {
-// //   this.cartService.getCartData().subscribe((data) => {
-// //     this.cartItems = data;
-// //     this.showCartSummary = true;
-// //   });
-// // }
-
-// // getTotal(): number {
-// //   return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-// // }
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../app/service/cart.service';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../app/auth.service';
 
 declare var Razorpay: any;
 
@@ -123,25 +16,49 @@ declare var Razorpay: any;
   styleUrl: './buynow.component.css',
   standalone: true,
 })
-export class BuynowComponent {
+export class BuynowComponent implements AfterViewInit {
   cartItems: any[] = [];
   checkoutForm: FormGroup;
+  userId: number;
+
+  @ViewChild('addressInput') addressInput!: ElementRef;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private http: HttpClient,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.cartItems = data?.cart;
-    console.log('Received data:', this.cartItems);
+
+    this.userId = this.authService.getUserId() ?? 0;
 
     this.checkoutForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
       shippingAddress: ['', Validators.required],
-      paymentMethod: ['Credit / Debit Card', Validators.required]
+      paymentMethod: ['', Validators.required]
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.initGoogleAutocomplete();
+  }
+
+  initGoogleAutocomplete() {
+    const autocomplete = new google.maps.places.Autocomplete(this.addressInput.nativeElement, {
+      types: ['geocode'],
+      componentRestrictions: { country: 'in' }
+    });
+
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      if (place && place.formatted_address) {
+        this.checkoutForm.controls['shippingAddress'].setValue(place.formatted_address);
+      }
     });
   }
 
@@ -149,59 +66,12 @@ export class BuynowComponent {
     return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   }
 
-  ngOnInit() {}
-
-  // 🔵 Razorpay Payment (Existing Flow)
-  async startRazorpayCheckout() {
-    const payload = {
-      gateway: 'razorpay',
-      amount: 610000, // ₹6100.00 in paise
-      currency: 'INR',
-      name: this.checkoutForm.value.fullName,
-      email: this.checkoutForm.value.email,
-      contact: this.checkoutForm.value.phoneNumber,
-      address: this.checkoutForm.value.shippingAddress,
-    };
-
-    try {
-      const response = await this.http
-        .post<any>('https://api.thub.sanchidev.in/api/v1/payments/create-order', payload)
-        .toPromise();
-
-      const order = response.data;
-
-      const options = {
-        key: 'rzp_test_uEJqigl3qciRzl',
-        amount: order.amount,
-        currency: order.currency,
-        name: 'My App',
-        description: 'Order Payment',
-        order_id: order.id,
-        handler: (res: any) => {
-          console.log('Razorpay Payment Success:', res);
-        },
-        prefill: {
-          name: this.checkoutForm.value.fullName,
-          email: this.checkoutForm.value.email,
-          contact: this.checkoutForm.value.phoneNumber,
-        },
-        theme: {
-          color: '#3399CC',
-        },
-      };
-
-      const rzp = new Razorpay(options);
-      rzp.open();
-    } catch (error) {
-      console.error('Error creating Razorpay order', error);
-    }
-  }
-
-  // 🟢 Easebuzz Payment (New Flow)
-  placeEasebuzzOrder() {
+  placeOrder() {
     const totalAmount = this.getTotal();
+    const selectedGateway = this.checkoutForm.value.paymentMethod;
+
     const orderPayload = {
-      userId: 11, // Replace with actual logged-in user ID
+      userId: this.userId,
       billingDetails: {
         fullName: this.checkoutForm.value.fullName,
         email: this.checkoutForm.value.email,
@@ -209,21 +79,123 @@ export class BuynowComponent {
         shippingAddress: this.checkoutForm.value.shippingAddress
       },
       cartItems: this.cartItems,
-      paymentMethod: this.checkoutForm.value.paymentMethod,
+      paymentMethod: selectedGateway,
       totalAmount: totalAmount
     };
 
-    // Create Order in Backend
     this.http.post<any>('http://localhost:3000/api/orders', orderPayload).subscribe(orderRes => {
-      // Initiate Easebuzz Payment
-      this.http.post<any>('http://localhost:3000/api/easebuzz-order', {
-        orderId: orderRes.orderId,
-        totalAmount: totalAmount,
-        customer: orderPayload.billingDetails
-      }).subscribe(paymentRes => {
-        // Redirect to Easebuzz Payment Page
-        window.location.href = paymentRes.data.payment_link;
+      console.log('Order Created:', orderRes);
+
+      if (orderRes.gateway === 'razorpay') {
+        this.initiateRazorpay(orderRes);
+      } else if (orderRes.gateway === 'easebuzz') {
+        this.initiateEasebuzz(orderRes);
+      } else {
+        console.error('Unsupported Payment Gateway');
+      }
+    }, error => {
+      console.error('Order creation failed:', error);
+    });
+  }
+
+  initiateRazorpay(orderRes: any) {
+    const options = {
+      key: 'rzp_test_uEJqigl3qciRzl',
+      amount: orderRes.amount,
+      currency: orderRes.currency,
+      name: 'My App',
+      description: 'Order Payment',
+      order_id: orderRes.razorpayOrderId,
+      handler: (res: any) => {
+        console.log('Razorpay Payment Success:', res);
+
+        this.http.post('http://localhost:3000/api/payments/update-status', {
+          paymentMethod: 'razorpay',
+          txnid: orderRes.txnId,
+          razorpay_order_id: orderRes.razorpayOrderId,
+          razorpay_payment_id: res.razorpay_payment_id,
+          razorpay_signature: res.razorpay_signature,
+          status: 'success'
+        }).subscribe(() => {
+          this.clearCart();
+          this.router.navigate(['/paysucess'], { queryParams: { txnid: orderRes.txnId } });
+        }, error => {
+          console.error('Error updating payment status:', error);
+        });
+      },
+      prefill: {
+        name: this.checkoutForm.value.fullName,
+        email: this.checkoutForm.value.email,
+        contact: this.checkoutForm.value.phoneNumber
+      },
+      theme: { color: '#3399CC' }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+
+    rzp.on('payment.failed', (response: any) => {
+      console.error('Razorpay Payment Failed:', response);
+
+      this.http.post('http://localhost:3000/api/payments/update-status', {
+        paymentMethod: 'razorpay',
+        txnid: orderRes.txnId,
+        razorpay_order_id: orderRes.razorpayOrderId,
+        razorpay_payment_id: response.error.metadata.payment_id,
+        razorpay_signature: '',
+        status: 'failure'
+      }).subscribe(() => {
+        this.router.navigate(['/payfail'], { queryParams: { txnid: orderRes.txnId } });
+      }, error => {
+        console.error('Error updating payment status:', error);
       });
     });
+  }
+
+  initiateEasebuzz(orderRes: any) {
+    const clientId = "BVK2USG0F";
+    const paymentMode = "test";
+    const accessKey = orderRes.access_key;
+
+    const EasebuzzCheckout = (window as any).EasebuzzCheckout;
+
+    if (!EasebuzzCheckout) {
+      console.error('Easebuzz SDK not loaded');
+      return;
+    }
+
+    const easebuzzCheckout = new EasebuzzCheckout(clientId, paymentMode, true);
+
+    easebuzzCheckout.initiatePayment({
+      access_key: accessKey,
+      onResponse: (res: any) => {
+        console.log('Easebuzz Payment Response:', res);
+
+        this.http.post('http://localhost:3000/api/payments/update-status', {
+          paymentMethod: 'easebuzz',
+          txnid: res.txnid,
+          status: res.status
+        }).subscribe(() => {
+          if (res.status === 'success') {
+            this.clearCart();
+            this.router.navigate(['/paysucess'], { queryParams: { txnid: res.txnid } });
+          } else {
+            this.router.navigate(['/payfail'], { queryParams: { txnid: res.txnid } });
+          }
+        }, error => {
+          console.error('Error updating payment status:', error);
+        });
+      },
+      theme: '#123456',
+    });
+  }
+
+  clearCart() {
+    this.http.post('http://localhost:3000/api/cart/clear', { userId: this.userId })
+      .subscribe(() => {
+        console.log('Cart cleared successfully');
+      }, error => {
+        console.error('Error clearing cart:', error);
+      });
   }
 }

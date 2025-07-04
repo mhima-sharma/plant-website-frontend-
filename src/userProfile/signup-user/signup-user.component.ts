@@ -14,17 +14,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../app/auth.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-signup-user',
   // standalone:true,
-  imports: [RouterLink,ReactiveFormsModule,RouterLink],
+  imports: [RouterLink,ReactiveFormsModule,RouterLink,CommonModule],
   templateUrl: './signup-user.component.html',
    styleUrl: './signup-user.component.css'
 })
 export class SignupUserComponent implements OnInit {
   signupForm!:FormGroup
+errorMessage: any;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 

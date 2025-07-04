@@ -1,72 +1,63 @@
-<div class="max-w-lg mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
-    <h2 class="text-2xl font-bold mb-4">Add New Product</h2>
-    <form  [formGroup]="productForm" (ngSubmit)="submitForm()" >
-      
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">Title</label>
-        <input 
-          formControlName="title" 
-          type="text" 
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter product title">
-        <!-- <div  class="text-red-500">
-          Title is required.
-        </div> -->
+<div class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8 space-y-6">
+  <h2 class="text-3xl font-bold text-center text-gray-800">Add New Product</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="space-y-6">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Title</label>
+        <input
+          formControlName="title"
+          type="text"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter product title" />
       </div>
-  
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">Quantity</label>
-        <input 
-          formControlName="quantity" 
-          type="number" 
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter quantity">
-        <!-- <div  class="text-red-500">
-          Quantity is required.
-        </div> -->
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Quantity</label>
+        <input
+          formControlName="quantity"
+          type="number"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter quantity" />
       </div>
-  
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">Price (Rs.)</label>
-        <input 
-          type="number" 
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Price (Rs.)</label>
+        <input
+          type="number"
           formControlName="price"
           step="0.01"
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter price">
-        <!-- <div  class="text-red-500">
-          Price is required.
-        </div> -->
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Enter price" />
       </div>
-  
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">Description</label>
-        <textarea 
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter description" 
-          formControlName="description"></textarea>
-        <!-- <div class="text-red-500">
-          Description is required.
-        </div> -->
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Image Upload</label>
+        <input
+          type="file"
+          multiple
+          (change)="onFileChange($event)"
+          class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+        />
       </div>
-  
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2">Image URL</label>
-        <input 
-          type="file" 
-          multiple 
-          (change)="onFileChange($event)" 
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter image filename or URL">
-      </div>
-     
-  
-      <button 
-        type="submit" 
-        class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700">
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-semibold mb-2">Description</label>
+      <textarea
+        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        placeholder="Enter description"
+        rows="4"
+        formControlName="description"></textarea>
+    </div>
+
+    <div>
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-blue-700 transition">
         Add Product
       </button>
-    </form>
-  </div>
-  
-  
+    </div>
+  </form>
+</div>

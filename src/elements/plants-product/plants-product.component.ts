@@ -1,37 +1,39 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from "../header/header.component";
-import { FooterComponent } from "../footer/footer.component";
 import { ProductService } from '../../app/service/product.service';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
-
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-plants-product',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './plants-product.component.html',
-  styleUrl: './plants-product.component.css'
+  styleUrls: ['./plants-product.component.css'] // ✅ Corrected here
 })
 export class PlantsProductComponent {
   products: any[] = [];
 
-
-  constructor(private productService: ProductService, private router:Router) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe({
-      next: (data) => {
-        this.products = data;
-      },
-      error: (err) => {
-        console.error('Error fetching products:', err);
-      }
-    });
+    this.fetchAllProducts();
   }
- 
+
+  // ✅ Separated for better readability
+  fetchAllProducts() {
+   this.productService.getAllProducts().subscribe({
+  next: (res) => {
+    console.log('API Response:', res);  // Check what you are getting here
+    this.products = res; // Save the products to display
+  },
+  error: (err) => {
+    console.error('Error fetching products', err);
+  }
+});
+  }
 
   viewDetails(id: number): void {
-    console.log(id)
-    this.router.navigate(['/product/', id]);
+    console.log('Navigating to product id:', id);
+    this.router.navigate(['/product', id]);
   }
 }
