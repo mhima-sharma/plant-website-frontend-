@@ -7,10 +7,15 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class AuthService {
   // private baseUrl = 'http://localhost:3000/api/auth';
-  private baseUrl = 'backend-plant-website.vercel.app/api/auth';
+  private baseUrl = '';
   private token$ = new BehaviorSubject<string | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const isLocalhost = window.location.hostname === 'localhost';
+    this.baseUrl = isLocalhost
+      ? 'http://localhost:3000/api/auth'
+      : 'https://backend-plant-website.vercel.app/api/auth';
+  }
 
   signup(data: { name: string; email: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/signup`, data);
