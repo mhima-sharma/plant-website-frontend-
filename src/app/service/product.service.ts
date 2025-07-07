@@ -8,10 +8,15 @@ import { Observable } from 'rxjs';
 export class ProductService {
 
   // private apiUrl = 'http://localhost:3000/api/products'; // Base API URL
-  private apiUrl = 'backend-plant-website.vercel.app/api/products'; // Base API URL
+  private apiUrl = ''; // Base API URL
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const isLocalhost = window.location.hostname === 'localhost';
+    this.apiUrl = isLocalhost
+      ? 'http://localhost:3000/api/products'
+      : 'https://backend-plant-website.vercel.app/api/products';
+  }
 
   // ✅ Get all products
   getAllProducts(): Observable<any[]> {

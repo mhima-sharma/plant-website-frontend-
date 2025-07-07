@@ -6,11 +6,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PaymentService {
   // private apiUrl = 'http://localhost:3000/api';
-   private apiUrl = 'backend-plant-website.vercel.app/api';
+   private apiUrl = '';
 
   
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const isLocalhost = window.location.hostname === 'localhost';
+    this.apiUrl = isLocalhost
+      ? 'http://localhost:3000/api'
+      : 'https://backend-plant-website.vercel.app/api';
+  
+  }
 
   // createOrder(orderData: any) {
   //   return this.http.post(`${this.apiUrl}/orders`, orderData);

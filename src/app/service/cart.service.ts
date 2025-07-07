@@ -7,9 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
 
-  // private baseUrl = 'http://localhost:3000/api/cart';
-private baseUrl ='backend-plant-website.vercel.app/api/cart'
-  constructor(private http: HttpClient) {}
+  private baseUrl = '';
+
+  constructor(private http: HttpClient) {
+     const isLocalhost = window.location.hostname === 'localhost';
+    this.baseUrl = isLocalhost
+      ? 'http://localhost:3000/api/cart'
+      : 'https://backend-plant-website.vercel.app/api/cart';
+  }
 
   addToCart(userId: number, productId: number, quantity: number = 1,title:string, price:number) {
     return this.http.post(`${this.baseUrl}/add`, {
