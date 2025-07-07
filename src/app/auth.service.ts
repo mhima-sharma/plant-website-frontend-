@@ -6,7 +6,8 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/api/auth';
+  // private baseUrl = 'http://localhost:3000/api/auth';
+  private baseUrl = 'backend-plant-website.vercel.app/api/auth';
   private token$ = new BehaviorSubject<string | null>(null);
 
   constructor(private http: HttpClient) {}

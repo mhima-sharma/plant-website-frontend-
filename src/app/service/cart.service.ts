@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
 
-  private baseUrl = 'http://localhost:3000/api/cart';
-
+  // private baseUrl = 'http://localhost:3000/api/cart';
+private baseUrl ='backend-plant-website.vercel.app/api/cart'
   constructor(private http: HttpClient) {}
 
   addToCart(userId: number, productId: number, quantity: number = 1,title:string, price:number) {

@@ -5,7 +5,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PaymentService {
-  private apiUrl = 'http://localhost:3000/api';
+  // private apiUrl = 'http://localhost:3000/api';
+   private apiUrl = 'backend-plant-website.vercel.app/api';
+
+  
 
   constructor(private http: HttpClient) {}
 
