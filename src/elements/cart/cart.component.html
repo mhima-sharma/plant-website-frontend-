@@ -22,8 +22,15 @@
         <div class="flex-1">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ item.title }}</h3>
           <p class="text-gray-600 mb-1">Price: ₹{{ item.price }}</p>
-          <p class="text-gray-600 mb-1">Quantity: {{ item.quantity }}</p>
-          <p class="text-green-600 font-semibold">Total: ₹{{ item.price * item.quantity }}</p>
+
+          <!-- Quantity Controls -->
+          <div class="flex items-center gap-2 mt-2">
+            <button (click)="decreaseQuantity(item)" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full text-lg font-bold">-</button>
+            <span class="text-gray-700 font-medium">{{ item.quantity }}</span>
+            <button (click)="increaseQuantity(item)" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full text-lg font-bold">+</button>
+          </div>
+
+          <p class="text-green-600 font-semibold mt-2">Total: ₹{{ item.price * item.quantity }}</p>
         </div>
       </div>
     </div>

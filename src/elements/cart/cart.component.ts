@@ -71,23 +71,23 @@ export class CartComponent {
       // Optional: Reload cart or take any further action
     });
   }
+ increaseQuantity(item: any) {
+    item.quantity++;
+  }
 
-  // You can enable this if you add stock management
-  // stockMessages: { [productId: number]: string } = {};
+  decreaseQuantity(item: any) {
+    if (item.quantity > 1) {
+      item.quantity--;
+    } else {
+      this.removeItem(item);
+    }
+  }
 
-  // increaseQuantity(item: any) {
-  //   if (item.quantity < item.stock) {
-  //     item.quantity++;
-  //     this.stockMessages[item.id] = '';
-  //   } else {
-  //     this.stockMessages[item.id] = 'Stock is full';
-  //   }
-  // }
+    removeItem(item: any) {
+    const index = this.cartItems.findIndex(i => i.id === item.id);
+    if (index !== -1) {
+      this.cartItems.splice(index, 1);
+    }
+  }
+  }
 
-  // decreaseQuantity(item: any) {
-  //   if (item.quantity > 1) {
-  //     item.quantity--;
-  //     this.stockMessages[item.id] = '';
-  //   }
-  // }
-}

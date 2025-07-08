@@ -35,5 +35,7 @@ export class CartService {
   getCartData() {
       return this.http.get<any[]>(`${this.baseUrl}/user-cart`);
     }
-    
+ 
+
+ 
 }
