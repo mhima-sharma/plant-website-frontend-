@@ -1,13 +1,11 @@
-// src/app/product-details/product-details.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { HeaderComponent } from "../elements/header/header.component";
 import { FooterComponent } from "../elements/footer/footer.component";
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../app/service/cart.service';
 import { AuthService } from '../app/auth.service';
-
 
 @Component({
   selector: 'app-product-details',
@@ -17,9 +15,8 @@ import { AuthService } from '../app/auth.service';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent implements OnInit {
-
   @Input() product: any;
-  img: any;
+  selectedQuantity: number = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,20 +27,30 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log('Product ID:', id);
-
     if (id) {
       this.http.get(`http://localhost:3000/api/products/${id}`).subscribe({
         next: (res: any) => {
           this.product = res;
-          console.log('Product details:', res);
+          if (!this.product.quantity) {
+            this.product.quantity = 0;
+          }
         },
         error: (err) => {
           console.error('Error fetching product:', err);
         }
       });
-    } else {
-      console.error('No product ID found in route.');
+    }
+  }
+
+  increaseQuantity() {
+    if (this.selectedQuantity < this.product.quantity) {
+      this.selectedQuantity++;
+    }
+  }
+
+  decreaseQuantity() {
+    if (this.selectedQuantity > 1) {
+      this.selectedQuantity--;
     }
   }
 
@@ -55,9 +62,20 @@ export class ProductDetailsComponent implements OnInit {
       return;
     }
 
-    this.cartService.addToCart(userId, this.product.id, this.product.email, this.product.title, this.product.price).subscribe({
+    if (this.product.quantity === 0) {
+      alert('Product is out of stock.');
+      return;
+    }
+
+    this.cartService.addToCart(
+      userId,
+      this.product.id,
+      this.selectedQuantity, // ⬅️ quantity is 3rd param
+      this.product.title,
+      this.product.price
+    ).subscribe({
       next: () => alert('Added to cart!'),
-      error: () => alert('Error adding to cart.'),
+      error: () => alert('Error adding to cart.')
     });
   }
 }

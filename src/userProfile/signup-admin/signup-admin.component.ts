@@ -48,7 +48,7 @@ export class SignupAdminComponent {
     }
 
     this.authService.signupAdmin({ name, email, password }).subscribe({
-      next: () => this.router.navigate(['/admin-login']),
+      next: () => this.router.navigate(['/admindash']),
       error: (err) => {
         this.errorMessage = err.error?.message || 'Signup failed';
       }

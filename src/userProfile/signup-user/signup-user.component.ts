@@ -1,34 +1,25 @@
-// import { Component } from '@angular/core';
-// import { RouterLink } from '@angular/router';
-
-// @Component({
-//   selector: 'app-signup-user',
-//   imports: [RouterLink],
-//   templateUrl: './signup-user.component.html',
-//   styleUrl: './signup-user.component.css'
-// })
-// export class SignupUserComponent {
-
-// }
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../app/auth.service';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-signup-user',
-  // standalone:true,
-  imports: [RouterLink,ReactiveFormsModule,RouterLink,CommonModule],
+  // standalone: true,
+  imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './signup-user.component.html',
-   styleUrl: './signup-user.component.css'
+  styleUrl: './signup-user.component.css'
 })
 export class SignupUserComponent implements OnInit {
-  signupForm!:FormGroup
-errorMessage: any;
+  signupForm!: FormGroup;
+  errorMessage: any;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router // <-- Inject Router here
+  ) {}
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -49,7 +40,10 @@ errorMessage: any;
     }
 
     this.authService.signup({ name, email, password }).subscribe({
-      next: () => alert('Signup successful'),
+      next: () => {
+        alert('Signup successful');
+        this.router.navigate(['/show']); // <-- Navigate on success
+      },
       error: err => alert(err.error.message || 'Signup failed'),
     });
   }

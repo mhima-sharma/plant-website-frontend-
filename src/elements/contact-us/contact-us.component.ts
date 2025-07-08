@@ -12,6 +12,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrl: './contact-us.component.css'
 })
 export class ContactUsComponent {
+  isChatbotOpen = false;
+
   formData = {
     name: '',
     email: '',
@@ -24,6 +26,10 @@ export class ContactUsComponent {
 
   constructor(private http: HttpClient) {}
 
+
+   toggleChatbot() {
+    this.isChatbotOpen = !this.isChatbotOpen;
+  }
   onSubmit() {
     const endpoint = 'https://getform.io/f/azywegjb';
 

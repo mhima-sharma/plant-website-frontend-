@@ -18,7 +18,22 @@
 <div class="px-4 md:px-10 lg:px-20 py-10 bg-gray-50 min-h-screen">
   <app-plants-product></app-plants-product>
 </div>
+ <!-- Chatbot Badge -->
+  <div class="fixed bottom-6 right-6 z-50 " *ngIf="!isChatbotOpen">
+    <button 
+      (click)="toggleChatbot()" 
+      class="relative flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-full shadow-lg focus:outline-none hover:scale-110 transition-transform duration-300 animate-pulse hover:animate-none">
 
+      <!-- Chat Icon -->
+      <span class="text-2xl">💬</span>
+
+      <!-- Optional Notification Badge -->
+      <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
+        1
+      </span>
+
+    </button>
+  </div>
 <!-- Need Help Section -->
 <app-need-help></app-need-help>
 
