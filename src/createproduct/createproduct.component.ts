@@ -1,23 +1,31 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from '../app/service/product.service';
 
 @Component({
   selector: 'app-createproduct',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './createproduct.component.html',
   styleUrl: './createproduct.component.css'
 })
 export class CreateproductComponent {
   productForm: FormGroup;
   selectedFiles: File[] = [];
-  productService: any;
-  products: any;
+  products: any[] = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  // ✅ Dynamically set base URL (localhost or production)
+  private baseUrl = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000/api/products'
+    : 'https://backend-plant-website.vercel.app/api/products';
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private productService: ProductService
+  ) {
     this.productForm = this.fb.group({
       title: ['', Validators.required],
       quantity: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
@@ -26,7 +34,6 @@ export class CreateproductComponent {
     });
   }
 
-  // Triggered when file input changes
   onFileChange(event: any): void {
     const files = event.target.files;
     if (files && files.length > 0) {
@@ -35,7 +42,6 @@ export class CreateproductComponent {
     }
   }
 
-  // Submit product form with images
   submitForm(): void {
     if (this.productForm.invalid || this.selectedFiles.length === 0) {
       alert('Please fill all required fields and select at least one image.');
@@ -52,12 +58,13 @@ export class CreateproductComponent {
       formData.append('images', file);
     });
 
-    this.http.post('http://localhost:3000/api/products', formData).subscribe({
+    this.http.post(this.baseUrl, formData).subscribe({
       next: (res) => {
         console.log('Product added successfully:', res);
         alert('Product uploaded ✅');
         this.productForm.reset();
         this.selectedFiles = [];
+        this.fetchProducts(); // optional: refresh list
       },
       error: (err) => {
         console.error('Error uploading product:', err);
@@ -66,18 +73,14 @@ export class CreateproductComponent {
     });
   }
 
-
-
-  fetchProducts() {
+  fetchProducts(): void {
     this.productService.getAllProducts().subscribe({
-      next: (res: any) => {
+      next: (res) => {
         this.products = res;
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error('Error fetching products:', err);
       }
     });
   }
 }
-
-
