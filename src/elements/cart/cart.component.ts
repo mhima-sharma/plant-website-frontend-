@@ -61,7 +61,7 @@ export class CartComponent {
 
   onBuyNow() {
     const dialogRef = this.dialog.open(BuynowComponent, {
-      width: '700px',
+      width: '1000px',
       disableClose: false,
       data: { cart: this.cartItems }
     });
