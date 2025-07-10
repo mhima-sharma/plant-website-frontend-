@@ -1,5 +1,5 @@
 <!-- Checkout Page Container -->
-<div class="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10" [formGroup]="checkoutForm">
+<div class="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 overflow-y-auto h-screen" [formGroup]="checkoutForm">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
     <!-- LEFT: Delivery and Cart Items -->
@@ -60,15 +60,16 @@
     </div>
 
     <!-- RIGHT: Summary and Payment -->
-    <div class="w-full bg-white p-6 rounded-lg shadow-md space-y-6">
+    <div class="w-full bg-white p-6 rounded-lg shadow-md space-y-6 lg:sticky lg:top-6 h-fit">
       <!-- Price Summary -->
       <div class="border-t pt-4 text-sm space-y-2">
         <div class="flex justify-between text-gray-700">
           <span>Total MRP</span>
           <span>₹{{ getSubtotal() }}</span>
         </div>
+      
         <div class="flex justify-between text-gray-700">
-          <span>Platform Fee</span>
+          <span>Platform Fee </span>
           <span>₹10</span>
         </div>
         <div class="flex justify-between font-semibold text-lg pt-2 border-t">
