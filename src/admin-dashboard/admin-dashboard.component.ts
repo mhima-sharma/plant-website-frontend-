@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ProductService } from '../app/service/product.service';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../app/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -16,8 +16,8 @@ export class AdminDashboardComponent implements OnInit {
   private baseUrl: string;
 
   constructor(
-    private productService: ProductService,
     private http: HttpClient,
+    private authService: AuthService,
     private router: Router
   ) {
     const isLocalhost = window.location.hostname === 'localhost';
@@ -30,35 +30,48 @@ export class AdminDashboardComponent implements OnInit {
     this.fetchProducts();
   }
 
-  // ✅ Fetch only products added by the logged-in user, excluding quantity = 0
+  // ✅ Fetch only products added by logged-in user, excluding quantity = 0
   fetchProducts(): void {
-    const token = localStorage.getItem('token'); // 👈 Get token from storage
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You are not logged in.');
+      this.router.navigate(['/admin-login']);
+      return;
+    }
 
-    this.http.get<any[]>(`${this.baseUrl}/my`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).subscribe({
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    this.http.get<any[]>(`${this.baseUrl}/my`, { headers }).subscribe({
       next: (res) => {
         this.products = res.filter(product => product.quantity > 0);
         console.log('Filtered My Products:', this.products);
       },
       error: (err) => {
         console.error('Error fetching my products:', err);
+        if (err.status === 401) {
+          alert('Session expired. Please log in again.');
+          this.router.navigate(['/admin-login']);
+        }
       }
     });
   }
 
-  // Delete product
+  // ✅ Delete product
   deleteProduct(id: number): void {
     const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Unauthorized');
+      return;
+    }
 
     if (confirm('Are you sure you want to delete this product?')) {
-      this.http.delete(`${this.baseUrl}/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).subscribe({
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      });
+
+      this.http.delete(`${this.baseUrl}/products/${id}`, { headers }).subscribe({
         next: () => {
           this.products = this.products.filter(p => p.id !== id);
           console.log('Product deleted:', id);
@@ -70,7 +83,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-  // Navigate to edit product
+  // ✅ Navigate to edit product
   editProduct(id: number): void {
     this.router.navigate(['/editProduct', id]);
   }
