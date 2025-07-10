@@ -30,12 +30,12 @@ export class AdminDashboardComponent implements OnInit {
     this.fetchProducts();
   }
 
-  // Fetch all products
+  // Fetch all products excluding those with quantity = 0
   fetchProducts(): void {
     this.productService.getAllProducts().subscribe({
       next: (res) => {
-        this.products = res;
-        console.log('Products fetched in Admin Dashboard:', this.products);
+        this.products = res.filter(product => product.quantity > 0);
+        console.log('Filtered Products:', this.products);
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -43,13 +43,13 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  // Delete product with confirmation
+  // Delete product
   deleteProduct(id: number): void {
     if (confirm('Are you sure you want to delete this product?')) {
       this.http.delete(`${this.baseUrl}/${id}`).subscribe({
         next: () => {
           this.products = this.products.filter(p => p.id !== id);
-          console.log('Product deleted successfully:', id);
+          console.log('Product deleted:', id);
         },
         error: (err) => {
           console.error('Error deleting product:', err);
@@ -58,7 +58,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-  // Navigate to edit page
+  // Navigate to edit product
   editProduct(id: number): void {
     this.router.navigate(['/editProduct', id]);
   }
