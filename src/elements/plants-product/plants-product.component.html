@@ -13,7 +13,7 @@
           <div class="overflow-hidden rounded-lg">
             <img
               class="w-full h-60 object-cover transform group-hover:scale-105 transition duration-300 cursor-pointer"
-              [src]="'http://localhost:3000/uploads/' + (product.images?.split(',')[0] || 'placeholder.jpg')"
+              [src]="(product.images?.split(',')[0] || 'placeholder.jpg')"
               alt="{{ product.title }}"
               (click)="viewDetails(product.id)"
             />
