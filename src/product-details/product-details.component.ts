@@ -28,7 +28,7 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.http.get(`http://localhost:3000/api/products/${id}`).subscribe({
+      this.http.get(`https://backend-plant-website.vercel.app/api/products/${id}`).subscribe({
         next: (res: any) => {
           this.product = res;
           if (!this.product.quantity) {
