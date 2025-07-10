@@ -28,8 +28,9 @@ export class CartService {
 
 
   getCartItems(userId: number) {
-    return this.http.get(`http://localhost:3000/api/cart/${userId}`);
+    return this.http.get(`${this.baseUrl}/${userId}`);
   }
+
 
 
   getCartData() {
