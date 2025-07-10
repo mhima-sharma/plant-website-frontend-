@@ -1,9 +1,20 @@
-import { Component, Inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  ElementRef,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../app/service/cart.service';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../app/auth.service';
 
@@ -14,7 +25,7 @@ declare var Razorpay: any;
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './buynow.component.html',
-  styleUrl: './buynow.component.css',
+  styleUrl: './buynow.component.css'
 })
 export class BuynowComponent implements AfterViewInit {
   cartItems: any[] = [];
@@ -22,6 +33,8 @@ export class BuynowComponent implements AfterViewInit {
   userId: number;
   apiUrl: string;
   loading = false;
+  city: string = '';
+  pincode: string = '';
 
   @ViewChild('addressInput') addressInput!: ElementRef;
 
@@ -64,6 +77,20 @@ export class BuynowComponent implements AfterViewInit {
       const place = autocomplete.getPlace();
       if (place?.formatted_address) {
         this.checkoutForm.controls['shippingAddress'].setValue(place.formatted_address);
+
+        // Optional: extract city and pincode
+        this.city = '';
+        this.pincode = '';
+        for (const component of place.address_components) {
+          if (component.types.includes('postal_code')) {
+            this.pincode = component.long_name;
+          }
+          if (component.types.includes('locality')) {
+            this.city = component.long_name;
+          }
+        }
+        console.log('City:', this.city);
+        console.log('Pincode:', this.pincode);
       }
     });
   }
@@ -73,6 +100,8 @@ export class BuynowComponent implements AfterViewInit {
   }
 
   placeOrder() {
+    if (!window.confirm('Do you want to place this order?')) return;
+
     this.loading = true;
     const totalAmount = this.getTotal();
     const selectedGateway = this.checkoutForm.value.paymentMethod;
@@ -83,7 +112,9 @@ export class BuynowComponent implements AfterViewInit {
         fullName: this.checkoutForm.value.fullName,
         email: this.checkoutForm.value.email,
         phone: this.checkoutForm.value.phoneNumber,
-        shippingAddress: this.checkoutForm.value.shippingAddress
+        shippingAddress: this.checkoutForm.value.shippingAddress,
+        city: this.city,
+        pincode: this.pincode
       },
       cartItems: this.cartItems,
       paymentMethod: selectedGateway,
