@@ -77,8 +77,6 @@ export class BuynowComponent implements AfterViewInit {
       const place = autocomplete.getPlace();
       if (place?.formatted_address) {
         this.checkoutForm.controls['shippingAddress'].setValue(place.formatted_address);
-
-        // Optional: extract city and pincode
         this.city = '';
         this.pincode = '';
         for (const component of place.address_components) {
@@ -89,14 +87,16 @@ export class BuynowComponent implements AfterViewInit {
             this.city = component.long_name;
           }
         }
-        console.log('City:', this.city);
-        console.log('Pincode:', this.pincode);
       }
     });
   }
 
-  getTotal(): number {
+  getSubtotal(): number {
     return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  }
+
+  getTotal(): number {
+    return this.getSubtotal() + 10; // Platform fee ₹10
   }
 
   placeOrder() {
@@ -127,8 +127,6 @@ export class BuynowComponent implements AfterViewInit {
         this.initiateRazorpay(orderRes);
       } else if (orderRes.gateway === 'easebuzz') {
         this.initiateEasebuzz(orderRes);
-      } else {
-        console.error('Unsupported Payment Gateway');
       }
     }, error => {
       this.loading = false;
@@ -156,9 +154,6 @@ export class BuynowComponent implements AfterViewInit {
         }).subscribe(() => {
           this.clearCart(orderRes.txnId);
           this.router.navigate(['/paysucess'], { queryParams: { txnid: orderRes.txnId } });
-        }, error => {
-          this.loading = false;
-          console.error('Error updating payment status:', error);
         });
       },
       prefill: {
@@ -183,9 +178,6 @@ export class BuynowComponent implements AfterViewInit {
         status: 'failure'
       }).subscribe(() => {
         this.router.navigate(['/payfail'], { queryParams: { txnid: orderRes.txnId } });
-      }, error => {
-        this.loading = false;
-        console.error('Error updating payment status:', error);
       });
     });
   }
@@ -194,7 +186,6 @@ export class BuynowComponent implements AfterViewInit {
     const clientId = "BVK2USG0F";
     const paymentMode = "test";
     const accessKey = orderRes.access_key;
-
     const EasebuzzCheckout = (window as any).EasebuzzCheckout;
 
     if (!EasebuzzCheckout) {
@@ -219,9 +210,6 @@ export class BuynowComponent implements AfterViewInit {
           } else {
             this.router.navigate(['/payfail'], { queryParams: { txnid: res.txnid } });
           }
-        }, error => {
-          this.loading = false;
-          console.error('Error updating payment status:', error);
         });
       },
       theme: '#123456',
@@ -229,20 +217,10 @@ export class BuynowComponent implements AfterViewInit {
   }
 
   clearCart(txnid: string) {
-    this.http.post(`${this.apiUrl}/cart/clear`, { userId: this.userId })
-      .subscribe(() => {
-        console.log('Cart cleared successfully');
-        this.http.post(`${this.apiUrl}/orders/update-stock`, { txnid: txnid })
-          .subscribe(() => {
-            console.log('Stock updated successfully');
-            this.loading = false;
-          }, error => {
-            this.loading = false;
-            console.error('Error updating stock:', error);
-          });
-      }, error => {
+    this.http.post(`${this.apiUrl}/cart/clear`, { userId: this.userId }).subscribe(() => {
+      this.http.post(`${this.apiUrl}/orders/update-stock`, { txnid: txnid }).subscribe(() => {
         this.loading = false;
-        console.error('Error clearing cart:', error);
       });
+    });
   }
 }
