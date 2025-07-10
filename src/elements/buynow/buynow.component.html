@@ -37,10 +37,6 @@
       <div class="border p-4 rounded-lg bg-white">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-3 gap-2">
           <span class="font-semibold text-pink-600">{{ cartItems.length }}/{{ cartItems.length }} ITEMS SELECTED</span>
-          <div class="flex gap-4 text-sm text-gray-600 font-medium">
-            <button class="hover:underline">REMOVE</button>
-            <button class="hover:underline">MOVE TO WISHLIST</button>
-          </div>
         </div>
 
         <div *ngFor="let item of cartItems" class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
@@ -52,7 +48,7 @@
             <h4 class="font-semibold text-gray-800">{{ item.title }}</h4>
             <p class="text-sm text-gray-600">Qty: {{ item.quantity }}</p>
             <p class="text-sm text-gray-600">₹{{ item.price * item.quantity }}</p>
-            <p class="text-xs text-gray-500">Exchange Only</p>
+            
           </div>
           <button class="text-gray-400 hover:text-red-600 text-lg self-start">&times;</button>
         </div>
@@ -63,13 +59,7 @@
     <div class="w-full lg:w-full bg-white p-6 rounded-lg shadow-md space-y-6 lg:sticky lg:top-6 h-fit">
 
       <!-- Apply Coupons -->
-      <div>
-        <div class="flex justify-between items-center">
-          <h4 class="font-semibold text-gray-700">Apply Coupons</h4>
-          <button class="text-sm text-pink-600 font-medium border border-pink-500 px-3 py-1 rounded hover:bg-pink-50">APPLY</button>
-        </div>
-        <p class="text-xs text-gray-500 mt-1">Login to get up to ₹200 OFF on first order</p>
-      </div>
+     
 
      
 
