@@ -1,15 +1,3 @@
-// import { Component } from '@angular/core';
-// import { RouterLink } from '@angular/router';
-
-// @Component({
-//   selector: 'app-login-admin',
-//   imports: [RouterLink],
-//   templateUrl: './login-admin.component.html',
-//   styleUrl: './login-admin.component.css'
-// })
-// export class LoginAdminComponent {
-
-// }
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -18,37 +6,40 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-admin',
-  imports:[ReactiveFormsModule, CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login-admin.component.html',
   styleUrls: ['./login-admin.component.css']
 })
 export class LoginAdminComponent {
-  errorMessage = '';
   loginForm!: FormGroup;
+  errorMessage = '';
+  loading = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {
-    
-  this.loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required]
-  });
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
   }
-
 
   onLogin() {
     if (this.loginForm.invalid) return;
 
     const { email, password } = this.loginForm.value;
+    this.loading = true;
 
     this.authService.loginAdmin({ email, password }).subscribe({
       next: (res) => {
-        // optionally save token or admin info
+        localStorage.setItem('token', res.token); // ✅ optional: save token
+        this.loading = false;
         this.router.navigate(['/admindash']);
       },
       error: (err) => {
+        this.loading = false;
         this.errorMessage = err.error?.message || 'Login failed';
       }
     });

@@ -6,10 +6,12 @@
           <div>
             <h2 class="text-xl font-semibold text-gray-800">Product Management</h2>
             <p class="text-gray-500 text-sm mt-1">
-              A list of all the products in our website which are newly created.
+              A list of all the products you created.
             </p>
           </div>
-          <button class="bg-indigo-600 text-white text-sm px-4 py-2 rounded-md hover:bg-indigo-700" routerLink="/addProduct">
+          <button
+            class="bg-indigo-600 text-white text-sm px-4 py-2 rounded-md hover:bg-indigo-700"
+            routerLink="/addProduct">
             Create Product
           </button>
         </div>
@@ -31,14 +33,18 @@
               <tr *ngFor="let product of products; let i = index">
                 <td class="px-6 py-4">{{ i + 1 }}</td>
                 <td class="px-4 py-2">
-                  <img *ngFor="let img of product.images?.split(',')"
-                       [src]="'http://localhost:3000/uploads/' + img"
-                       alt="Product Image"
-                       class="w-16 h-16 object-cover inline-block mr-2" />
+                  <ng-container *ngIf="product.images">
+                    <img
+                      *ngFor="let img of product.images.split(',')"
+                      [src]="img"
+                      alt="Product Image"
+                      class="w-16 h-16 object-cover inline-block mr-2"
+                    />
+                  </ng-container>
                 </td>
                 <td class="px-6 py-4">{{ product.title }}</td>
                 <td class="px-6 py-4">{{ product.quantity }}</td>
-                <td class="px-6 py-4">{{ product.price }}</td>
+                <td class="px-6 py-4">₹{{ product.price }}</td>
                 <td class="px-6 py-4">{{ product.description }}</td>
                 <td class="px-6 py-4 text-right space-x-4">
                   <button (click)="editProduct(product.id)" class="text-indigo-600 font-medium hover:underline">Edit</button>

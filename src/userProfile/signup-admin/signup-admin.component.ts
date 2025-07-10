@@ -7,13 +7,15 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-signup-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './signup-admin.component.html',
-  styleUrls: ['./signup-admin.component.css'] // ✅ fixed from 'styleUrl'
+  styleUrls: ['./signup-admin.component.css']
 })
 export class SignupAdminComponent {
+  signupForm!: FormGroup;
   errorMessage = '';
-  signupForm!:FormGroup
+  loading = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -27,29 +29,25 @@ export class SignupAdminComponent {
     });
   }
 
-
-
   onSubmit() {
     if (this.signupForm.invalid) return;
 
-    const name = this.signupForm.get('name')?.value;
-    const email = this.signupForm.get('email')?.value;
-    const password = this.signupForm.get('password')?.value;
-    const confirmPassword = this.signupForm.get('confirmPassword')?.value;
+    const { name, email, password, confirmPassword } = this.signupForm.value;
 
     if (password !== confirmPassword) {
       this.errorMessage = 'Passwords do not match';
       return;
     }
 
-    if (!name || !email || !password) {
-      this.errorMessage = 'All fields are required';
-      return;
-    }
+    this.loading = true;
 
     this.authService.signupAdmin({ name, email, password }).subscribe({
-      next: () => this.router.navigate(['/admindash']),
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/admindash']);
+      },
       error: (err) => {
+        this.loading = false;
         this.errorMessage = err.error?.message || 'Signup failed';
       }
     });

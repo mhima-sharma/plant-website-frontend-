@@ -30,23 +30,35 @@ export class AdminDashboardComponent implements OnInit {
     this.fetchProducts();
   }
 
-  // Fetch all products excluding those with quantity = 0
+  // ✅ Fetch only products added by the logged-in user, excluding quantity = 0
   fetchProducts(): void {
-    this.productService.getAllProducts().subscribe({
+    const token = localStorage.getItem('token'); // 👈 Get token from storage
+
+    this.http.get<any[]>(`${this.baseUrl}/my`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).subscribe({
       next: (res) => {
         this.products = res.filter(product => product.quantity > 0);
-        console.log('Filtered Products:', this.products);
+        console.log('Filtered My Products:', this.products);
       },
       error: (err) => {
-        console.error('Error fetching products:', err);
+        console.error('Error fetching my products:', err);
       }
     });
   }
 
   // Delete product
   deleteProduct(id: number): void {
+    const token = localStorage.getItem('token');
+
     if (confirm('Are you sure you want to delete this product?')) {
-      this.http.delete(`${this.baseUrl}/${id}`).subscribe({
+      this.http.delete(`${this.baseUrl}/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).subscribe({
         next: () => {
           this.products = this.products.filter(p => p.id !== id);
           console.log('Product deleted:', id);
