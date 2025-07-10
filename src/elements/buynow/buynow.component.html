@@ -2,7 +2,7 @@
   <!-- Header -->
   <div class="text-center mb-6">
     <h2 class="text-2xl font-semibold text-gray-800">Checkout</h2>
-    <p class="text-gray-500 text-sm">Fill in your details below to complete the order</p>
+    <p class="text-gray-500 text-sm">Complete your order below</p>
   </div>
 
   <!-- Grid Layout -->
@@ -55,8 +55,9 @@
       </div>
     </div>
 
-    <!-- Right: Order Summary -->
-    <div class="bg-gray-50 rounded-2xl shadow p-4 h-fit sticky top-4">
+    <!-- Right: Order Summary (Sticky only on large screens) -->
+    <div
+      class="bg-gray-50 rounded-2xl shadow p-4 h-fit lg:sticky lg:top-4 sm:static sm:mt-0">
       <h3 class="text-lg font-semibold text-gray-800 mb-4">Order Summary</h3>
 
       <div *ngIf="cartItems.length === 0" class="text-center text-gray-500 text-sm py-4">
