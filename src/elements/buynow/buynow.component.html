@@ -1,81 +1,83 @@
-<div class="max-w-6xl mx-auto px-4 py-10" [formGroup]="checkoutForm">
+<div class="max-w-6xl mx-auto px-2 py-6" [formGroup]="checkoutForm">
   <!-- Header -->
-  <div class="text-center mb-10">
-    <h2 class="text-3xl font-bold text-gray-800">Complete Your Purchase</h2>
-    <p class="text-gray-500 mt-2">Enter your billing details and review your order</p>
+  <div class="text-center mb-6">
+    <h2 class="text-2xl font-semibold text-gray-800">Checkout</h2>
+    <p class="text-gray-500 text-sm">Fill in your details below to complete the order</p>
   </div>
 
-  <!-- Layout -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <!-- Grid Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
     <!-- Left: Billing Info -->
-    <div class="bg-white rounded-3xl shadow-lg p-6 sm:p-8 space-y-6">
-      <h3 class="text-2xl font-semibold text-gray-700 mb-4">Billing Information</h3>
+    <div class="bg-white rounded-2xl shadow p-4 space-y-4">
+      <h3 class="text-lg font-medium text-gray-700">Billing Info</h3>
 
-      <div class="space-y-4">
+      <div class="space-y-3">
         <div>
-          <label class="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+          <label class="block text-sm text-gray-600">Full Name</label>
           <input type="text" formControlName="fullName"
-            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none" />
+            class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-indigo-500" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-600 mb-1">Email</label>
+          <label class="block text-sm text-gray-600">Email</label>
           <input type="email" formControlName="email"
-            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none" />
+            class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-indigo-500" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-600 mb-1">Phone Number</label>
+          <label class="block text-sm text-gray-600">Phone</label>
           <input type="tel" formControlName="phoneNumber"
-            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none" />
+            class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-indigo-500" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-600 mb-1">Shipping Address</label>
-          <textarea formControlName="shippingAddress" rows="3"
-            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+          <label class="block text-sm text-gray-600">Address</label>
+          <textarea rows="2" formControlName="shippingAddress"
+            class="w-full border border-gray-300 rounded px-3 py-1.5 text-sm focus:ring-1 focus:ring-indigo-500"
             placeholder="Street, City, Pincode"></textarea>
         </div>
       </div>
 
-      <div class="mt-6">
-        <h4 class="text-lg font-semibold text-gray-700 mb-3">Select Payment Method</h4>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <label class="flex items-center gap-2 border rounded-lg px-4 py-2 w-full cursor-pointer hover:shadow-md">
+      <!-- Payment Method -->
+      <div class="mt-3">
+        <h4 class="text-sm font-medium text-gray-700 mb-2">Payment Method</h4>
+        <div class="flex gap-4 flex-wrap">
+          <label class="flex items-center gap-2 text-sm text-gray-600">
             <input type="radio" formControlName="paymentMethod" value="razorpay" class="accent-indigo-500" />
-            <span class="text-sm text-gray-700">Razorpay</span>
+            Razorpay
           </label>
-
-          <label class="flex items-center gap-2 border rounded-lg px-4 py-2 w-full cursor-pointer hover:shadow-md">
+          <label class="flex items-center gap-2 text-sm text-gray-600">
             <input type="radio" formControlName="paymentMethod" value="easebuzz" class="accent-indigo-500" />
-            <span class="text-sm text-gray-700">Easebuzz</span>
+            Easebuzz
           </label>
         </div>
       </div>
     </div>
 
-    <!-- Right: Summary -->
-    <div class="bg-gray-50 rounded-3xl shadow-xl p-6 sm:p-8 h-fit sticky top-6">
-      <h3 class="text-2xl font-semibold text-gray-800 mb-6">Order Summary</h3>
+    <!-- Right: Order Summary -->
+    <div class="bg-gray-50 rounded-2xl shadow p-4 h-fit sticky top-4">
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">Order Summary</h3>
 
-      <div *ngIf="cartItems.length === 0" class="text-gray-500 text-center py-10">No items in your cart.</div>
+      <div *ngIf="cartItems.length === 0" class="text-center text-gray-500 text-sm py-4">
+        No items in your cart.
+      </div>
 
-      <div *ngFor="let item of cartItems" class="flex justify-between items-center mb-4 text-sm text-gray-700">
-        <div class="font-medium truncate w-1/2">{{ item.title }}</div>
+      <div *ngFor="let item of cartItems" class="flex justify-between items-center mb-2 text-sm text-gray-700">
+        <div class="truncate w-1/2">{{ item.title }}</div>
         <div>x{{ item.quantity }}</div>
         <div>₹{{ item.price * item.quantity }}</div>
       </div>
 
-      <div class="border-t border-gray-300 my-6"></div>
+      <div class="border-t border-gray-200 my-4"></div>
 
-      <div class="flex justify-between items-center font-semibold text-lg text-gray-900 mb-6">
-        <span>Total:</span>
+      <div class="flex justify-between text-base font-semibold text-gray-900 mb-4">
+        <span>Total</span>
         <span>₹{{ getTotal() }}</span>
       </div>
 
       <button (click)="placeOrder()" [disabled]="checkoutForm.invalid || loading"
-        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-3 rounded-xl transition duration-300 disabled:opacity-50">
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 rounded-lg transition disabled:opacity-50">
         <span *ngIf="!loading">Place Order</span>
         <span *ngIf="loading">Processing...</span>
       </button>
@@ -84,7 +86,7 @@
 
   <!-- Loading Spinner -->
   <div *ngIf="loading"
-    class="fixed inset-0 bg-white/70 z-50 flex items-center justify-center backdrop-blur-sm">
-    <div class="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+    class="fixed inset-0 bg-white/60 z-50 flex items-center justify-center backdrop-blur-sm">
+    <div class="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
   </div>
 </div>
