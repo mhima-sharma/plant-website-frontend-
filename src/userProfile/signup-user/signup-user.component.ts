@@ -42,7 +42,7 @@ export class SignupUserComponent implements OnInit {
     this.authService.signup({ name, email, password }).subscribe({
       next: () => {
         alert('Signup successful');
-        this.router.navigate(['/show']); // <-- Navigate on success
+        this.router.navigate(['/']); // <-- Navigate on success
       },
       error: err => alert(err.error.message || 'Signup failed'),
     });
