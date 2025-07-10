@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CartService } from '../../app/service/cart.service';
-import { BuynowComponent } from '../buynow/buynow.component';
 import { AuthService } from '../../app/auth.service';
 
 @Component({
   selector: 'app-cart',
+  standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css',
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
   showCartSummary: boolean = false;
@@ -20,8 +19,7 @@ export class CartComponent {
   constructor(
     private cartService: CartService,
     private authService: AuthService,
-    public dialogRef: MatDialogRef<CartComponent>,
-    private dialog: MatDialog
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +30,6 @@ export class CartComponent {
       this.loadCart();
     } else {
       console.error('User not logged in!');
-      // Optional: redirect to login or show a message
     }
   }
 
@@ -56,22 +53,15 @@ export class CartComponent {
   }
 
   close() {
-    this.dialogRef.close();
+    // Redirect to home or close side panel/modal if used that way
+    this.router.navigate(['/']);
   }
 
   onBuyNow() {
-    const dialogRef = this.dialog.open(BuynowComponent, {
-      width: '500px',
-      disableClose: false,
-      data: { cart: this.cartItems }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Cart dialog closed');
-      // Optional: Reload cart or take any further action
-    });
+    this.router.navigate(['/buynow'], { state: { cart: this.cartItems } });
   }
- increaseQuantity(item: any) {
+
+  increaseQuantity(item: any) {
     item.quantity++;
   }
 
@@ -83,11 +73,10 @@ export class CartComponent {
     }
   }
 
-    removeItem(item: any) {
+  removeItem(item: any) {
     const index = this.cartItems.findIndex(i => i.id === item.id);
     if (index !== -1) {
       this.cartItems.splice(index, 1);
     }
   }
-  }
-
+}
