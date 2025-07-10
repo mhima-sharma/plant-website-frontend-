@@ -1,106 +1,99 @@
 <!-- Checkout Page Container -->
-<div class="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 overflow-y-auto h-screen lg:h-auto" [formGroup]="checkoutForm">
+<div class="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 overflow-y-auto h-screen" [formGroup]="checkoutForm">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-  <!-- Horizontal Scroll Wrapper for Desktop -->
-  <div class="w-full lg:overflow-x-auto">
-    <div class="min-w-[1024px] grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- LEFT: Delivery and Cart Items -->
+    <div class="lg:col-span-2 space-y-6">
 
-      <!-- LEFT: Delivery and Cart Items -->
-      <div class="lg:col-span-2 space-y-6">
-
-        <!-- Billing Details -->
-        <div class="border p-4 rounded-lg bg-white">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Billing Details</h3>
-          <div class="space-y-4">
-            <div>
-              <label class="block text-gray-600 font-medium mb-1">Full Name</label>
-              <input type="text" formControlName="fullName"
-                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="John Doe" />
-            </div>
-            <div>
-              <label class="block text-gray-600 font-medium mb-1">Email Address</label>
-              <input type="email" formControlName="email"
-                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="john@example.com" />
-            </div>
-            <div>
-              <label class="block text-gray-600 font-medium mb-1">Phone Number</label>
-              <input type="tel" formControlName="phoneNumber"
-                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="9876543210" />
-            </div>
-            <div>
-              <label class="block text-gray-600 font-medium mb-1">Shipping Address</label>
-              <textarea #addressInput formControlName="shippingAddress" rows="3"
-                class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Street, City, Pincode"></textarea>
-            </div>
+      <!-- Billing Details -->
+      <div class="border p-4 rounded-lg bg-white">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Billing Details</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-gray-600 font-medium mb-1">Full Name</label>
+            <input type="text" formControlName="fullName"
+              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="John Doe" />
           </div>
-        </div>
-
-        <!-- Cart Items -->
-        <div class="border p-4 rounded-lg bg-white">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-3 gap-2">
-            <span class="font-semibold text-green-600">{{ cartItems.length }}/{{ cartItems.length }} ITEMS SELECTED</span>
+          <div>
+            <label class="block text-gray-600 font-medium mb-1">Email Address</label>
+            <input type="email" formControlName="email"
+              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="john@example.com" />
           </div>
-
-          <div *ngFor="let item of cartItems"
-            class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
-            <div class="flex items-start gap-3">
-              <input type="checkbox" checked class="mt-1 text-green-600" />
-              <img [src]="item.image" alt="{{ item.title }}"
-                class="w-20 h-24 object-cover rounded-lg border" />
-            </div>
-            <div class="flex-1 space-y-1">
-              <h4 class="font-semibold text-gray-800">{{ item.title }}</h4>
-              <p class="text-sm text-gray-600">Qty: {{ item.quantity }}</p>
-              <p class="text-sm text-gray-600">₹{{ item.price * item.quantity }}</p>
-            </div>
-            <button class="text-gray-400 hover:text-red-600 text-lg self-start">&times;</button>
+          <div>
+            <label class="block text-gray-600 font-medium mb-1">Phone Number</label>
+            <input type="tel" formControlName="phoneNumber"
+              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="9876543210" />
+          </div>
+          <div>
+            <label class="block text-gray-600 font-medium mb-1">Shipping Address</label>
+            <textarea #addressInput formControlName="shippingAddress" rows="3"
+              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Street, City, Pincode"></textarea>
           </div>
         </div>
       </div>
 
-      <!-- RIGHT: Summary and Payment -->
-      <div class="w-full lg:w-full bg-white p-6 rounded-lg shadow-md space-y-6 lg:sticky lg:top-6 h-fit">
-        <!-- Price Summary -->
-        <div class="border-t pt-4 text-sm space-y-2">
-          <div class="flex justify-between text-gray-700">
-            <span>Total MRP</span>
-            <span>₹{{ getSubtotal() }}</span>
-          </div>
-          <div class="flex justify-between text-gray-700">
-            <span>Coupon Discount</span>
-            <span class="text-green-600 cursor-pointer hover:underline">Apply Coupon</span>
-          </div>
-          <div class="flex justify-between text-gray-700">
-            <span>Platform Fee <span class="text-blue-500 cursor-pointer text-xs">Know More</span></span>
-            <span>₹10</span>
-          </div>
-          <div class="flex justify-between font-semibold text-lg pt-2 border-t">
-            <span>Total Amount</span>
-            <span>₹{{ getTotal() }}</span>
-          </div>
+      <!-- Cart Items -->
+      <div class="border p-4 rounded-lg bg-white">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-3 gap-2">
+          <span class="font-semibold text-green-600">{{ cartItems.length }}/{{ cartItems.length }} ITEMS SELECTED</span>
         </div>
 
-        <!-- Payment Method -->
-        <div class="space-y-2">
-          <label class="flex items-center gap-2">
-            <input type="radio" formControlName="paymentMethod" value="razorpay" class="text-green-500" /> Razorpay
-          </label>
-          <label class="flex items-center gap-2">
-            <input type="radio" formControlName="paymentMethod" value="easebuzz" class="text-green-500" /> Easebuzz
-          </label>
+        <div *ngFor="let item of cartItems"
+          class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
+          <div class="flex items-start gap-3">
+            <input type="checkbox" checked class="mt-1 text-green-600" />
+            <img [src]="item.image" alt="{{ item.title }}"
+              class="w-20 h-24 object-cover rounded-lg border" />
+          </div>
+          <div class="flex-1 space-y-1">
+            <h4 class="font-semibold text-gray-800">{{ item.title }}</h4>
+            <p class="text-sm text-gray-600">Qty: {{ item.quantity }}</p>
+            <p class="text-sm text-gray-600">₹{{ item.price * item.quantity }}</p>
+          </div>
+          <button class="text-gray-400 hover:text-red-600 text-lg self-start">&times;</button>
         </div>
-
-        <!-- Place Order -->
-        <button (click)="placeOrder()" [disabled]="checkoutForm.invalid || loading"
-          class="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition">
-          <span *ngIf="!loading">PLACE ORDER</span>
-          <span *ngIf="loading">Processing...</span>
-        </button>
       </div>
+    </div>
+
+    <!-- RIGHT: Summary and Payment -->
+    <div class="w-full bg-white p-6 rounded-lg shadow-md space-y-6 lg:sticky lg:top-6 h-fit">
+      <!-- Price Summary -->
+      <div class="border-t pt-4 text-sm space-y-2">
+        <div class="flex justify-between text-gray-700">
+          <span>Total MRP</span>
+          <span>₹{{ getSubtotal() }}</span>
+        </div>
+      
+        <div class="flex justify-between text-gray-700">
+          <span>Platform Fee </span>
+          <span>₹10</span>
+        </div>
+        <div class="flex justify-between font-semibold text-lg pt-2 border-t">
+          <span>Total Amount</span>
+          <span>₹{{ getTotal() }}</span>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="space-y-2">
+        <label class="flex items-center gap-2">
+          <input type="radio" formControlName="paymentMethod" value="razorpay" class="text-green-500" /> Razorpay
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" formControlName="paymentMethod" value="easebuzz" class="text-green-500" /> Easebuzz
+        </label>
+      </div>
+
+      <!-- Place Order -->
+      <button (click)="placeOrder()" [disabled]="checkoutForm.invalid || loading"
+        class="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition">
+        <span *ngIf="!loading">PLACE ORDER</span>
+        <span *ngIf="loading">Processing...</span>
+      </button>
     </div>
   </div>
 </div>
