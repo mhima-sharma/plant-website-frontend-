@@ -12,14 +12,12 @@
 
     <!-- Desktop Links -->
     <div class="hidden md:flex items-center space-x-8">
-      <a routerLink="/show" class="text-gray-900 text-lg font-medium hover:text-green-800">Home</a>
-      <a routerLink="/store" class="text-gray-900 text-lg font-medium hover:text-green-800">Store</a>
-      <a routerLink="/about" class="text-gray-900 text-lg font-medium hover:text-green-800">About Us</a>
-      <a routerLink="/contact" class="text-gray-900 text-lg font-medium hover:text-green-800">Contact Us</a>
-       <a href="https://mhima-sharma.github.io/Weather-App/" target="_blank">Check Weather</a>
-      <!-- <a routerLink="/chat" class="text-gray-900 text-lg font-medium hover:text-green-800">CHAT</a> -->
-
-      <a (click)="openCart()" class="text-gray-900 text-lg font-medium hover:text-green-800 cursor-pointer">Cart</a>
+      <a routerLink="/show" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Home</a>
+      <a routerLink="/store" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Store</a>
+      <a routerLink="/about" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">About Us</a>
+      <a routerLink="/contact" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Contact Us</a>
+      <a href="https://mhima-sharma.github.io/Weather-App/" target="_blank" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Check Weather</a>
+      <a (click)="openCart()" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200 cursor-pointer">Cart</a>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -31,13 +29,12 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div *ngIf="isMobileMenuOpen" class="md:hidden bg-white shadow px-6 py-4 space-y-4">
-    <a routerLink="/show" (click)="closeMobileMenu()" class="block text-gray-900 text-lg font-medium hover:text-green-800">Home</a>
-    <a routerLink="/store" (click)="closeMobileMenu()" class="block text-gray-900 text-lg font-medium hover:text-green-800">Store</a>
-    <a routerLink="/about" (click)="closeMobileMenu()" class="block text-gray-900 text-lg font-medium hover:text-green-800">About Us</a>
-    <a routerLink="/contact" (click)="closeMobileMenu()" class="block text-gray-900 text-lg font-medium hover:text-green-800">Contact Us</a>
-    <a href="https://mhima-sharma.github.io/Weather-App/" target="_blank">Check Weather</a>
-
-    <a (click)="openCart(); closeMobileMenu()" class="block text-gray-900 text-lg font-medium hover:text-green-800 cursor-pointer">Cart</a>
+  <div *ngIf="isMobileMenuOpen" class="md:hidden bg-gradient-to-r from-lime-300 to-green-800 shadow px-6 py-4 space-y-4">
+    <a routerLink="/show" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Home</a>
+    <a routerLink="/store" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Store</a>
+    <a routerLink="/about" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">About Us</a>
+    <a routerLink="/contact" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Contact Us</a>
+    <a href="https://mhima-sharma.github.io/Weather-App/" target="_blank" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Check Weather</a>
+    <a (click)="openCart(); closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Cart</a>
   </div>
 </div>
