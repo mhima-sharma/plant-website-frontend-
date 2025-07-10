@@ -1,84 +1,81 @@
-<div class="relative w-full max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10" [formGroup]="checkoutForm">
-  <h2 class="text-2xl sm:text-3xl font-extrabold mb-8 sm:mb-10 text-center text-gray-800">Checkout</h2>
+<div class="relative w-full max-w-6xl mx-auto px-2 sm:px-4 py-4 sm:py-6 md:py-10" [formGroup]="checkoutForm">
+  <!-- Title -->
+  <h2 class="text-xl sm:text-2xl font-bold text-center text-gray-800 mb-6 sm:mb-8">Checkout</h2>
 
-  <!-- Responsive grid layout -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-    
+  <!-- Responsive Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6 md:gap-8">
+
     <!-- Billing Details -->
-    <div class="w-full bg-white p-6 sm:p-8 shadow-lg rounded-2xl">
-      <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-700">Billing Details</h3>
-
-      <div class="space-y-4 sm:space-y-6">
-        <div>
-          <label class="block text-gray-600 font-medium mb-2">Full Name</label>
+    <div class="bg-white shadow-md rounded-lg p-4 sm:p-6">
+      <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-4 border-b pb-2">Billing Details</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="col-span-full">
+          <label class="text-sm font-medium text-gray-600 mb-1 block">Full Name</label>
           <input type="text" formControlName="fullName"
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="John Doe" />
         </div>
-
         <div>
-          <label class="block text-gray-600 font-medium mb-2">Email Address</label>
+          <label class="text-sm font-medium text-gray-600 mb-1 block">Email</label>
           <input type="email" formControlName="email"
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="john@example.com" />
         </div>
-
         <div>
-          <label class="block text-gray-600 font-medium mb-2">Phone Number</label>
+          <label class="text-sm font-medium text-gray-600 mb-1 block">Phone</label>
           <input type="tel" formControlName="phoneNumber"
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="9876543210" />
         </div>
-
-        <div>
-          <label class="block text-gray-600 font-medium mb-2">Shipping Address</label>
-          <textarea #addressInput formControlName="shippingAddress"
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
-            rows="4" placeholder="Street, City, Pincode"></textarea>
+        <div class="col-span-full">
+          <label class="text-sm font-medium text-gray-600 mb-1 block">Shipping Address</label>
+          <textarea rows="4" #addressInput formControlName="shippingAddress"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Street, City, Pincode"></textarea>
         </div>
       </div>
     </div>
 
-    <!-- Order Summary -->
-    <div class="w-full bg-white p-6 sm:p-8 shadow-lg rounded-2xl">
-      <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-700">Order Summary</h3>
+    <!-- Order Summary + Payment -->
+    <div class="bg-white shadow-md rounded-lg p-4 sm:p-6">
+      <h3 class="text-lg sm:text-xl font-semibold text-gray-700 mb-4 border-b pb-2">Order Summary</h3>
 
-      <div class="border-b pb-4 sm:pb-6 mb-4 sm:mb-6 divide-y divide-gray-200">
+      <!-- Items -->
+      <div class="space-y-3 text-sm text-gray-700 mb-4">
         <div *ngIf="cartItems.length === 0" class="text-center text-gray-500 py-4">
           No items in your cart.
         </div>
-
-        <div *ngFor="let item of cartItems" class="flex justify-between py-3 text-gray-700 text-sm sm:text-base">
-          <span class="font-medium">{{ item.title }}</span>
+        <div *ngFor="let item of cartItems" class="flex justify-between items-center">
+          <span class="truncate w-1/2">{{ item.title }}</span>
           <span>x{{ item.quantity }}</span>
-          <span>₹{{ item.price * item.quantity }}</span>
+          <span class="font-medium">₹{{ item.price * item.quantity }}</span>
         </div>
       </div>
 
-      <div class="flex justify-between font-bold text-lg sm:text-xl text-gray-800 mb-4 sm:mb-6">
+      <!-- Total -->
+      <div class="flex justify-between font-bold text-gray-800 border-t pt-3 mb-4">
         <span>Total</span>
         <span>₹{{ getTotal() }}</span>
       </div>
 
-      <!-- Payment Methods -->
-      <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-700">Payment Method</h3>
-      <div class="flex flex-col space-y-3 sm:space-y-4">
-        <label class="flex items-center cursor-pointer">
+      <!-- Payment Method -->
+      <h3 class="text-md font-medium text-gray-700 mb-2">Payment Method</h3>
+      <div class="space-y-2 mb-4">
+        <label class="flex items-center">
           <input type="radio" formControlName="paymentMethod" value="razorpay"
-            class="mr-3 w-4 h-4 text-green-500 focus:ring-green-500" />
-          <span>Razorpay</span>
+            class="mr-2 accent-blue-600" />
+          Razorpay
         </label>
-
-        <label class="flex items-center cursor-pointer">
+        <label class="flex items-center">
           <input type="radio" formControlName="paymentMethod" value="easebuzz"
-            class="mr-3 w-4 h-4 text-green-500 focus:ring-green-500" />
-          <span>Easebuzz</span>
+            class="mr-2 accent-blue-600" />
+          Easebuzz
         </label>
       </div>
 
       <!-- Place Order Button -->
       <button (click)="placeOrder()" [disabled]="checkoutForm.invalid || loading"
-        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl w-full mt-6 sm:mt-8 transition disabled:opacity-50">
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition disabled:opacity-50">
         <span *ngIf="!loading">Place Order</span>
         <span *ngIf="loading">Processing...</span>
       </button>
@@ -87,7 +84,7 @@
 
   <!-- Loading Spinner Overlay -->
   <div *ngIf="loading"
-    class="absolute inset-0 bg-white bg-opacity-60 flex items-center justify-center z-50 rounded-xl">
-    <div class="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+    class="absolute inset-0 bg-white/60 flex items-center justify-center z-50 rounded-xl">
+    <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
   </div>
 </div>
