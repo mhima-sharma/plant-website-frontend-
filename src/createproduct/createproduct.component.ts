@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../app/service/product.service';
 
@@ -16,7 +16,6 @@ export class CreateproductComponent {
   selectedFiles: File[] = [];
   products: any[] = [];
 
-  // ✅ Dynamically set base URL (localhost or production)
   private baseUrl = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api/products'
     : 'https://backend-plant-website.vercel.app/api/products';
@@ -48,6 +47,12 @@ export class CreateproductComponent {
       return;
     }
 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You must be logged in to upload products.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('title', this.productForm.get('title')?.value);
     formData.append('quantity', this.productForm.get('quantity')?.value);
@@ -58,17 +63,21 @@ export class CreateproductComponent {
       formData.append('images', file);
     });
 
-    this.http.post(this.baseUrl, formData).subscribe({
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    this.http.post(this.baseUrl, formData, { headers }).subscribe({
       next: (res) => {
-        console.log('Product added successfully:', res);
+        console.log('✅ Product added successfully:', res);
         alert('Product uploaded ✅');
         this.productForm.reset();
         this.selectedFiles = [];
-        this.fetchProducts(); // optional: refresh list
+        this.fetchProducts(); // optional refresh
       },
       error: (err) => {
-        console.error('Error uploading product:', err);
-        alert('Upload failed. Please check console/logs.');
+        console.error('❌ Error uploading product:', err);
+        alert(err.error?.message || 'Upload failed. Please login again.');
       }
     });
   }
