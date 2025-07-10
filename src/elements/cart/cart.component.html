@@ -16,7 +16,7 @@
 
       <div *ngFor="let item of cartItems" class="p-4 border mb-4 rounded-xl shadow flex items-center gap-4 hover:shadow-md transition">
         <img
-          [src]="'http://localhost:3000/uploads/' + item.images"
+          [src]="item.images"
           alt="Product Image"
           class="w-24 h-24 object-cover rounded-lg" />
         <div class="flex-1">
