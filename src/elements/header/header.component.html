@@ -36,16 +36,7 @@
         <div *ngIf="isMoreMenuOpen" class="absolute right-0 mt-2 w-44 bg-white shadow-md rounded-md z-50">
           <a routerLink="/terms" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Terms</a>
           <a routerLink="/intro" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Introduction</a>
-          <a routerLink="/user-login" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 relative">
-            User Access
-            <!-- Finger GIF if not logged in -->
-            <!-- <img
-              *ngIf="!isLoggedIn"
-              src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
-              alt="tap here"
-              class="absolute -right-10 -top-5 w-12 h-12 pointer-events-none"
-            /> -->
-          </a>
+          <a routerLink="/user-login" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 relative"> User Access</a>
           <a routerLink="/admin-login" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Admin Access</a>
           <a (click)="openLogoutPopup(); closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 cursor-pointer">Logout</a>
         </div>
@@ -69,6 +60,8 @@
     <hr class="border-white/40">
     <a routerLink="/intro" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Introduction</a>
     <a routerLink="/terms" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Terms</a>
+    <a routerLink="/user-login" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">User Access</a>
+
     <a routerLink="/admin-login" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Admin Access</a>
     <a (click)="openLogoutPopup()" class="block text-green-100 text-lg font-semibold hover:text-white cursor-pointer">Logout</a>
   </div>
