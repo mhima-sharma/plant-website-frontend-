@@ -1,29 +1,94 @@
 <main class="p-4 sm:p-6 flex-1 overflow-y-auto bg-gray-50 min-h-screen">
   <div class="w-full h-full min-h-[500px] border-2 border-dashed border-gray-300 rounded-lg bg-white">
-
-    <!-- Page Content -->
     <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold tracking-tight text-green-900 mb-10 text-center">
+
+      <!-- "We Also Offer" Static Categories -->
+      <div class="mb-10">
+        <h3 class="text-xl font-semibold text-green-900 mb-6 text-center sm:text-left">
+          We Also Offer
+        </h3>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">
+          <!-- Gardening Tools -->
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-green-700 shadow">
+              <img
+                src="assets/categories/tools.jpg"
+                alt="Gardening Tools"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <p class="mt-2 text-sm text-green-800 font-medium text-center">Gardening Tools</p>
+          </div>
+
+          <!-- Plant Accessories -->
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-green-700 shadow">
+              <img
+                src="assets/categories/accessories.jpg"
+                alt="Plant Accessories"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <p class="mt-2 text-sm text-green-800 font-medium text-center">Plant Accessories</p>
+          </div>
+
+          <!-- Types of Plants -->
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-green-700 shadow">
+              <img
+                src="assets/categories/plants.jpg"
+                alt="Types of Plants"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <p class="mt-2 text-sm text-green-800 font-medium text-center">Types of Plants</p>
+          </div>
+
+          <!-- Soil & Compost -->
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-green-700 shadow">
+              <img
+                src="assets/categories/soil.jpg"
+                alt="Soil & Compost"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <p class="mt-2 text-sm text-green-800 font-medium text-center">Soil & Compost</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="mb-8 flex justify-center">
+        <input
+          type="text"
+          placeholder="Search products..."
+          class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+        />
+      </div>
+
+      <!-- Product Section Title -->
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-green-900 mb-8 text-center sm:text-left">
         Customers Can Purchase
       </h2>
 
-      <!-- Responsive Grid -->
+      <!-- Product Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         <div
           class="group relative border rounded-lg p-3 sm:p-4 bg-white hover:shadow-2xl transition duration-300"
           *ngFor="let product of products"
         >
-
-          <!-- Image -->
+          <!-- Product Image -->
           <div class="overflow-hidden rounded-md">
             <img
               class="w-full h-48 object-cover transform group-hover:scale-105 transition duration-300 cursor-pointer"
-              [src]="(product.images?.split(',')[0] || 'placeholder.jpg')"
+              [src]="(product.images?.split(',')[0] || 'assets/placeholder.jpg')"
               alt="{{ product.title }}"
             />
           </div>
 
-          <!-- Details -->
+          <!-- Product Details -->
           <div class="mt-3 flex flex-col justify-between space-y-2">
             <div class="flex justify-between items-start space-x-2">
               <div class="flex-1 min-w-0">
@@ -38,8 +103,12 @@
                 </p>
               </div>
               <div class="text-right ml-2 whitespace-nowrap">
-                <p class="text-sm sm:text-base font-semibold text-green-800">₹{{ product.price }}</p>
-                <p class="text-gray-600 text-xs sm:text-sm">Qty: {{ product.quantity }}</p>
+                <p class="text-sm sm:text-base font-semibold text-green-800">
+                  ₹{{ product.price }}
+                </p>
+                <p class="text-gray-600 text-xs sm:text-sm">
+                  Qty: {{ product.quantity }}
+                </p>
               </div>
             </div>
 
