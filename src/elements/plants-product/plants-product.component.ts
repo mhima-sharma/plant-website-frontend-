@@ -37,4 +37,8 @@ export class PlantsProductComponent {
     console.log('Navigating to product id:', id);
     this.router.navigate(['/product', id]);
   }
+  onSearch(event: Event) {
+  event.preventDefault(); // Prevent form refresh
+  // Add logic here later
+}
 }
