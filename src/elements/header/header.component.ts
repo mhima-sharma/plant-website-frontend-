@@ -60,6 +60,6 @@ export class HeaderComponent {
   confirmLogout() {
     localStorage.clear(); // Replace with authService.logout() if using a service
     this.showLogoutModal = false;
-    this.router.navigate(['/user-login']);
+    this.router.navigate(['/']);
   }
 }
