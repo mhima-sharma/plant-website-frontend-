@@ -16,6 +16,7 @@ export class HeaderComponent {
   isMobileMenuOpen = false;
   isMoreMenuOpen = false;
   showLogoutModal = false;
+  isLoggedIn = false;
 
   constructor(private dialog: MatDialog, private router: Router) {}
 
@@ -26,6 +27,10 @@ export class HeaderComponent {
     });
   }
 
+  ngOnInit() {
+  const token = localStorage.getItem('token'); // or use a service to verify login
+  this.isLoggedIn = !!token;
+}
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
