@@ -24,6 +24,12 @@
       <div class="relative" (click)="toggleMoreMenu()">
         <button class="text-green-700 text-lg font-semibold flex items-center gap-1 hover:text-lime-600 transition">
           More <span class="text-sm">▼</span>
+            <img
+              *ngIf="!isLoggedIn"
+              src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
+              alt="tap here"
+              class="absolute w-10 h-10 pointer-events-none mt-12"
+            />
         </button>
 
         <!-- Dropdown Content -->
@@ -33,12 +39,12 @@
           <a routerLink="/user-login" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 relative">
             User Access
             <!-- Finger GIF if not logged in -->
-            <img
+            <!-- <img
               *ngIf="!isLoggedIn"
               src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
               alt="tap here"
               class="absolute -right-10 -top-5 w-12 h-12 pointer-events-none"
-            />
+            /> -->
           </a>
           <a routerLink="/admin-login" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Admin Access</a>
           <a (click)="openLogoutPopup(); closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 cursor-pointer">Logout</a>
