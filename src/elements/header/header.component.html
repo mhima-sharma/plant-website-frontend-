@@ -23,6 +23,8 @@
         <div *ngIf="isMoreMenuOpen" class="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md z-50">
           <a routerLink="/terms" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Terms</a>
           <a routerLink="/intro" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Introduction</a>
+          <a routerLink="/admin-login" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Want to become admin?</a>
+
           <a (click)="openLogoutPopup()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 cursor-pointer">Logout</a>
         </div>
       </div>
@@ -47,6 +49,8 @@
     <a routerLink="/intro" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Introduction</a>
     <a routerLink="/terms" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Terms</a>
     <a (click)="openLogoutPopup()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Logout</a>
+    <a routerLink="/admin-login" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Want to become admin?</a>
+
   </div>
 </div>
 
