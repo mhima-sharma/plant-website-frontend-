@@ -1,21 +1,24 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { CartComponent } from "../cart/cart.component";
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { CartComponent } from '../cart/cart.component';
+
 @Component({
   selector: 'app-header',
-  imports: [RouterLink,CommonModule],
+  standalone: true, // ✅ Required for using `imports`
+  imports: [RouterLink, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  dialogOpen = false;
-  isMobileMenuOpen: boolean = false;
-  isMoreMenuOpen: boolean = false;
-  showLogoutModal: boolean = false;
-  router: any;
-constructor(private dialog: MatDialog){}
+  isMobileMenuOpen = false;
+  isMoreMenuOpen = false;
+  showLogoutModal = false;
+
+  constructor(private dialog: MatDialog, private router: Router) {}
+
   openCart() {
     this.dialog.open(CartComponent, {
       width: '500px',
@@ -23,39 +26,35 @@ constructor(private dialog: MatDialog){}
     });
   }
 
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
 
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+  }
 
-toggleMobileMenu() {
-  this.isMobileMenuOpen = !this.isMobileMenuOpen;
-}
+  toggleMoreMenu() {
+    this.isMoreMenuOpen = !this.isMoreMenuOpen;
+  }
 
-closeMobileMenu() {
-  this.isMobileMenuOpen = false;
-}
+  closeMoreMenu() {
+    this.isMoreMenuOpen = false;
+  }
 
-toggleMoreMenu() {
-  this.isMoreMenuOpen = !this.isMoreMenuOpen;
-}
-
-closeMoreMenu() {
-  this.isMoreMenuOpen = false;
-}
-
-openLogoutPopup() {
+  openLogoutPopup() {
     this.showLogoutModal = true;
     this.closeMobileMenu();
     this.closeMoreMenu();
   }
 
-closeLogoutPopup() {
+  closeLogoutPopup() {
     this.showLogoutModal = false;
   }
 
   confirmLogout() {
-    // Replace this with your logout logic
-    localStorage.clear(); // or this.authService.logout();
+    localStorage.clear(); // Replace with authService.logout() if using a service
     this.showLogoutModal = false;
     this.router.navigate(['/login']);
   }
-
 }

@@ -6,7 +6,6 @@
 <!-- Navbar -->
 <div class="fixed top-[34px] w-full bg-white shadow z-40">
   <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-
     <!-- Logo -->
     <h1 class="text-green-900 text-3xl md:text-4xl font-bold">🌿Little Leafy</h1>
 
@@ -24,7 +23,7 @@
         <div *ngIf="isMoreMenuOpen" class="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md z-50">
           <a routerLink="/terms" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Terms</a>
           <a routerLink="/intro" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Introduction</a>
-          <a (click)="openLogoutPopup()" target="_blank" class="block px-4 py-2 text-green-700 hover:bg-lime-100">logout</a>
+          <a (click)="openLogoutPopup()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 cursor-pointer">Logout</a>
         </div>
       </div>
     </div>
@@ -42,16 +41,17 @@
     <a routerLink="/about" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">About Us</a>
     <a routerLink="/contact" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Contact Us</a>
     <a (click)="openCart(); closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Cart</a>
-
-    <!-- More Links in Mobile View -->
+    
+    <!-- More Links -->
     <hr class="border-white/40">
     <a routerLink="/intro" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Introduction</a>
     <a routerLink="/terms" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Terms</a>
-    <a (click)="openLogoutPopup()" target="_blank" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Logout</a>
+    <a (click)="openLogoutPopup()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Logout</a>
   </div>
 </div>
+
 <!-- Logout Confirmation Modal -->
-<div *ngIf="showLogoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+<div *ngIf="showLogoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-[999] flex items-center justify-center">
   <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
     <h2 class="text-xl font-semibold text-green-900 mb-4">Are you sure you want to logout?</h2>
     <div class="flex justify-center space-x-4 mt-4">
