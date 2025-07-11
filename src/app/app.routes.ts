@@ -15,11 +15,11 @@ import { ProductDetailsComponent } from '../product-details/product-details.comp
 import { ChatComponent } from './chat/chat.component';
 import { SuccessPaymentComponent } from '../success-payment/success-payment.component';
 import { FaliedPaymentComponent } from '../falied-payment/falied-payment.component';
-import { ExtraComponent } from '../extra/extra.component';
+
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
 import { TermPolicyComponent } from '../elements/term-policy/term-policy.component';
-import { LogoutComponent } from '../elements/logout/logout.component';
+
 
 export const routes: Routes = [
     { path: 'show', component: ShowCaseOfMyProjectComponent },
@@ -40,11 +40,11 @@ export const routes: Routes = [
     { path: 'chat1', component: ChatComponent },
     { path: 'paysucess', component: SuccessPaymentComponent },
     { path: 'payfail', component: FaliedPaymentComponent},
-    { path: 'extra', component: ExtraComponent},
+   
     { path: 'chat', component: ChatbotComponent},
     { path: 'intro', component: IntroductionComponent},
     { path: 'terms', component: TermPolicyComponent},
-    { path: 'logout', component: LogoutComponent},
+    
 
 
 
