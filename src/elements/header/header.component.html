@@ -24,7 +24,7 @@
         <div *ngIf="isMoreMenuOpen" class="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md z-50">
           <a routerLink="/terms" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Terms</a>
           <a routerLink="/intro" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Introduction</a>
-          <a href="" target="_blank" class="block px-4 py-2 text-green-700 hover:bg-lime-100">logout</a>
+          <a (click)="openLogoutPopup()" target="_blank" class="block px-4 py-2 text-green-700 hover:bg-lime-100">logout</a>
         </div>
       </div>
     </div>
@@ -47,6 +47,16 @@
     <hr class="border-white/40">
     <a routerLink="/intro" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Introduction</a>
     <a routerLink="/terms" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Terms</a>
-    <a href="" target="_blank" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Logout</a>
+    <a (click)="openLogoutPopup()" target="_blank" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Logout</a>
+  </div>
+</div>
+<!-- Logout Confirmation Modal -->
+<div *ngIf="showLogoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+    <h2 class="text-xl font-semibold text-green-900 mb-4">Are you sure you want to logout?</h2>
+    <div class="flex justify-center space-x-4 mt-4">
+      <button (click)="confirmLogout()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Yes</button>
+      <button (click)="closeLogoutPopup()" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition">No</button>
+    </div>
   </div>
 </div>

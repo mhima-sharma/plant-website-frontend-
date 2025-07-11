@@ -12,7 +12,9 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   dialogOpen = false;
   isMobileMenuOpen: boolean = false;
-isMoreMenuOpen: boolean = false;
+  isMoreMenuOpen: boolean = false;
+  showLogoutModal: boolean = false;
+  router: any;
 constructor(private dialog: MatDialog){}
   openCart() {
     this.dialog.open(CartComponent, {
@@ -39,5 +41,21 @@ closeMoreMenu() {
   this.isMoreMenuOpen = false;
 }
 
+openLogoutPopup() {
+    this.showLogoutModal = true;
+    this.closeMobileMenu();
+    this.closeMoreMenu();
+  }
+
+closeLogoutPopup() {
+    this.showLogoutModal = false;
+  }
+
+  confirmLogout() {
+    // Replace this with your logout logic
+    localStorage.clear(); // or this.authService.logout();
+    this.showLogoutModal = false;
+    this.router.navigate(['/login']);
+  }
 
 }

@@ -19,6 +19,7 @@ import { ExtraComponent } from '../extra/extra.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
 import { TermPolicyComponent } from '../elements/term-policy/term-policy.component';
+import { LogoutComponent } from '../elements/logout/logout.component';
 
 export const routes: Routes = [
     { path: 'show', component: ShowCaseOfMyProjectComponent },
@@ -42,7 +43,9 @@ export const routes: Routes = [
     { path: 'extra', component: ExtraComponent},
     { path: 'chat', component: ChatbotComponent},
     { path: 'intro', component: IntroductionComponent},
-    { path: 'terms', component: TermPolicyComponent}
+    { path: 'terms', component: TermPolicyComponent},
+    { path: 'logout', component: LogoutComponent},
+
 
 
 
