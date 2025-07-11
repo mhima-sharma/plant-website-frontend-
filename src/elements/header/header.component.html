@@ -6,25 +6,32 @@
 <!-- Navbar -->
 <div class="fixed top-[34px] w-full bg-white shadow z-40">
   <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-    
+
     <!-- Logo -->
     <h1 class="text-green-900 text-3xl md:text-4xl font-bold">🌿Little Leafy</h1>
 
     <!-- Desktop Links -->
-    <div class="hidden md:flex items-center space-x-8">
+    <div class="hidden md:flex items-center space-x-8 relative">
       <a routerLink="/show" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Home</a>
       <a routerLink="/store" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Store</a>
       <a routerLink="/about" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">About Us</a>
       <a routerLink="/contact" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Contact Us</a>
-      <a href="https://mhima-sharma.github.io/Weather-App/" target="_blank" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Check Weather</a>
       <a (click)="openCart()" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200 cursor-pointer">Cart</a>
+
+      <!-- More (Three Dot Menu) -->
+      <div class="relative">
+        <button (click)="toggleMoreMenu()" class="text-green-900 text-2xl focus:outline-none">⋮</button>
+        <div *ngIf="isMoreMenuOpen" class="absolute right-0 mt-2 w-40 bg-white shadow-md rounded-md z-50">
+          <a routerLink="/terms" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Terms</a>
+          <a routerLink="/intro" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Introduction</a>
+          <a href="" target="_blank" class="block px-4 py-2 text-green-700 hover:bg-lime-100">logout</a>
+        </div>
+      </div>
     </div>
 
     <!-- Mobile Menu Button -->
     <div class="md:hidden">
-      <button (click)="toggleMobileMenu()" class="text-3xl text-green-900 focus:outline-none">
-        ☰
-      </button>
+      <button (click)="toggleMobileMenu()" class="text-3xl text-green-900 focus:outline-none">☰</button>
     </div>
   </nav>
 
@@ -34,7 +41,12 @@
     <a routerLink="/store" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Store</a>
     <a routerLink="/about" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">About Us</a>
     <a routerLink="/contact" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Contact Us</a>
-    <a href="https://mhima-sharma.github.io/Weather-App/" target="_blank" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Check Weather</a>
     <a (click)="openCart(); closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Cart</a>
+
+    <!-- More Links in Mobile View -->
+    <hr class="border-white/40">
+    <a routerLink="/intro" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Introduction</a>
+    <a routerLink="/terms" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Terms</a>
+    <a href="" target="_blank" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Logout</a>
   </div>
 </div>

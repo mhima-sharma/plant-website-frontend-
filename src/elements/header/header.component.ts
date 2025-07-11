@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   dialogOpen = false;
-  isMobileMenuOpen = false;
+  isMobileMenuOpen: boolean = false;
+isMoreMenuOpen: boolean = false;
 constructor(private dialog: MatDialog){}
   openCart() {
     this.dialog.open(CartComponent, {
@@ -19,6 +20,7 @@ constructor(private dialog: MatDialog){}
       disableClose: false,
     });
   }
+
 
 
 toggleMobileMenu() {
@@ -29,9 +31,13 @@ closeMobileMenu() {
   this.isMobileMenuOpen = false;
 }
 
+toggleMoreMenu() {
+  this.isMoreMenuOpen = !this.isMoreMenuOpen;
+}
 
-  closeDialog() {
-    this.dialogOpen = false;
-  }
+closeMoreMenu() {
+  this.isMoreMenuOpen = false;
+}
+
 
 }
