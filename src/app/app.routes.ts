@@ -18,6 +18,7 @@ import { FaliedPaymentComponent } from '../falied-payment/falied-payment.compone
 import { ExtraComponent } from '../extra/extra.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
+import { TermPolicyComponent } from '../elements/term-policy/term-policy.component';
 
 export const routes: Routes = [
     { path: 'show', component: ShowCaseOfMyProjectComponent },
@@ -40,7 +41,9 @@ export const routes: Routes = [
     { path: 'payfail', component: FaliedPaymentComponent},
     { path: 'extra', component: ExtraComponent},
     { path: 'chat', component: ChatbotComponent},
-    { path: 'intro', component: IntroductionComponent}
+    { path: 'intro', component: IntroductionComponent},
+    { path: 'terms', component: TermPolicyComponent}
+
 
 
 
