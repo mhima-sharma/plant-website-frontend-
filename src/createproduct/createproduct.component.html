@@ -1,62 +1,78 @@
-<div class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8 space-y-6">
-  <h2 class="text-3xl font-bold text-center text-gray-800">Add New Product</h2>
+<div class="max-w-4xl mx-auto mt-10 bg-white shadow-2xl rounded-3xl overflow-hidden">
+  <!-- Header with a banner image -->
+  <div class="relative h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1512499617640-c2f9990385bc');">
+    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-white drop-shadow-xl">🌿 Add a New Plant Product</h2>
+    </div>
+  </div>
 
-  <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="space-y-6">
+  <!-- GIF at the top -->
+  <div class="flex justify-center mt-6">
+    <img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" alt="Plant growing" class="w-32 h-32 rounded-full shadow-lg border-4 border-green-300" />
+  </div>
 
+  <!-- Form Section -->
+  <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="p-8 space-y-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
       <div>
-        <label class="block text-gray-700 font-semibold mb-2">Title</label>
+        <label class="block text-gray-700 font-semibold mb-2">🌱 Title</label>
         <input
           formControlName="title"
           type="text"
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           placeholder="Enter product title" />
       </div>
 
       <div>
-        <label class="block text-gray-700 font-semibold mb-2">Quantity</label>
+        <label class="block text-gray-700 font-semibold mb-2">🔢 Quantity</label>
         <input
           formControlName="quantity"
           type="number"
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           placeholder="Enter quantity" />
       </div>
 
       <div>
-        <label class="block text-gray-700 font-semibold mb-2">Price (Rs.)</label>
+        <label class="block text-gray-700 font-semibold mb-2">💸 Price (Rs.)</label>
         <input
-          type="number"
           formControlName="price"
+          type="number"
           step="0.01"
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"
           placeholder="Enter price" />
       </div>
 
       <div>
-        <label class="block text-gray-700 font-semibold mb-2">Image Upload</label>
+        <label class="block text-gray-700 font-semibold mb-2">🖼️ Image Upload</label>
         <input
           type="file"
           multiple
           (change)="onFileChange($event)"
-          class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-800 hover:file:bg-green-200"
         />
       </div>
     </div>
 
     <div>
-      <label class="block text-gray-700 font-semibold mb-2">Description</label>
+      <label class="block text-gray-700 font-semibold mb-2">📝 Description</label>
       <textarea
-        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-        placeholder="Enter descriptions with care tips, sunlight, watering needs. "
+        formControlName="description"
         rows="4"
-        formControlName="description"></textarea>
+        placeholder="Enter details like care tips, sunlight, watering, etc."
+        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"></textarea>
+    </div>
+
+    <!-- Success Message / Preview Image (optional) -->
+    <div class="text-center">
+      <img src="https://media.giphy.com/media/fxsqOYnIMEefC/giphy.gif" class="mx-auto w-24 h-24" alt="Nature Happy" />
     </div>
 
     <div>
       <button
         type="submit"
-        class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-blue-700 transition">
-        Add Product
+        class="w-full bg-green-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-green-700 transition">
+        ➕ Add Product
       </button>
     </div>
   </form>
