@@ -19,6 +19,7 @@ import { FaliedPaymentComponent } from '../falied-payment/falied-payment.compone
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
 import { TermPolicyComponent } from '../elements/term-policy/term-policy.component';
+import { SplashComponent } from '../elements/splash/splash.component';
 
 
 export const routes: Routes = [
@@ -26,7 +27,8 @@ export const routes: Routes = [
     { path: 'admin-login', component: LoginAdminComponent },
     
     // { path: 'user-login', component: LoginAdminComponent },
-    { path: '', component: LoginUserComponent },
+      { path: '', component: SplashComponent },
+    { path: 'user-login', component: LoginUserComponent },
     { path: 'signup-admin', component: SignupAdminComponent },
     { path: 'signup-user', component: SignupUserComponent },
     { path: 'store', component: StoreComponent },
