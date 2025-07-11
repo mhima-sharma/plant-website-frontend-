@@ -25,9 +25,7 @@ import { SplashComponent } from '../elements/splash/splash.component';
 export const routes: Routes = [
     { path: 'show', component: ShowCaseOfMyProjectComponent },
     { path: 'admin-login', component: LoginAdminComponent },
-    
-    // { path: 'user-login', component: LoginAdminComponent },
-      { path: '', component: SplashComponent },
+    { path: '', component: SplashComponent },
     { path: 'user-login', component: LoginUserComponent },
     { path: 'signup-admin', component: SignupAdminComponent },
     { path: 'signup-user', component: SignupUserComponent },
@@ -42,7 +40,6 @@ export const routes: Routes = [
     { path: 'chat1', component: ChatComponent },
     { path: 'paysucess', component: SuccessPaymentComponent },
     { path: 'payfail', component: FaliedPaymentComponent},
-   
     { path: 'chat', component: ChatbotComponent},
     { path: 'intro', component: IntroductionComponent},
     { path: 'terms', component: TermPolicyComponent},
