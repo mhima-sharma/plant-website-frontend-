@@ -3,11 +3,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../app/service/product.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-createproduct',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './createproduct.component.html',
   styleUrl: './createproduct.component.css'
 })
