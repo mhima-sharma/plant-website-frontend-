@@ -1,20 +1,26 @@
 <div class="max-w-4xl mx-auto mt-10 bg-white shadow-2xl rounded-3xl overflow-hidden">
   <!-- Header with a banner image -->
-  <div class="relative h-56 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1512499617640-c2f9990385bc');">
+  <div
+    class="relative h-56 bg-cover bg-center"
+    style="background-image: url('https://images.unsplash.com/photo-1512499617640-c2f9990385bc');">
     <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-      <h2 class="text-4xl md:text-5xl font-bold text-white drop-shadow-xl">🌿 Add a New Plant Product</h2>
+      <h2 class="text-4xl md:text-5xl font-bold text-white drop-shadow-xl">
+        🌿 Add a New Plant Product
+      </h2>
     </div>
   </div>
 
   <!-- GIF at the top -->
   <div class="flex justify-center mt-6">
-    <img src="https://i.graphicmama.com/uploads/2023/3/64254d39d07c0-cartoon-doughnut-character-animator-gifs.gif" alt="Plant growing" class="w-32 h-32 rounded-full shadow-lg border-4 border-green-300" />
+    <img
+      src="https://i.graphicmama.com/uploads/2023/3/64254d39d07c0-cartoon-doughnut-character-animator-gifs.gif"
+      alt="Plant growing"
+      class="w-32 h-32 rounded-full shadow-lg border-4 border-green-300" />
   </div>
 
   <!-- Form Section -->
   <form [formGroup]="productForm" (ngSubmit)="submitForm()" class="p-8 space-y-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      
       <div>
         <label class="block text-gray-700 font-semibold mb-2">🌱 Title</label>
         <input
@@ -49,8 +55,7 @@
           type="file"
           multiple
           (change)="onFileChange($event)"
-          class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-800 hover:file:bg-green-200"
-        />
+          class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-800 hover:file:bg-green-200" />
       </div>
     </div>
 
@@ -63,11 +68,15 @@
         class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition"></textarea>
     </div>
 
-    <!-- Success Message / Preview Image (optional) -->
+    <!-- Success GIF / Decorative -->
     <div class="text-center">
-      <img src="https://media.giphy.com/media/fxsqOYnIMEefC/giphy.gif" class="mx-auto w-24 h-24" alt="Nature Happy" />
+      <img
+        src="https://media.giphy.com/media/fxsqOYnIMEefC/giphy.gif"
+        class="mx-auto w-24 h-24"
+        alt="Nature Happy" />
     </div>
 
+    <!-- Submit Button -->
     <div>
       <button
         type="submit"
@@ -76,4 +85,18 @@
       </button>
     </div>
   </form>
+
+  <!-- View Added Products Button -->
+  <div class="text-center mt-4 mb-8">
+    <a
+      routerLink="/addProduct"
+      class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition-all duration-300 ease-in-out">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 19l-7-7 7-7" />
+      </svg>
+      Show My Added Products
+    </a>
+  </div>
 </div>
