@@ -17,6 +17,7 @@ import { SuccessPaymentComponent } from '../success-payment/success-payment.comp
 import { FaliedPaymentComponent } from '../falied-payment/falied-payment.component';
 import { ExtraComponent } from '../extra/extra.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { IntroductionComponent } from '../elements/introduction/introduction.component';
 
 export const routes: Routes = [
     { path: 'show', component: ShowCaseOfMyProjectComponent },
@@ -38,7 +39,9 @@ export const routes: Routes = [
     { path: 'paysucess', component: SuccessPaymentComponent },
     { path: 'payfail', component: FaliedPaymentComponent},
     { path: 'extra', component: ExtraComponent},
-    { path: 'chat', component: ChatbotComponent}
+    { path: 'chat', component: ChatbotComponent},
+    { path: 'intro', component: IntroductionComponent}
+
 
 
 
