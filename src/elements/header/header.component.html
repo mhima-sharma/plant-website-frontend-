@@ -1,22 +1,30 @@
+<!-- Top Green Bar -->
+<div class="bg-gradient-to-r from-lime-300 to-green-800 fixed w-full z-50 text-white text-center text-base md:text-xl font-bold py-1">
+  <p>"Work that speaks for itself."</p>
+</div>
+
 <!-- Navbar -->
 <div class="fixed top-[34px] w-full bg-white shadow z-40">
   <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+    
     <!-- Logo -->
-    <h1 class="text-green-900 text-3xl md:text-4xl font-bold">🌿Little Leafy</h1>
+    <h1 class="text-green-900 text-3xl md:text-4xl font-bold flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/2900/2900546.png" class="w-8 h-8" alt="logo" />
+      Little Leafy
+    </h1>
 
     <!-- Desktop Links -->
-    <div class="hidden md:flex items-center space-x-8 relative">
-      <a routerLink="/show" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Home</a>
-      <a routerLink="/store" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Store</a>
-      <a routerLink="/about" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">About Us</a>
-      <a routerLink="/contact" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200">Contact Us</a>
-      <a (click)="openCart()" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition duration-200 cursor-pointer">Cart</a>
+    <div class="hidden md:flex items-center space-x-8">
+      <a routerLink="/show" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">Home</a>
+      <a routerLink="/store" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">Store</a>
+      <a routerLink="/about" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">About Us</a>
+      <a routerLink="/contact" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">Contact Us</a>
+      <a (click)="openCart()" class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer">Cart</a>
 
       <!-- Dropdown Menu -->
       <div class="relative" (click)="toggleMoreMenu()">
-        <button class="text-green-900 text-lg font-semibold flex items-center gap-1 hover:text-lime-600 transition">
-          More
-          <span class="text-sm">▼</span>
+        <button class="text-green-700 text-lg font-semibold flex items-center gap-1 hover:text-lime-600 transition">
+          More <span class="text-sm">▼</span>
         </button>
 
         <!-- Dropdown Content -->
@@ -25,8 +33,7 @@
           <a routerLink="/intro" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100">Introduction</a>
           <a routerLink="/user-login" (click)="closeMoreMenu()" class="block px-4 py-2 text-green-700 hover:bg-lime-100 relative">
             User Access
-
-            <!-- 👇 Finger GIF if not logged in -->
+            <!-- Finger GIF if not logged in -->
             <img
               *ngIf="!isLoggedIn"
               src="https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif"
@@ -48,16 +55,16 @@
 
   <!-- Mobile Menu -->
   <div *ngIf="isMobileMenuOpen" class="md:hidden bg-gradient-to-r from-lime-300 to-green-800 shadow px-6 py-4 space-y-4">
-    <a routerLink="/show" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Home</a>
-    <a routerLink="/store" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Store</a>
-    <a routerLink="/about" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">About Us</a>
-    <a routerLink="/contact" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Contact Us</a>
-    <a (click)="openCart(); closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Cart</a>
+    <a routerLink="/show" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Home</a>
+    <a routerLink="/store" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Store</a>
+    <a routerLink="/about" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">About Us</a>
+    <a routerLink="/contact" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Contact Us</a>
+    <a (click)="openCart(); closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white cursor-pointer">Cart</a>
 
     <hr class="border-white/40">
-    <a routerLink="/intro" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Introduction</a>
-    <a routerLink="/terms" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Terms</a>
-    <a routerLink="/admin-login" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200">Admin Access</a>
-    <a (click)="openLogoutPopup()" class="block text-green-100 text-lg font-semibold hover:text-white transition duration-200 cursor-pointer">Logout</a>
+    <a routerLink="/intro" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Introduction</a>
+    <a routerLink="/terms" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Terms</a>
+    <a routerLink="/admin-login" (click)="closeMobileMenu()" class="block text-green-100 text-lg font-semibold hover:text-white">Admin Access</a>
+    <a (click)="openLogoutPopup()" class="block text-green-100 text-lg font-semibold hover:text-white cursor-pointer">Logout</a>
   </div>
 </div>

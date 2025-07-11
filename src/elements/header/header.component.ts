@@ -27,9 +27,9 @@ export class HeaderComponent {
     });
   }
 
-  ngOnInit() {
-  const token = localStorage.getItem('token'); // or use a service to verify login
-  this.isLoggedIn = !!token;
+ ngOnInit() {
+  const token = localStorage.getItem('token');
+  this.isLoggedIn = !!token; // ✅ Simple direct check
 }
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
