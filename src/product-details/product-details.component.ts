@@ -96,9 +96,9 @@ addToCart() {
         panelClass: 'cart-snackbar-success'
       });
 
-      snackBarRef.onAction().subscribe(() => {
-        this.router.navigate(['/cart']);
-      });
+      // snackBarRef.onAction().subscribe(() => {
+      //   this.router.navigate(['/cart']);
+      // });
     },
     error: () => {
       this.snackBar.open('❌ Failed to add to cart.', 'Close', {
