@@ -1,105 +1,117 @@
-<!-- Checkout Page Container -->
-<div class="max-w-7xl mx-auto px-4 py-6 sm:py-8 md:py-10 overflow-y-auto h-screen" [formGroup]="checkoutForm">
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="max-w-4xl mx-auto px-4 py-6">
+  <mat-horizontal-stepper [linear]="true" #stepper class="bg-white p-4 rounded-lg shadow">
 
-    <!-- LEFT: Delivery and Cart Items -->
-    <div class="lg:col-span-2 space-y-6">
+    <!-- Step 1: Billing Details -->
+    <mat-step [stepControl]="billingDetailsForm">
+      <form [formGroup]="billingDetailsForm">
+        <ng-template matStepLabel>Billing Details</ng-template>
 
-      <!-- Billing Details -->
-      <div class="border p-4 rounded-lg bg-white">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">Billing Details</h3>
-        <div class="space-y-4">
+        <h2 class="text-xl font-semibold mb-6 text-gray-800">Hello! Please tell us a little bit about yourself.</h2>
+
+       
+        <mat-form-field appearance="fill" class="w-full mt-4">
+            <mat-label>Fullname</mat-label>
+            <input matInput formControlName="fullName" placeholder="mahima sharma" />
+          </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full mt-4">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="littleLeafy@gmail.com" type="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full mt-4">
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="phoneNumber" placeholder="+91" type="tel" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full mt-4">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="shippingAddress" placeholder="32 block, street" />
+        </mat-form-field>
+
+       
+
+        <div class="flex justify-between mt-6">
+          <button mat-stroked-button color="primary" (click)="stepper.previous()">Back</button>
+          <button mat-raised-button color="primary" (click)="stepper.next()" [disabled]="billingDetailsForm.invalid">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 2: Cart Review -->
+    <mat-step>
+      <ng-template matStepLabel>Review Cart</ng-template>
+
+      <div class="bg-white p-6 rounded-lg shadow space-y-4">
+        <h3 class="text-xl font-semibold text-green-700 border-b pb-2">Your Cart</h3>
+
+        <div *ngFor="let item of cartItems" class="flex items-center gap-4 border-b pb-3">
+          <img [src]="(item.images?.split(',')[0] || 'assets/placeholder.jpg')" class="w-16 h-16 object-cover rounded shadow" />
           <div>
-            <label class="block text-gray-600 font-medium mb-1">Full Name</label>
-            <input type="text" formControlName="fullName"
-              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="John Doe" />
+            <p class="font-semibold text-gray-800">{{ item.title }}</p>
+            <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
+            <p class="text-sm text-gray-600">₹{{ item.price * item.quantity }}</p>
           </div>
-          <div>
-            <label class="block text-gray-600 font-medium mb-1">Email Address</label>
-            <input type="email" formControlName="email"
-              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="john@example.com" />
-          </div>
-          <div>
-            <label class="block text-gray-600 font-medium mb-1">Phone Number</label>
-            <input type="tel" formControlName="phoneNumber"
-              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="9876543210" />
-          </div>
-          <div>
-            <label class="block text-gray-600 font-medium mb-1">Shipping Address</label>
-            <textarea #addressInput formControlName="shippingAddress" rows="3"
-              class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="Street, City, Pincode"></textarea>
-          </div>
+        </div>
+
+        <div class="flex justify-between mt-4">
+          <button mat-stroked-button color="primary" (click)="stepper.previous()">Back</button>
+          <button mat-raised-button color="primary" (click)="stepper.next()">Continue</button>
         </div>
       </div>
+    </mat-step>
 
-      <!-- Cart Items -->
-      <div class="border p-4 rounded-lg bg-white">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-3 gap-2">
-          <span class="font-semibold text-green-600">{{ cartItems.length }}/{{ cartItems.length }} ITEMS SELECTED</span>
-        </div>
+    <!-- Step 3: Payment -->
+    <mat-step [stepControl]="paymentForm">
+      <form [formGroup]="paymentForm">
+        <ng-template matStepLabel>Payment & Summary</ng-template>
 
-        <div *ngFor="let item of cartItems"
-          class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
-          <div class="flex items-start gap-3"  *ngFor="let img of item.images?.split(',')" >
-            <input type="checkbox" checked class="mt-1 text-green-600" />
-            <img [src]="(item.images?.split(',')[0] || 'assets/placeholder.jpg')"
-              class="w-20 h-24 object-cover rounded-lg border" />
+        <div class="bg-white p-6 rounded-lg shadow space-y-4">
+          <h3 class="text-xl font-semibold text-green-700 border-b pb-2">Order Summary</h3>
+
+          <!-- Summary -->
+          <div class="text-sm space-y-2">
+            <div class="flex justify-between">
+              <span>Total MRP</span>
+              <span>₹{{ getSubtotal() }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Platform Fee</span>
+              <span>₹5</span>
+            </div>
+            <div class="flex justify-between font-semibold text-lg border-t pt-2">
+              <span>Total</span>
+              <span>₹{{ getTotal() }}</span>
+            </div>
           </div>
-          <div class="flex-1 space-y-1">
-            <h4 class="font-semibold text-gray-800">{{ item.title }} <span class="text-sm text-gray-600">Qty: {{ item.quantity }}</span> <span  class="text-sm text-gray-600">₹{{ item.price * item.quantity }}</span></h4>
-     
+
+          <!-- Payment Method -->
+          <div class="mt-4">
+            <label class="block mb-2 font-medium text-green-700">Choose Payment Method:</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2">
+                <input type="radio" formControlName="paymentMethod" value="razorpay" /> Razorpay
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="radio" formControlName="paymentMethod" value="easebuzz" /> Easebuzz
+              </label>
+            </div>
           </div>
-          <!-- <button class="text-gray-400 hover:text-red-600 text-lg self-start">&times;</button> -->
-        </div>
-      </div>
-    </div>
 
-    <!-- RIGHT: Summary and Payment -->
-    <div class="w-full bg-white p-6 rounded-lg shadow-md space-y-6 lg:sticky lg:top-6 h-fit">
-      <!-- Price Summary -->
-      <div class="border-t pt-4 text-sm space-y-2">
-
-        <div class="flex justify-between text-gray-700">
-          <span>Total MRP</span>
-          <span>₹{{ getSubtotal() }}</span>
+          <!-- Buttons -->
+          <div class="flex justify-between mt-6">
+            <button mat-stroked-button color="primary" (click)="stepper.previous()">Back</button>
+            <button mat-raised-button color="accent" (click)="placeOrder()" [disabled]="paymentForm.invalid || loading">
+              <span *ngIf="!loading">Place Order</span>
+              <span *ngIf="loading">Processing...</span>
+            </button>
+          </div>
         </div>
-      
-        <div class="flex justify-between text-gray-700">
-          <span>Platform Fee </span>
-          <span>₹5</span>
-        </div>
-        <div class="flex justify-between font-semibold text-lg pt-2 border-t">
-          <span>Total Amount</span>
-          <span>₹{{ getTotal() }}</span>
-        </div>
-      </div>
-
-      <!-- Payment Method -->
-      <div class="space-y-2">
-        <label class="flex items-center gap-2">
-          <input type="radio" formControlName="paymentMethod" value="razorpay" class="text-green-500" /> Razorpay
-        </label>
-        <label class="flex items-center gap-2">
-          <input type="radio" formControlName="paymentMethod" value="easebuzz" class="text-green-500" /> Easebuzz
-        </label>
-      </div>
-
-      <!-- Place Order -->
-      <button (click)="placeOrder()" [disabled]="checkoutForm.invalid || loading"
-        class="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition">
-        <span *ngIf="!loading">PLACE ORDER</span>
-        <span *ngIf="loading">Processing...</span>
-      </button>
-    </div>
-  </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>
 
-<!-- Spinner Overlay -->
-<div *ngIf="loading"
-  class="fixed inset-0 bg-white bg-opacity-70 flex items-center justify-center z-50">
-  <div class="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+<!-- Loading Overlay -->
+<div *ngIf="loading" class="fixed inset-0 bg-white bg-opacity-60 flex items-center justify-center z-50">
+  <div class="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
 </div>
