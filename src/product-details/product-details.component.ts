@@ -2,15 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HeaderComponent } from "../elements/header/header.component";
 import { FooterComponent } from "../elements/footer/footer.component";
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../app/service/cart.service';
 import { AuthService } from '../app/auth.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, CommonModule],
+  imports: [HeaderComponent, FooterComponent, CommonModule,MatSnackBarModule,],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -20,9 +21,11 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private http: HttpClient,
     private cartService: CartService,
     private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -54,28 +57,56 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  addToCart() {
-    const userId = this.authService.getUserId();
+ 
+addToCart() {
+  const userId = this.authService.getUserId();
 
-    if (!userId) {
-      alert('User not logged in!');
-      return;
-    }
-
-    if (this.product.quantity === 0) {
-      alert('Product is out of stock.');
-      return;
-    }
-
-    this.cartService.addToCart(
-      userId,
-      this.product.id,
-      this.selectedQuantity, // ⬅️ quantity is 3rd param
-      this.product.title,
-      this.product.price
-    ).subscribe({
-      next: () => alert('Added to cart!'),
-      error: () => alert('Error adding to cart.')
+  if (!userId) {
+    this.snackBar.open('⚠️ Please log in to add items to your cart.', 'Close', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: 'cart-snackbar-warning'
     });
+    return;
   }
-}
+
+  if (this.product.quantity === 0) {
+    this.snackBar.open('❌ Product is out of stock.', 'Close', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: 'cart-snackbar-error'
+    });
+    return;
+  }
+
+  this.cartService.addToCart(
+    userId,
+    this.product.id,
+    this.selectedQuantity,
+    this.product.title,
+    this.product.price
+  ).subscribe({
+    next: () => {
+      const snackBarRef = this.snackBar.open('✅ Added to cart!', 'View Cart', {
+        duration: 4000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: 'cart-snackbar-success'
+      });
+
+      snackBarRef.onAction().subscribe(() => {
+        this.router.navigate(['/cart']);
+      });
+    },
+    error: () => {
+      this.snackBar.open('❌ Failed to add to cart.', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: 'cart-snackbar-error'
+      });
+    }
+  });
+}}
