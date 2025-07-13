@@ -89,16 +89,12 @@ addToCart() {
     this.product.price
   ).subscribe({
     next: () => {
-      const snackBarRef = this.snackBar.open('✅ Added to cart!', 'View Cart', {
+      this.snackBar.open('✅ Added to cart!', 'View Cart', {
         duration: 4000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
         panelClass: 'cart-snackbar-success'
       });
-
-      // snackBarRef.onAction().subscribe(() => {
-      //   this.router.navigate(['/cart']);
-      // });
     },
     error: () => {
       this.snackBar.open('❌ Failed to add to cart.', 'Close', {
@@ -109,4 +105,7 @@ addToCart() {
       });
     }
   });
-}}
+}
+
+
+}

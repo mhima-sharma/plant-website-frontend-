@@ -1,0 +1,20 @@
+/* Success snackbar */
+.cart-snackbar-success {
+  background-color: #22c55e; /* green */
+  color: white;
+  font-weight: bold;
+}
+
+/* Warning snackbar */
+.cart-snackbar-warning {
+  background-color: #facc15; /* yellow */
+  color: #000;
+  font-weight: bold;
+}
+
+/* Error snackbar */
+.cart-snackbar-error {
+  background-color: #ef4444; /* red */
+  color: white;
+  font-weight: bold;
+}
