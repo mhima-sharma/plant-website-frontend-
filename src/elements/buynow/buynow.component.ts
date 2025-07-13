@@ -96,7 +96,7 @@ export class BuynowComponent implements AfterViewInit {
   }
 
   getTotal(): number {
-    return this.getSubtotal() + 10; // Platform fee ₹10
+    return this.getSubtotal() + 5; // Platform fee ₹10
   }
 
   placeOrder() {
