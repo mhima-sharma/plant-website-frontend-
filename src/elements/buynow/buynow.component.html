@@ -44,9 +44,9 @@
 
         <div *ngFor="let item of cartItems"
           class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
-          <div class="flex items-start gap-3">
+          <div class="flex items-start gap-3"  *ngFor="let img of item.images?.split(',')" >
             <input type="checkbox" checked class="mt-1 text-green-600" />
-            <img [src]="item.image" alt="{{ item.title }}"
+            <img [src]="(item.images?.split(',')[0] || 'assets/placeholder.jpg')"
               class="w-20 h-24 object-cover rounded-lg border" />
           </div>
           <div class="flex-1 space-y-1">
