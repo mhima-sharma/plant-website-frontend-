@@ -48,7 +48,7 @@
       </a>
 
       <!-- Sign Up (only if NOT logged in) -->
-      <a *ngIf="!isLoggedIn" routerLink="/contact" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+      <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
         class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition">
         Sign Up
         <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
@@ -105,37 +105,14 @@
       </span>
     </a>
 
-    <hr class="border-white/40" />
-
-    <a routerLink="/intro" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white">
-      Introduction
-    </a>
-
-    <a routerLink="/terms" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white">
-      Terms
-    </a>
-
-    <a routerLink="/user-login" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white">
-      User Access
-    </a>
-
-    <a routerLink="/admin-login" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white">
-      Admin Access
-    </a>
-
     <!-- Mobile Sign Up (only if NOT logged in) -->
-    <a *ngIf="!isLoggedIn" routerLink="/contact" routerLinkActive="text-blue-700"
+    <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
       class="block text-green-100 text-lg font-semibold hover:text-white">
       Sign Up
+       <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
+          alt="tap here"
+          class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2" />
     </a>
 
     <!-- Mobile Logout (only if logged in) -->
