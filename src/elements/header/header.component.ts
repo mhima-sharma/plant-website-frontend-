@@ -1,65 +1,124 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../../app/service/cart.service';
+import { AuthService } from '../../app/auth.service';
+import { Subscription } from 'rxjs';
+
+// ✅ Optional: Create a CartItem interface if not already declared
+interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  // Add more properties as needed
+}
 
 @Component({
   selector: 'app-header',
-  standalone: true, // ✅ Required for using `imports`
-  imports: [RouterLink, CommonModule],
+  standalone: true,
+  imports: [RouterLink, CommonModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   isMobileMenuOpen = false;
   isMoreMenuOpen = false;
   showLogoutModal = false;
   isLoggedIn = false;
+  isHeaderBlack = false;
+  cartCount = 0;
+  private cartSubscription!: Subscription;
+  private userId: number | null = null;
 
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+    private cartService: CartService,
+    private authService: AuthService
+  ) {}
 
-  openCart() {
+  ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    this.isLoggedIn = !!token;
+
+    this.userId = this.authService.getUserId();
+    if (this.userId) {
+      this.loadCartCount(this.userId);
+
+      // Subscribe to cart change notifications
+      this.cartSubscription = this.cartService.cartUpdated$.subscribe(() => {
+        this.loadCartCount(this.userId!);
+      });
+    }
+  }
+
+  loadCartCount(userId: number): void {
+    this.cartService.getCartItems(userId).subscribe(
+      (items: any[]) => {
+        this.cartCount = items.length;
+      },
+      (error) => {
+        console.error('Error loading cart items', error);
+      }
+    );
+  }
+
+  openCart(): void {
     this.dialog.open(CartComponent, {
       width: '500px',
       disableClose: false,
     });
   }
 
- ngOnInit() {
-  const token = localStorage.getItem('token');
-  this.isLoggedIn = !!token; // ✅ Simple direct check
-}
-  toggleMobileMenu() {
+  toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  closeMobileMenu() {
+  closeMobileMenu(): void {
     this.isMobileMenuOpen = false;
   }
 
-  toggleMoreMenu() {
+  toggleMoreMenu(): void {
     this.isMoreMenuOpen = !this.isMoreMenuOpen;
   }
 
-  closeMoreMenu() {
+  closeMoreMenu(): void {
     this.isMoreMenuOpen = false;
   }
 
-  openLogoutPopup() {
+  openLogoutPopup(): void {
     this.showLogoutModal = true;
     this.closeMobileMenu();
     this.closeMoreMenu();
   }
 
-  closeLogoutPopup() {
+  closeLogoutPopup(): void {
     this.showLogoutModal = false;
   }
 
-  confirmLogout() {
-    localStorage.clear(); // Replace with authService.logout() if using a service
+  confirmLogout(): void {
+    localStorage.clear();
     this.showLogoutModal = false;
     this.router.navigate(['/']);
+  }
+
+  makeHeaderBlack(): void {
+    this.isHeaderBlack = true;
+  }
+
+  onNavItemClick(): void {
+    this.makeHeaderBlack();
+    this.closeMobileMenu();
+    this.closeMoreMenu();
+  }
+
+  ngOnDestroy(): void {
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
   }
 }

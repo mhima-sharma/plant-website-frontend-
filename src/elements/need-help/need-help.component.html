@@ -1,20 +1,24 @@
 <!-- Need Help Section -->
 <div class="mb-16 px-4 md:px-16">
-  <div class="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-10">
-
+  <div class="grid lg:grid-cols-2 gap-10 items-center">
+    
     <!-- Heading -->
-    <h1 class="text-3xl md:text-4xl font-semibold text-green-900 flex-1">
-      Need help in choosing the right plants?
-    </h1>
+    <div>
+      <h1 class="text-3xl md:text-4xl font-semibold text-green-900">
+        Need help in choosing the right plants?
+      </h1>
+    </div>
 
     <!-- Description -->
-    <p class="text-black text-lg flex-1">
-      Don’t worry—we’ve got you covered! Whether you're a beginner looking for low-maintenance greenery or a plant lover ready to expand your collection, we’re here to guide you. From lighting conditions to watering needs, we’ll help you pick plants that fit your lifestyle and space perfectly. Our team is just a message away, ready to make your plant journey fun, easy, and rewarding. Let’s grow something beautiful together! 🌱✨
-    </p>
+    <div>
+      <p class="text-black text-lg">
+        Don’t worry—we’ve got you covered! Whether you're a beginner looking for low-maintenance greenery or a plant lover ready to expand your collection, we’re here to guide you. From lighting conditions to watering needs, we’ll help you pick plants that fit your lifestyle and space perfectly. Our team is just a message away, ready to make your plant journey fun, easy, and rewarding. Let’s grow something beautiful together! 🌱✨
+      </p>
+    </div>
   </div>
 
   <!-- Contact Button -->
-  <div class="mt-6">
+  <div class="mt-8 text-center lg:text-left">
     <button routerLink="/contact" class="text-pink-600 font-bold text-lg hover:underline">
       Contact with us
     </button>
@@ -23,25 +27,28 @@
 
 <!-- Shop Collection Section -->
 <div class="relative mt-5">
-  <!-- Darker Overlay for Better Contrast -->
+  <!-- Overlay -->
   <div class="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
 
-  <!-- Background Image -->
-  <div class="bg-[url('https://images.unsplash.com/photo-1538506392157-218c11f95129?q=80&w=1510&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center h-[500px] md:h-screen w-full flex flex-col justify-center items-start text-white p-6 md:p-20 relative z-20">
+  <!-- Background Image Container -->
+  <div
+    class="bg-[url('https://images.unsplash.com/photo-1538506392157-218c11f95129?q=80&w=1510&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] 
+           bg-cover bg-center h-[500px] md:h-screen w-full flex justify-center items-center text-white px-4 md:px-20 relative z-20">
 
-    <!-- Text Block with optional background for extra clarity -->
-    <div class="bg-black bg-opacity-50 backdrop-blur-sm p-6 rounded-lg max-w-4xl">
-      <h1 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">Interested? Shop This Plant Collection!</h1>
+    <!-- Text Content -->
+    <div class="bg-black bg-opacity-50 backdrop-blur-sm p-6 md:p-10 rounded-lg max-w-4xl text-left">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+        Interested? Shop This Plant Collection!
+      </h1>
 
       <p class="text-lg md:text-xl mb-6 drop-shadow-lg">
         Bring nature closer to home with our handpicked collection of beautiful, easy-to-love plants. Whether you’re a first-time plant parent or a seasoned collector, there’s something green and gorgeous waiting just for you. Each plant is selected for its charm, personality, and ability to thrive with a little love and care. Don’t wait—give your space the refresh it deserves and shop the collection now! 🌿✨
       </p>
 
-      <button routerLink="/store" class="bg-green-900 hover:bg-green-700 text-white py-3 px-6 rounded-full text-lg w-max">
+      <button routerLink="/store" class="bg-green-900 hover:bg-green-700 text-white py-3 px-6 rounded-full text-lg">
         Go To Shop
       </button>
     </div>
-
   </div>
 </div>
 

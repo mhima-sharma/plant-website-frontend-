@@ -3,115 +3,111 @@
 <!-- Hero Section -->
 <div class="relative bg-cover bg-center h-[300px] md:h-[400px]" style="background-image: url('https://img.freepik.com/premium-vector/abstract-background-pastel-colors_627230-60.jpg');">
   <div class="flex items-center justify-center h-full bg-black bg-opacity-40">
-    <h1 class="text-green-900 text-4xl md:text-6xl font-extrabold p-4">About Us</h1>
+    <h1 class="text-green-900 text-4xl md:text-6xl font-extrabold px-4 text-center">About Us</h1>
   </div>
 </div>
 
 <!-- About Section -->
-<div class="max-w-6xl mx-auto px-4 py-16 flex flex-col lg:flex-row items-center space-y-10 lg:space-y-0 lg:space-x-12">
-  <div class="flex-1">
-    <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center lg:text-left">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-16 flex flex-col lg:flex-row items-center gap-10">
+  <div class="flex-1 text-center lg:text-left">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">
       We Work Hard To Provide You The Best Quality Plants And Succulents
-    </h1>
-    <p class="text-lg mb-6 text-center lg:text-left">
+    </h2>
+    <p class="text-lg text-gray-700 leading-relaxed">
       It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
       The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.
     </p>
-    <!-- <div class="flex justify-center lg:justify-start">
-      <button class="bg-red-400 text-white py-3 px-6 rounded-2xl hover:bg-red-500 transition">Read More</button>
-    </div> -->
   </div>
 </div>
 
 <!-- Company Section -->
-<div class="max-w-6xl mx-auto px-4 py-16">
-  <h1 class="text-4xl text-center font-bold mb-6">Our Company</h1>
-  <p class="text-center text-lg mb-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-16">
+  <h2 class="text-4xl font-bold text-center mb-6">Our Company</h2>
+  <p class="text-center text-lg text-gray-700 mb-10">
     I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo, when an unknown printer took a galley.
   </p>
 
   <div class="flex justify-center mb-10">
-    <img class="rounded-2xl max-w-full h-auto" src="https://websitedemos.net/plant-store-02/wp-content/uploads/sites/410/2019/01/bg4-free-img.jpg" alt="Company Image">
+    <img src="https://websitedemos.net/plant-store-02/wp-content/uploads/sites/410/2019/01/bg4-free-img.jpg"
+         alt="Company Image" class="rounded-2xl max-w-full h-auto shadow-lg">
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-    <p class="text-lg">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-lg text-gray-700 leading-relaxed">
+    <p>
       It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
       The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ‘Content here,
       content here’, making it look like readable English. Many desktop publishing packages and web page editors.
     </p>
-    <p class="text-lg">
+    <p>
       There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,
       or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.
     </p>
   </div>
 </div>
-<!-- Chatbot Badge -->
-  <div class="fixed bottom-6 right-6 z-50 " *ngIf="!isChatbotOpen">
-    <button 
-      (click)="toggleChatbot()" 
-      class="relative flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-full shadow-lg focus:outline-none hover:scale-110 transition-transform duration-300 animate-pulse hover:animate-none">
 
-      <!-- Chat Icon -->
-      <span class="text-2xl">💬</span>
+<!-- Chatbot Button -->
+<div class="fixed bottom-6 right-6 z-50" *ngIf="!isChatbotOpen">
+  <button 
+    (click)="toggleChatbot()" 
+    class="relative flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-full shadow-lg focus:outline-none hover:scale-110 transition-transform duration-300 animate-pulse hover:animate-none">
+    <span class="text-2xl">💬</span>
+    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
+      1
+    </span>
+  </button>
+</div>
 
-      <!-- Optional Notification Badge -->
-      <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
-        1
-      </span>
-
-    </button>
-  </div>
 <!-- Team Section -->
-<div class="max-w-6xl mx-auto px-4 py-16">
-  <h1 class="text-4xl font-bold text-center mb-4">Our Team</h1>
-  <p class="text-center text-lg mb-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20 py-16">
+  <h2 class="text-4xl font-bold text-center mb-4">Our Team</h2>
+  <p class="text-center text-lg text-gray-700 mb-10">
     I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
     luctus nec ullamcorper mattis, pulvinar dapibus leo, when an unknown printer took a galley.
   </p>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
     <!-- Team Member -->
     <div class="flex flex-col items-center text-center">
-      <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Jessica Gordon" class="w-40 h-40 rounded-full object-cover mb-4">
-      <h2 class="text-xl font-bold">Jessica Gordon</h2>
-      <p class="mb-3">Co-Founder</p>
-      <div class="flex space-x-4">
-        <a href="#" class="text-2xl hover:text-green-900">🅾</a>
-        <a href="#" class="text-2xl hover:text-green-900">[in]</a>
-        <a href="#" class="text-2xl hover:text-green-900">𝕏</a>
-        <a href="#" class="text-2xl hover:text-green-900">ⓕ</a>
+      <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Jessica Gordon" class="w-40 h-40 rounded-full object-cover mb-4 shadow-md">
+      <h3 class="text-xl font-bold">Jessica Gordon</h3>
+      <p class="mb-3 text-gray-600">Co-Founder</p>
+      <div class="flex space-x-4 text-2xl">
+        <a href="#" class="hover:text-green-900">🅾</a>
+        <a href="#" class="hover:text-green-900">[in]</a>
+        <a href="#" class="hover:text-green-900">𝕏</a>
+        <a href="#" class="hover:text-green-900">ⓕ</a>
       </div>
     </div>
 
     <!-- Team Member -->
     <div class="flex flex-col items-center text-center">
-      <img src="https://static.vecteezy.com/system/resources/thumbnails/048/216/761/small/modern-male-avatar-with-black-hair-and-hoodie-illustration-free-png.png" alt="Bryan Joes" class="w-40 h-40 rounded-full object-cover mb-4">
-      <h2 class="text-xl font-bold">Bryan Joes</h2>
-      <p class="mb-3">Co-Founder</p>
-      <div class="flex space-x-4">
-        <a href="#" class="text-2xl hover:text-green-900">🅾</a>
-        <a href="#" class="text-2xl hover:text-green-900">[in]</a>
-        <a href="#" class="text-2xl hover:text-green-900">𝕏</a>
-        <a href="#" class="text-2xl hover:text-green-900">ⓕ</a>
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/048/216/761/small/modern-male-avatar-with-black-hair-and-hoodie-illustration-free-png.png" alt="Bryan Joes" class="w-40 h-40 rounded-full object-cover mb-4 shadow-md">
+      <h3 class="text-xl font-bold">Bryan Joes</h3>
+      <p class="mb-3 text-gray-600">Co-Founder</p>
+      <div class="flex space-x-4 text-2xl">
+        <a href="#" class="hover:text-green-900">🅾</a>
+        <a href="#" class="hover:text-green-900">[in]</a>
+        <a href="#" class="hover:text-green-900">𝕏</a>
+        <a href="#" class="hover:text-green-900">ⓕ</a>
       </div>
     </div>
 
     <!-- Team Member -->
     <div class="flex flex-col items-center text-center">
-      <img src="https://png.pngtree.com/png-vector/20240910/ourmid/pngtree-business-women-avatar-png-image_13805764.png" alt="Angella Mike" class="w-40 h-40 rounded-full object-cover mb-4">
-      <h2 class="text-xl font-bold">Angella Mike</h2>
-      <p class="mb-3">Co-Founder</p>
-      <div class="flex space-x-4">
-        <a href="#" class="text-2xl hover:text-green-900">🅾</a>
-        <a href="#" class="text-2xl hover:text-green-900">[in]</a>
-        <a href="#" class="text-2xl hover:text-green-900">𝕏</a>
-        <a href="#" class="text-2xl hover:text-green-900">ⓕ</a>
+      <img src="https://png.pngtree.com/png-vector/20240910/ourmid/pngtree-business-women-avatar-png-image_13805764.png" alt="Angella Mike" class="w-40 h-40 rounded-full object-cover mb-4 shadow-md">
+      <h3 class="text-xl font-bold">Angella Mike</h3>
+      <p class="mb-3 text-gray-600">Co-Founder</p>
+      <div class="flex space-x-4 text-2xl">
+        <a href="#" class="hover:text-green-900">🅾</a>
+        <a href="#" class="hover:text-green-900">[in]</a>
+        <a href="#" class="hover:text-green-900">𝕏</a>
+        <a href="#" class="hover:text-green-900">ⓕ</a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Help & Footer -->
 <app-need-help></app-need-help>
 <app-footer></app-footer>
