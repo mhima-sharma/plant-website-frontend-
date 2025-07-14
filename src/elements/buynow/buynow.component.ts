@@ -98,19 +98,19 @@ export class BuynowComponent implements AfterViewInit {
     });
   }
 
-  getSubtotal(): number {
-    return this.cartItems
-      .filter(item => item.selected)
-      .reduce((acc, item) => acc + item.price * item.quantity, 0);
-  }
+ getSubtotal(): number {
+  return this.cartItems
+    .filter(item => item.selected)
+    .reduce((acc, item) => acc + item.price * item.quantity, 0);
+}
 
-  getTotal(): number {
-    return this.getSubtotal() + 5;
-  }
+getTotal(): number {
+  return this.getSubtotal() + 5; // Platform fee
+}
 
-  updatePrice() {
-    // Triggered when checkbox is toggled, can add validation logic here if needed
-  }
+
+ 
+  updatePrice() {}
 
   placeOrder() {
     if (this.checkoutForm.invalid) {
