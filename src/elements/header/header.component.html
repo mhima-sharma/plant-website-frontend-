@@ -18,198 +18,147 @@
 
     <!-- Desktop Links -->
     <div class="hidden md:flex items-center space-x-8">
-      <a
-        routerLink="/show"
-        routerLinkActive="text-blue-700"
-        (click)="makeHeaderBlack()"
-        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition"
-        [ngClass]="{ 'text-green-700': true }"
-      >Home</a>
+      <a routerLink="/show" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
+        Home
+      </a>
 
-      <a
-        routerLink="/store"
-        routerLinkActive="text-blue-700"
-        (click)="makeHeaderBlack()"
-        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition"
-        [ngClass]="{ 'text-green-700': true }"
-      >Store</a>
+      <a routerLink="/store" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
+        Store
+      </a>
 
-      <a
-        routerLink="/about"
-        routerLinkActive="text-blue-700"
-        (click)="makeHeaderBlack()"
-        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition"
-        [ngClass]="{ 'text-green-700': true }"
-      >About Us</a>
+      <a routerLink="/about" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
+        About Us
+      </a>
 
-      <a
-        routerLink="/contact"
-        routerLinkActive="text-blue-700"
-        (click)="makeHeaderBlack()"
-        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition"
-        [ngClass]="{ 'text-green-700': true }"
-      >Contact Us</a>
+      <a routerLink="/contact" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
+        Contact Us
+      </a>
 
-      <a
-  (click)="openCart(); makeHeaderBlack()"
-  class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer"
->
-  Cart
-  <span
-    *ngIf="cartCount > 0"
-    class="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full"
-  >
-    {{ cartCount }}
-  </span>
-</a>
+      <a (click)="openCart(); makeHeaderBlack()"
+        class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer">
+        Cart
+        <span *ngIf="cartCount > 0"
+          class="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+          {{ cartCount }}
+        </span>
+      </a>
 
+      <!-- Sign Up (only if NOT logged in) -->
+      <a *ngIf="!isLoggedIn" routerLink="/contact" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+        class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition">
+        Sign Up
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
+          alt="tap here"
+          class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2" />
+      </a>
 
-      <!-- Dropdown Menu -->
-      <div class="relative" (click)="toggleMoreMenu()">
-        <button class="text-green-700 text-lg font-semibold flex items-center gap-1 hover:text-lime-600 transition">
-          More <span class="text-sm">▼</span>
-          <img
-            *ngIf="!isLoggedIn"
-            src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
-            alt="tap here"
-            class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2"
-          />
-        </button>
-
-        <!-- Dropdown Content -->
-        <div *ngIf="isMoreMenuOpen" class="absolute right-0 mt-2 w-44 bg-white shadow-md rounded-md z-50">
-          <a
-            routerLink="/terms"
-            routerLinkActive="text-blue-700"
-            (click)="closeMoreMenu(); makeHeaderBlack()"
-            class="block px-4 py-2 text-green-700 text-base font-medium hover:bg-lime-100"
-          >Terms</a>
-
-          <a
-            routerLink="/intro"
-            routerLinkActive="text-blue-700"
-            (click)="closeMoreMenu(); makeHeaderBlack()"
-            class="block px-4 py-2 text-green-700 text-base font-medium hover:bg-lime-100"
-          >Introduction</a>
-
-          <a
-            routerLink="/user-login"
-            routerLinkActive="text-blue-700"
-            (click)="closeMoreMenu(); makeHeaderBlack()"
-            class="block px-4 py-2 text-green-700 text-base font-medium hover:bg-lime-100"
-          >User Access</a>
-
-          <a
-            routerLink="/admin-login"
-            routerLinkActive="text-blue-700"
-            (click)="closeMoreMenu(); makeHeaderBlack()"
-            class="block px-4 py-2 text-green-700 text-base font-medium hover:bg-lime-100"
-          >Admin Access</a>
-
-          <a
-            (click)="openLogoutPopup(); closeMoreMenu(); makeHeaderBlack()"
-            class="block px-4 py-2 text-green-700 text-base font-medium hover:bg-lime-100 cursor-pointer"
-          >Logout</a>
-        </div>
-      </div>
+      <!-- Logout (only if logged in) -->
+      <a *ngIf="isLoggedIn" (click)="openLogoutPopup(); makeHeaderBlack()"
+        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer">
+        Logout
+      </a>
     </div>
 
     <!-- Mobile Menu Button -->
     <div class="md:hidden">
-      <button
-        (click)="toggleMobileMenu()"
-        class="text-3xl text-green-900 focus:outline-none"
-      >☰</button>
+      <button (click)="toggleMobileMenu()" class="text-3xl text-green-900 focus:outline-none">☰</button>
     </div>
   </nav>
 
   <!-- Mobile Menu -->
-  <div
-    *ngIf="isMobileMenuOpen"
-    class="md:hidden bg-gradient-to-r from-lime-300 to-green-800 shadow px-6 py-4 space-y-4"
-  >
+  <div *ngIf="isMobileMenuOpen"
+    class="md:hidden bg-gradient-to-r from-lime-300 to-green-800 shadow px-6 py-4 space-y-4">
     <a routerLink="/show" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >Home</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      Home
+    </a>
 
     <a routerLink="/store" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >Store</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      Store
+    </a>
 
     <a routerLink="/about" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >About Us</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      About Us
+    </a>
 
     <a routerLink="/contact" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >Contact Us</a>
-<a
-  (click)="openCart(); closeMobileMenu(); makeHeaderBlack()"
-  class="relative block text-green-100 text-lg font-semibold hover:text-white cursor-pointer"
->
-  Cart
-  <span
-    *ngIf="cartCount > 0"
-    class="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full"
-  >
-    {{ cartCount }}
-  </span>
-</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      Contact Us
+    </a>
 
-
+    <a (click)="openCart(); closeMobileMenu(); makeHeaderBlack()"
+      class="relative block text-green-100 text-lg font-semibold hover:text-white cursor-pointer">
+      Cart
+      <span *ngIf="cartCount > 0"
+        class="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+        {{ cartCount }}
+      </span>
+    </a>
 
     <hr class="border-white/40" />
 
     <a routerLink="/intro" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >Introduction</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      Introduction
+    </a>
 
     <a routerLink="/terms" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >Terms</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      Terms
+    </a>
 
     <a routerLink="/user-login" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >User Access</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      User Access
+    </a>
 
     <a routerLink="/admin-login" routerLinkActive="text-blue-700"
       (click)="closeMobileMenu(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white"
-    >Admin Access</a>
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      Admin Access
+    </a>
 
-    <a (click)="openLogoutPopup(); makeHeaderBlack()"
-      class="block text-green-100 text-lg font-semibold hover:text-white cursor-pointer"
-    >Logout</a>
+    <!-- Mobile Sign Up (only if NOT logged in) -->
+    <a *ngIf="!isLoggedIn" routerLink="/contact" routerLinkActive="text-blue-700"
+      (click)="closeMobileMenu(); makeHeaderBlack()"
+      class="block text-green-100 text-lg font-semibold hover:text-white">
+      Sign Up
+    </a>
+
+    <!-- Mobile Logout (only if logged in) -->
+    <a *ngIf="isLoggedIn" (click)="openLogoutPopup(); closeMobileMenu(); makeHeaderBlack()"
+      class="block text-green-100 text-lg font-semibold hover:text-white cursor-pointer">
+      Logout
+    </a>
   </div>
 </div>
 
 <!-- Logout Modal -->
-<div
-  *ngIf="showLogoutModal"
-  class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center"
->
+<div *ngIf="showLogoutModal" class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
   <div class="bg-white rounded-xl p-6 shadow-lg w-80 text-center">
     <h2 class="text-lg font-semibold mb-4 text-gray-800">
       Are you sure you want to logout?
     </h2>
     <div class="flex justify-center gap-4">
-      <button
-        (click)="confirmLogout()"
-        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-      >
+      <button (click)="confirmLogout()"
+        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
         Yes
       </button>
-      <button
-        (click)="closeLogoutPopup()"
-        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded"
-      >
+      <button (click)="closeLogoutPopup()"
+        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded">
         No
       </button>
     </div>
