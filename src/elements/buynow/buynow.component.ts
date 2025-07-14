@@ -55,10 +55,10 @@ export class BuynowComponent implements AfterViewInit {
       : 'https://backend-plant-website.vercel.app/api';
 
     this.checkoutForm = this.fb.group({
-      fullName: ['', Validators.required],
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', Validators.required],
-      shippingAddress: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
+      shippingAddress: ['', [Validators.required, Validators.minLength(10)]],
       paymentMethod: ['', Validators.required]
     });
   }
@@ -79,11 +79,13 @@ export class BuynowComponent implements AfterViewInit {
         this.checkoutForm.controls['shippingAddress'].setValue(place.formatted_address);
         this.city = '';
         this.pincode = '';
-        for (const component of place.address_components) {
-          if (component.types.includes('postal_code')) {
+
+        for (const component of place.address_components || []) {
+          const types = component.types;
+          if (types.includes('postal_code')) {
             this.pincode = component.long_name;
           }
-          if (component.types.includes('locality')) {
+          if (types.includes('locality') || types.includes('sublocality_level_1')) {
             this.city = component.long_name;
           }
         }
@@ -96,13 +98,19 @@ export class BuynowComponent implements AfterViewInit {
   }
 
   getTotal(): number {
-    return this.getSubtotal() + 5; // Platform fee ₹10
+    return this.getSubtotal() + 5;
   }
 
   placeOrder() {
+    if (this.checkoutForm.invalid) {
+      this.checkoutForm.markAllAsTouched();
+      return;
+    }
+
     if (!window.confirm('Do you want to place this order?')) return;
 
     this.loading = true;
+
     const totalAmount = this.getTotal();
     const selectedGateway = this.checkoutForm.value.paymentMethod;
 
@@ -118,19 +126,23 @@ export class BuynowComponent implements AfterViewInit {
       },
       cartItems: this.cartItems,
       paymentMethod: selectedGateway,
-      totalAmount: totalAmount
+      totalAmount
     };
 
-    this.http.post<any>(`${this.apiUrl}/orders`, orderPayload).subscribe(orderRes => {
-      this.loading = false;
-      if (orderRes.gateway === 'razorpay') {
-        this.initiateRazorpay(orderRes);
-      } else if (orderRes.gateway === 'easebuzz') {
-        this.initiateEasebuzz(orderRes);
+    this.http.post<any>(`${this.apiUrl}/orders`, orderPayload).subscribe({
+      next: (orderRes) => {
+        this.loading = false;
+        if (orderRes.gateway === 'razorpay') {
+          this.initiateRazorpay(orderRes);
+        } else if (orderRes.gateway === 'easebuzz') {
+          this.initiateEasebuzz(orderRes);
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        console.error('Order creation failed:', error);
+        alert('Something went wrong. Please try again.');
       }
-    }, error => {
-      this.loading = false;
-      console.error('Order creation failed:', error);
     });
   }
 
@@ -139,7 +151,7 @@ export class BuynowComponent implements AfterViewInit {
       key: 'rzp_test_uEJqigl3qciRzl',
       amount: orderRes.amount,
       currency: orderRes.currency,
-      name: 'My App',
+      name: 'Plant Store',
       description: 'Order Payment',
       order_id: orderRes.razorpayOrderId,
       handler: (res: any) => {
@@ -161,7 +173,7 @@ export class BuynowComponent implements AfterViewInit {
         email: this.checkoutForm.value.email,
         contact: this.checkoutForm.value.phoneNumber
       },
-      theme: { color: '#3399CC' }
+      theme: { color: '#5CB85C' }
     };
 
     const rzp = new Razorpay(options);
@@ -183,9 +195,6 @@ export class BuynowComponent implements AfterViewInit {
   }
 
   initiateEasebuzz(orderRes: any) {
-    const clientId = "BVK2USG0F";
-    const paymentMode = "test";
-    const accessKey = orderRes.access_key;
     const EasebuzzCheckout = (window as any).EasebuzzCheckout;
 
     if (!EasebuzzCheckout) {
@@ -193,10 +202,10 @@ export class BuynowComponent implements AfterViewInit {
       return;
     }
 
-    const easebuzzCheckout = new EasebuzzCheckout(clientId, paymentMode, true);
+    const easebuzz = new EasebuzzCheckout("BVK2USG0F", "test", true);
 
-    easebuzzCheckout.initiatePayment({
-      access_key: accessKey,
+    easebuzz.initiatePayment({
+      access_key: orderRes.access_key,
       onResponse: (res: any) => {
         this.loading = true;
         this.http.post(`${this.apiUrl}/payments/update-status`, {
@@ -212,13 +221,13 @@ export class BuynowComponent implements AfterViewInit {
           }
         });
       },
-      theme: '#123456',
+      theme: '#5CB85C'
     });
   }
 
   clearCart(txnid: string) {
     this.http.post(`${this.apiUrl}/cart/clear`, { userId: this.userId }).subscribe(() => {
-      this.http.post(`${this.apiUrl}/orders/update-stock`, { txnid: txnid }).subscribe(() => {
+      this.http.post(`${this.apiUrl}/orders/update-stock`, { txnid }).subscribe(() => {
         this.loading = false;
       });
     });

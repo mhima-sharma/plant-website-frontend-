@@ -6,29 +6,56 @@
     <div class="border p-4 rounded-lg bg-white">
       <h3 class="text-lg font-semibold text-gray-800 mb-4">Billing Details</h3>
       <div class="space-y-4">
+        <!-- Full Name -->
         <div>
           <label class="block text-gray-600 font-medium mb-1">Full Name</label>
           <input type="text" formControlName="fullName"
+            [ngClass]="{ 'border-red-500': checkoutForm.get('fullName')?.invalid && checkoutForm.get('fullName')?.touched }"
             class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="John Doe" />
+          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('fullName')?.touched && checkoutForm.get('fullName')?.invalid">
+            <span *ngIf="checkoutForm.get('fullName')?.errors?.['required']">Full Name is required.</span>
+            <span *ngIf="checkoutForm.get('fullName')?.errors?.['minlength']">At least 3 characters required.</span>
+          </div>
         </div>
+
+        <!-- Email -->
         <div>
           <label class="block text-gray-600 font-medium mb-1">Email Address</label>
           <input type="email" formControlName="email"
+            [ngClass]="{ 'border-red-500': checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched }"
             class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="john@example.com" />
+          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('email')?.touched && checkoutForm.get('email')?.invalid">
+            <span *ngIf="checkoutForm.get('email')?.errors?.['required']">Email is required.</span>
+            <span *ngIf="checkoutForm.get('email')?.errors?.['email']">Invalid email format.</span>
+          </div>
         </div>
+
+        <!-- Phone Number -->
         <div>
           <label class="block text-gray-600 font-medium mb-1">Phone Number</label>
           <input type="tel" formControlName="phoneNumber"
+            [ngClass]="{ 'border-red-500': checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched }"
             class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="9876543210" />
+          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('phoneNumber')?.touched && checkoutForm.get('phoneNumber')?.invalid">
+            <span *ngIf="checkoutForm.get('phoneNumber')?.errors?.['required']">Phone number is required.</span>
+            <span *ngIf="checkoutForm.get('phoneNumber')?.errors?.['pattern']">Enter a valid 10-digit number.</span>
+          </div>
         </div>
+
+        <!-- Shipping Address -->
         <div>
           <label class="block text-gray-600 font-medium mb-1">Shipping Address</label>
-          <textarea #addressInput formControlName="shippingAddress" rows="3"
+          <textarea formControlName="shippingAddress" rows="3"
+            [ngClass]="{ 'border-red-500': checkoutForm.get('shippingAddress')?.invalid && checkoutForm.get('shippingAddress')?.touched }"
             class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             placeholder="Street, City, Pincode"></textarea>
+          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('shippingAddress')?.touched && checkoutForm.get('shippingAddress')?.invalid">
+            <span *ngIf="checkoutForm.get('shippingAddress')?.errors?.['required']">Address is required.</span>
+            <span *ngIf="checkoutForm.get('shippingAddress')?.errors?.['minlength']">Minimum 10 characters required.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -38,7 +65,6 @@
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-3 gap-2">
         <span class="font-semibold text-green-600">{{ cartItems.length }}/{{ cartItems.length }} ITEMS SELECTED</span>
       </div>
-
       <div *ngFor="let item of cartItems" class="flex gap-4 mb-4">
         <div class="flex items-start gap-3" *ngFor="let img of item.images?.split(',')">
           <input type="checkbox" checked class="mt-1 text-green-600" />
@@ -46,9 +72,10 @@
             class="w-20 h-24 object-cover rounded-lg border" />
         </div>
         <div class="flex-1 space-y-1">
-          <h4 class="font-semibold text-gray-800">{{ item.title }} <span
-              class="text-sm text-gray-600">Qty: {{ item.quantity }}</span> <span class="text-sm text-gray-600">₹{{
-              item.price * item.quantity }}</span></h4>
+          <h4 class="font-semibold text-gray-800">{{ item.title }}
+            <span class="text-sm text-gray-600">Qty: {{ item.quantity }}</span>
+            <span class="text-sm text-gray-600">₹{{ item.price * item.quantity }}</span>
+          </h4>
         </div>
       </div>
     </div>
@@ -62,7 +89,7 @@
           <span>₹{{ getSubtotal() }}</span>
         </div>
         <div class="flex justify-between text-gray-700">
-          <span>Platform Fee </span>
+          <span>Platform Fee</span>
           <span>₹5</span>
         </div>
         <div class="flex justify-between font-semibold text-lg pt-2 border-t">
@@ -74,11 +101,16 @@
       <!-- Payment Method -->
       <div class="space-y-2">
         <label class="flex items-center gap-2">
-          <input type="radio" formControlName="paymentMethod" value="razorpay" class="text-green-500 mr-5" /> Razorpay
+          <input type="radio" formControlName="paymentMethod" value="razorpay" class="text-green-500" />
+          Razorpay
         </label>
-        <label class="flex items-center gap-2">
-          <input type="radio" formControlName="paymentMethod" value="easebuzz" class="text-green-500" /> Easebuzz
+        <label class="flex items-center gap-2 ml-5">
+          <input type="radio" formControlName="paymentMethod" value="easebuzz" class="text-green-500" />
+          Easebuzz
         </label>
+        <div class="text-red-600 text-sm" *ngIf="checkoutForm.get('paymentMethod')?.touched && checkoutForm.get('paymentMethod')?.invalid">
+          Please select a payment method.
+        </div>
       </div>
 
       <!-- Place Order -->
