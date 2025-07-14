@@ -15,6 +15,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../app/auth.service';
 
@@ -23,7 +24,7 @@ declare var Razorpay: any;
 @Component({
   selector: 'app-buynow',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './buynow.component.html',
   styleUrl: './buynow.component.css'
 })
@@ -46,7 +47,11 @@ export class BuynowComponent implements AfterViewInit {
     private authService: AuthService,
     private router: Router
   ) {
-    this.cartItems = data?.cart;
+    this.cartItems = (data?.cart || []).map((item: any) => ({
+      ...item,
+      selected: true
+    }));
+
     this.userId = this.authService.getUserId() ?? 0;
 
     const isLocalhost = window.location.hostname === 'localhost';
@@ -94,16 +99,29 @@ export class BuynowComponent implements AfterViewInit {
   }
 
   getSubtotal(): number {
-    return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return this.cartItems
+      .filter(item => item.selected)
+      .reduce((acc, item) => acc + item.price * item.quantity, 0);
   }
 
   getTotal(): number {
     return this.getSubtotal() + 5;
   }
 
+  updatePrice() {
+    // Triggered when checkbox is toggled, can add validation logic here if needed
+  }
+
   placeOrder() {
     if (this.checkoutForm.invalid) {
       this.checkoutForm.markAllAsTouched();
+      return;
+    }
+
+    const selectedItems = this.cartItems.filter(item => item.selected);
+
+    if (selectedItems.length === 0) {
+      alert('Please select at least one product to place the order.');
       return;
     }
 
@@ -124,7 +142,7 @@ export class BuynowComponent implements AfterViewInit {
         city: this.city,
         pincode: this.pincode
       },
-      cartItems: this.cartItems,
+      cartItems: selectedItems,
       paymentMethod: selectedGateway,
       totalAmount
     };
@@ -224,7 +242,9 @@ export class BuynowComponent implements AfterViewInit {
       theme: '#5CB85C'
     });
   }
-
+getSelectedItemCount(): number {
+  return this.cartItems.filter(item => item.selected).length;
+}
   clearCart(txnid: string) {
     this.http.post(`${this.apiUrl}/cart/clear`, { userId: this.userId }).subscribe(() => {
       this.http.post(`${this.apiUrl}/orders/update-stock`, { txnid }).subscribe(() => {
