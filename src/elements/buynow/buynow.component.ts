@@ -105,12 +105,16 @@ export class BuynowComponent implements AfterViewInit {
 }
 
 getTotal(): number {
-  return this.getSubtotal() + 5; // Platform fee
+  return this.getSubtotal() + 5;
 }
 
 
+
  
-  updatePrice() {}
+  updatePrice() {
+    this.getSubtotal();
+  this.getTotal();
+  }
 
   placeOrder() {
     if (this.checkoutForm.invalid) {
@@ -245,6 +249,7 @@ getTotal(): number {
 getSelectedItemCount(): number {
   return this.cartItems.filter(item => item.selected).length;
 }
+
   clearCart(txnid: string) {
     this.http.post(`${this.apiUrl}/cart/clear`, { userId: this.userId }).subscribe(() => {
       this.http.post(`${this.apiUrl}/orders/update-stock`, { txnid }).subscribe(() => {
