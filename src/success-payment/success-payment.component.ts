@@ -17,7 +17,7 @@ export class SuccessPaymentComponent implements OnInit {
   ngOnInit(): void {
     this.txnid = this.route.snapshot.queryParamMap.get('txnid');
     this.amount = this.route.snapshot.queryParamMap.get('totalAmount');
-    console.log("amount",this.amount);
+    console.log("amount",this.totalAmount);
     this.status = this.route.snapshot.queryParamMap.get('status');
 
     if (this.txnid && this.status) {
@@ -30,5 +30,8 @@ export class SuccessPaymentComponent implements OnInit {
         error: (err) => console.error('Failed to update payment status', err)
       });
     }
+  }
+  totalAmount(arg0: string, totalAmount: any) {
+    throw new Error('Method not implemented.');
   }
 }
