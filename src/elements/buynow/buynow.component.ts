@@ -1,20 +1,9 @@
-import {
-  Component,
-  Inject,
-  ElementRef,
-  ViewChild,
-  AfterViewInit
-} from '@angular/core';
+import {Component,Inject,ElementRef, ViewChild,AfterViewInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../app/service/cart.service';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms';
+import { FormBuilder,FormGroup,ReactiveFormsModule,Validators} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../app/auth.service';
@@ -107,14 +96,9 @@ export class BuynowComponent implements AfterViewInit {
 getTotal(): number {
   return this.getSubtotal() + 5;
 }
-
-
-
- 
-  updatePrice() {
-    this.getSubtotal();
-  this.getTotal();
-  }
+updatePrice() {
+  this.getSubtotal();
+  this.getTotal();}
 
   placeOrder() {
     if (this.checkoutForm.invalid) {
