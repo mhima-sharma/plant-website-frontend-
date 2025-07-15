@@ -16,7 +16,7 @@ export class SuccessPaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.txnid = this.route.snapshot.queryParamMap.get('txnid');
-    this.amount = this.route.snapshot.queryParamMap.get('amount');
+    this.amount = this.route.snapshot.queryParamMap.get('totalAmount');
     console.log("amount",this.amount);
     this.status = this.route.snapshot.queryParamMap.get('status');
 
