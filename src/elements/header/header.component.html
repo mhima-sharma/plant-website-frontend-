@@ -4,12 +4,7 @@
 </div>
 
 <!-- Navbar -->
-<div
-  [ngClass]="[
-    'fixed top-[34px] w-full shadow z-40 transition-colors duration-300',
-    isHeaderBlack ? 'bg-black' : 'bg-white'
-  ]"
->
+<div class="fixed top-[34px] w-full shadow z-40 transition-colors duration-300 bg-white">
   <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
     <!-- Logo -->
     <h1 class="text-green-900 text-3xl md:text-4xl font-bold flex items-center gap-2">
@@ -18,27 +13,27 @@
 
     <!-- Desktop Links -->
     <div class="hidden md:flex items-center space-x-8">
-      <a routerLink="/show" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+      <a routerLink="/show" routerLinkActive="text-blue-700"
         class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
         Home
       </a>
 
-      <a routerLink="/store" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+      <a routerLink="/store" routerLinkActive="text-blue-700"
         class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
         Store
       </a>
 
-      <a routerLink="/about" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+      <a routerLink="/about" routerLinkActive="text-blue-700"
         class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
         About Us
       </a>
 
-      <a routerLink="/contact" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+      <a routerLink="/contact" routerLinkActive="text-blue-700"
         class="text-green-700 text-lg font-semibold hover:text-lime-600 transition">
         Contact Us
       </a>
 
-      <a (click)="openCart(); makeHeaderBlack()"
+      <a (click)="openCart()"
         class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer">
         Cart
         <span *ngIf="cartCount > 0"
@@ -48,7 +43,7 @@
       </a>
 
       <!-- Sign Up (only if NOT logged in) -->
-      <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700" (click)="makeHeaderBlack()"
+      <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700"
         class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition">
         Sign Up
         <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
@@ -57,7 +52,7 @@
       </a>
 
       <!-- Logout (only if logged in) -->
-      <a *ngIf="isLoggedIn" (click)="openLogoutPopup(); makeHeaderBlack()"
+      <a *ngIf="isLoggedIn" (click)="openLogoutPopup()"
         class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer">
         Logout
       </a>
@@ -73,30 +68,30 @@
   <div *ngIf="isMobileMenuOpen"
     class="md:hidden bg-gradient-to-r from-lime-300 to-green-800 shadow px-6 py-4 space-y-4">
     <a routerLink="/show" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
+      (click)="closeMobileMenu()"
       class="block text-green-100 text-lg font-semibold hover:text-white">
       Home
     </a>
 
     <a routerLink="/store" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
+      (click)="closeMobileMenu()"
       class="block text-green-100 text-lg font-semibold hover:text-white">
       Store
     </a>
 
     <a routerLink="/about" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
+      (click)="closeMobileMenu()"
       class="block text-green-100 text-lg font-semibold hover:text-white">
       About Us
     </a>
 
     <a routerLink="/contact" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
+      (click)="closeMobileMenu()"
       class="block text-green-100 text-lg font-semibold hover:text-white">
       Contact Us
     </a>
 
-    <a (click)="openCart(); closeMobileMenu(); makeHeaderBlack()"
+    <a (click)="openCart(); closeMobileMenu()"
       class="relative block text-green-100 text-lg font-semibold hover:text-white cursor-pointer">
       Cart
       <span *ngIf="cartCount > 0"
@@ -107,16 +102,16 @@
 
     <!-- Mobile Sign Up (only if NOT logged in) -->
     <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700"
-      (click)="closeMobileMenu(); makeHeaderBlack()"
+      (click)="closeMobileMenu()"
       class="block text-green-100 text-lg font-semibold hover:text-white">
       Sign Up
-       <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
-          alt="tap here"
-          class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2" />
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
+        alt="tap here"
+        class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2" />
     </a>
 
     <!-- Mobile Logout (only if logged in) -->
-    <a *ngIf="isLoggedIn" (click)="openLogoutPopup(); closeMobileMenu(); makeHeaderBlack()"
+    <a *ngIf="isLoggedIn" (click)="openLogoutPopup(); closeMobileMenu()"
       class="block text-green-100 text-lg font-semibold hover:text-white cursor-pointer">
       Logout
     </a>
