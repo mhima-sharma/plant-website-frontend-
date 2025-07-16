@@ -9,20 +9,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
-export class FooterComponent implements OnInit {
-  visitorCount: number = 0;
+export class FooterComponent {
+  // visitorCount: number = 0;
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    // ✅ Increment visitor count on component load
-    this.http.post('https://your-backend-url.com/api/visitor', {}).subscribe();
+  // ngOnInit(): void {
+  //   // ✅ Increment visitor count on component load
+  //   this.http.post('https://your-backend-url.com/api/visitor', {}).subscribe();
 
-    // ✅ Fetch updated count
-    this.http.get<{ count: number }>('https://your-backend-url.com/api/visitor/count')
-      .subscribe({
-        next: (res) => this.visitorCount = res.count,
-        error: (err) => console.error('Failed to load visitor count', err)
-      });
-  }
+  //   // ✅ Fetch updated count
+  //   this.http.get<{ count: number }>('https://your-backend-url.com/api/visitor/count')
+  //     .subscribe({
+  //       next: (res) => this.visitorCount = res.count,
+  //       error: (err) => console.error('Failed to load visitor count', err)
+  //     });
+  // }
 }
