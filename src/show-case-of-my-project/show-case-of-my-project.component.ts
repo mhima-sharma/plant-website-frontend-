@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class ShowCaseOfMyProjectComponent {
 isChatbotOpen = false;
 isWeatherOpen = false;
+ isGameOpen = false;
 
  toggleChatbot() {
     this.isChatbotOpen = !this.isChatbotOpen;
@@ -23,5 +24,8 @@ isWeatherOpen = false;
   toggleWeather() {
   this.isWeatherOpen = !this.isWeatherOpen;
 }
+ toggleGame() {
+    this.isGameOpen = !this.isGameOpen;
+  }
 
 }
