@@ -138,15 +138,15 @@
       </button>
       <button 
         class="px-3 py-1 rounded-full transition duration-200"
-        [ngClass]="selectedGame === 'snake' ? 'bg-indigo-600 text-white' : 'text-indigo-700 hover:bg-indigo-200'"
-        (click)="selectGame('snake')">
-        🐍 Snake
+        [ngClass]="selectedGame === 'QuickSum' ? 'bg-indigo-600 text-white' : 'text-indigo-700 hover:bg-indigo-200'"
+        (click)="selectGame('QuickSum')">
+        🔢⏱️ QuickSum
       </button>
       <button 
         class="px-3 py-1 rounded-full transition duration-200"
-        [ngClass]="selectedGame === 'flappy' ? 'bg-indigo-600 text-white' : 'text-indigo-700 hover:bg-indigo-200'"
-        (click)="selectGame('flappy')">
-        🐤 Flappy
+        [ngClass]="selectedGame === 'TypeRun' ? 'bg-indigo-600 text-white' : 'text-indigo-700 hover:bg-indigo-200'"
+        (click)="selectGame('TypeRun')">
+        🏃⌨️ TypeRun 
       </button>
     </div>
 
@@ -159,17 +159,17 @@
           title="Tic Tac Toe Game">
         </iframe>
 
-        <!-- <iframe *ngSwitchCase="'snake'"
-          src="https://playsnake.org/"
+        <iframe *ngSwitchCase="'QuickSum'"
+          src="https://mhima-sharma.github.io/random-math-problem/"
           class="w-full h-[500px] border-2 rounded-xl"
-          title="Snake Game">
-        </iframe> -->
+          title="quick math problem">
+        </iframe>
 
-        <!-- <iframe *ngSwitchCase="'flappy'"
-          src="https://flappybird.io/"
+        <iframe *ngSwitchCase="'TypeRun'"
+          src="https://mhima-sharma.github.io/typing-speed-test/"
           class="w-full h-[500px] border-2 rounded-xl"
-          title="Flappy Bird">
-        </iframe> -->
+          title="TypeRun">
+        </iframe>
       </ng-container>
 
       <button 
