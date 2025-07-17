@@ -17,6 +17,7 @@ export class ShowCaseOfMyProjectComponent {
 isChatbotOpen = false;
 isWeatherOpen = false;
  isGameOpen = false;
+ selectedGame = 'tic-tac-toe';
 
  toggleChatbot() {
     this.isChatbotOpen = !this.isChatbotOpen;
@@ -27,5 +28,8 @@ isWeatherOpen = false;
  toggleGame() {
     this.isGameOpen = !this.isGameOpen;
   }
+  selectGame(game: string) {
+  this.selectedGame = game;
+}
 
 }
