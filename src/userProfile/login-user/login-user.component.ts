@@ -16,7 +16,6 @@ import { AuthService } from '../../app/auth.service';
 })
 export class LoginUserComponent implements OnInit {
   loginForm!: FormGroup;
-  showPassword = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -26,10 +25,6 @@ export class LoginUserComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
-
-  togglePasswordVisibility() {
-  this.showPassword = !this.showPassword;
-}
 
  onLogin(): void {
   if (this.loginForm.invalid) return;

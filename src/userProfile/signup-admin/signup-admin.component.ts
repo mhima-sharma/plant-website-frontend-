@@ -15,8 +15,6 @@ export class SignupAdminComponent {
   signupForm!: FormGroup;
   errorMessage = '';
   loading = false;
-  showPassword = false;
-  showConfirmPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -30,16 +28,6 @@ export class SignupAdminComponent {
       confirmPassword: ['', Validators.required]
     });
   }
-
-
-  togglePasswordVisibility() {
-  this.showPassword = !this.showPassword;
-}
-
-
-toggleConfirmPasswordVisibility() {
-  this.showConfirmPassword = !this.showConfirmPassword;
-}
 
   onSubmit() {
     if (this.signupForm.invalid) return;
