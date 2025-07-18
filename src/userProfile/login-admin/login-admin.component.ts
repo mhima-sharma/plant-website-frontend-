@@ -14,6 +14,7 @@ export class LoginAdminComponent {
   loginForm!: FormGroup;
   errorMessage = '';
   loading = false;
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +26,10 @@ export class LoginAdminComponent {
       password: ['', Validators.required]
     });
   }
+
+  togglePasswordVisibility() {
+  this.showPassword = !this.showPassword;
+}
 
   onLogin() {
     if (this.loginForm.invalid) return;

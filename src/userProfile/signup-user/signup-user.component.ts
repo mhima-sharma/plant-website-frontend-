@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 export class SignupUserComponent implements OnInit {
   signupForm!: FormGroup;
   errorMessage: any;
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +31,14 @@ export class SignupUserComponent implements OnInit {
       confirmPassword: ['', Validators.required]
     });
   }
+
+  togglePasswordVisibility() {
+  this.showPassword = !this.showPassword;
+}
+
+toggleConfirmPasswordVisibility() {
+  this.showConfirmPassword = !this.showConfirmPassword;
+}
 
   onSignup() {
     if (this.signupForm.invalid) return;
