@@ -1,94 +1,92 @@
 <!-- Checkout Page Container -->
-<div class="max-w-3xl mx-auto px-4 py-6 sm:py-8 md:py-10 overflow-y-auto h-screen" [formGroup]="checkoutForm">
-  <div class="grid grid-cols-1 gap-6">
+<div class="max-w-4xl mx-auto px-4 py-8 md:py-12 bg-gray-50 min-h-screen" [formGroup]="checkoutForm">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- Left Section: Billing and Cart -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <!-- Billing Details -->
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Billing Details</h2>
+        <div class="space-y-4">
+          <!-- Full Name -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+            <input type="text" formControlName="fullName"
+              [ngClass]="{ 'border-red-500': checkoutForm.get('fullName')?.invalid && checkoutForm.get('fullName')?.touched }"
+              class="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              placeholder="John Doe" />
+            <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('fullName')?.touched && checkoutForm.get('fullName')?.invalid">
+              <span *ngIf="checkoutForm.get('fullName')?.errors?.['required']">Full Name is required.</span>
+              <span *ngIf="checkoutForm.get('fullName')?.errors?.['minlength']">At least 3 characters required.</span>
+            </div>
+          </div>
 
-    <!-- Billing Details -->
-    <div class="border p-4 rounded-lg bg-white">
-      <h3 class="text-lg font-semibold text-gray-800 mb-4">Billing Details</h3>
-      <div class="space-y-4">
-        <!-- Full Name -->
-        <div>
-          <label class="block text-gray-600 font-medium mb-1">Full Name</label>
-          <input type="text" formControlName="fullName"
-            [ngClass]="{ 'border-red-500': checkoutForm.get('fullName')?.invalid && checkoutForm.get('fullName')?.touched }"
-            class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="John Doe" />
-          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('fullName')?.touched && checkoutForm.get('fullName')?.invalid">
-            <span *ngIf="checkoutForm.get('fullName')?.errors?.['required']">Full Name is required.</span>
-            <span *ngIf="checkoutForm.get('fullName')?.errors?.['minlength']">At least 3 characters required.</span>
+          <!-- Email -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email Address</label>
+            <input type="email" formControlName="email"
+              [ngClass]="{ 'border-red-500': checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched }"
+              class="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              placeholder="john@example.com" />
+            <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('email')?.touched && checkoutForm.get('email')?.invalid">
+              <span *ngIf="checkoutForm.get('email')?.errors?.['required']">Email is required.</span>
+              <span *ngIf="checkoutForm.get('email')?.errors?.['email']">Invalid email format.</span>
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+            <input type="tel" formControlName="phoneNumber"
+              [ngClass]="{ 'border-red-500': checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched }"
+              class="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              placeholder="9876543210" />
+            <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('phoneNumber')?.touched && checkoutForm.get('phoneNumber')?.invalid">
+              <span *ngIf="checkoutForm.get('phoneNumber')?.errors?.['required']">Phone number is required.</span>
+              <span *ngIf="checkoutForm.get('phoneNumber')?.errors?.['pattern']">Enter a valid 10-digit number.</span>
+            </div>
+          </div>
+
+          <!-- Shipping Address -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Shipping Address</label>
+            <textarea formControlName="shippingAddress" rows="3" #addressInput
+              [ngClass]="{ 'border-red-500': checkoutForm.get('shippingAddress')?.invalid && checkoutForm.get('shippingAddress')?.touched }"
+              class="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              placeholder="Street, City, Pincode"></textarea>
+            <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('shippingAddress')?.touched && checkoutForm.get('shippingAddress')?.invalid">
+              <span *ngIf="checkoutForm.get('shippingAddress')?.errors?.['required']">Address is required.</span>
+              <span *ngIf="checkoutForm.get('shippingAddress')?.errors?.['minlength']">Minimum 10 characters required.</span>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Email -->
-        <div>
-          <label class="block text-gray-600 font-medium mb-1">Email Address</label>
-          <input type="email" formControlName="email"
-            [ngClass]="{ 'border-red-500': checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched }"
-            class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="john@example.com" />
-          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('email')?.touched && checkoutForm.get('email')?.invalid">
-            <span *ngIf="checkoutForm.get('email')?.errors?.['required']">Email is required.</span>
-            <span *ngIf="checkoutForm.get('email')?.errors?.['email']">Invalid email format.</span>
-          </div>
+      <!-- Cart Items -->
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <div class="flex justify-between items-center border-b pb-3 mb-4">
+          <h3 class="text-lg font-semibold text-gray-800">Your Cart</h3>
+          <span class="text-green-600 font-medium text-sm">{{ getSelectedItemCount() }}/{{ cartItems.length }} ITEMS SELECTED</span>
         </div>
-
-        <!-- Phone Number -->
-        <div>
-          <label class="block text-gray-600 font-medium mb-1">Phone Number</label>
-          <input type="tel" formControlName="phoneNumber"
-            [ngClass]="{ 'border-red-500': checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched }"
-            class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="9876543210" />
-          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('phoneNumber')?.touched && checkoutForm.get('phoneNumber')?.invalid">
-            <span *ngIf="checkoutForm.get('phoneNumber')?.errors?.['required']">Phone number is required.</span>
-            <span *ngIf="checkoutForm.get('phoneNumber')?.errors?.['pattern']">Enter a valid 10-digit number.</span>
-          </div>
-        </div>
-
-        <!-- Shipping Address -->
-        <div>
-          <label class="block text-gray-600 font-medium mb-1">Shipping Address</label>
-          <textarea formControlName="shippingAddress" rows="3" #addressInput
-            [ngClass]="{ 'border-red-500': checkoutForm.get('shippingAddress')?.invalid && checkoutForm.get('shippingAddress')?.touched }"
-            class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Street, City, Pincode"></textarea>
-          <div class="text-red-600 text-sm mt-1" *ngIf="checkoutForm.get('shippingAddress')?.touched && checkoutForm.get('shippingAddress')?.invalid">
-            <span *ngIf="checkoutForm.get('shippingAddress')?.errors?.['required']">Address is required.</span>
-            <span *ngIf="checkoutForm.get('shippingAddress')?.errors?.['minlength']">Minimum 10 characters required.</span>
+        <div *ngFor="let item of cartItems" class="flex items-center gap-4 py-4 border-b last:border-b-0">
+          <input type="checkbox" [(ngModel)]="item.selected" name="itemSelect{{ item.id }}" class="mt-1 accent-green-600" (change)="updatePrice()" />
+          <img [src]="(item.images?.split(',')[0] || 'assets/placeholder.jpg')" class="w-20 h-20 rounded-lg border object-cover" />
+          <div class="flex-1">
+            <h4 class="text-md font-semibold text-gray-700">{{ item.title }}</h4>
+            <p class="text-sm text-gray-500">Qty: {{ item.quantity }}</p>
+            <p class="text-md font-medium text-gray-800">₹{{ item.price * item.quantity }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Cart Items -->
-    <div class="border p-4 rounded-lg bg-white">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-3 gap-2">
-        <span class="font-semibold text-green-600">
-          {{ getSelectedItemCount() }}/{{ cartItems.length }} ITEMS SELECTED
-        </span>
-      </div>
-      <div *ngFor="let item of cartItems" class="flex gap-4 mb-4">
-        <div class="flex items-start gap-3">
-          <input type="checkbox" [(ngModel)]="item.selected"
-                name="itemSelect{{ item.id }}" class="mt-1 text-green-600"
-                 (change)="updatePrice()" />
-          <img [src]="(item.images?.split(',')[0] || 'assets/placeholder.jpg')"
-               class="w-20 h-24 object-cover rounded-lg border" />
-        </div>
-        <div class="flex-1 space-y-1">
-          <h4 class="font-semibold text-gray-800">
-            {{ item.title }}
-            <span class="text-sm text-gray-600">Qty: {{ item.quantity }}</span>
-            <span class="text-sm text-gray-600">₹{{ item.price * item.quantity }}</span>
-          </h4>
-        </div>
-      </div>
-    </div>
+    <!-- Right Section: Summary and Payment -->
+    <div class="bg-white rounded-xl shadow-md p-6 space-y-6">
+      <h2 class="text-xl font-bold text-gray-800">Order Summary</h2>
 
-    <!-- Summary and Payment -->
-    <div class="w-full bg-white p-6 rounded-lg shadow-md space-y-6">
-      <!-- Price Summary -->
-      <div class="border-t pt-4 text-sm space-y-2">
+      <!-- Price Details -->
+      <div class="text-sm space-y-2">
         <div class="flex justify-between text-gray-700">
           <span>Total MRP</span>
           <span>₹{{ getSubtotal() }}</span>
@@ -104,13 +102,13 @@
       </div>
 
       <!-- Payment Method -->
-      <div class="space-y-2">
+      <div class="pt-4 space-y-3">
         <label class="flex items-center gap-2">
-          <input type="radio" formControlName="paymentMethod" value="razorpay" class="text-green-500" />
+          <input type="radio" formControlName="paymentMethod" value="razorpay" class="accent-green-500" />
           Razorpay
         </label>
-        <label class="flex items-center gap-2 ml-5">
-          <input type="radio" formControlName="paymentMethod" value="easebuzz" class="text-green-500" />
+        <label class="flex items-center gap-2">
+          <input type="radio" formControlName="paymentMethod" value="easebuzz" class="accent-green-500" />
           Easebuzz
         </label>
         <div class="text-red-600 text-sm" *ngIf="checkoutForm.get('paymentMethod')?.touched && checkoutForm.get('paymentMethod')?.invalid">
@@ -120,7 +118,7 @@
 
       <!-- Place Order -->
       <button (click)="placeOrder()" [disabled]="checkoutForm.invalid || loading"
-        class="w-full bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition">
+        class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
         <span *ngIf="!loading">PLACE ORDER</span>
         <span *ngIf="loading">Processing...</span>
       </button>
@@ -129,7 +127,6 @@
 </div>
 
 <!-- Spinner Overlay -->
-<div *ngIf="loading"
-  class="fixed inset-0 bg-white bg-opacity-70 flex items-center justify-center z-50">
-  <div class="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+<div *ngIf="loading" class="fixed inset-0 bg-white bg-opacity-60 flex items-center justify-center z-50">
+  <div class="w-14 h-14 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
 </div>
