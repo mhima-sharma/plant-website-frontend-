@@ -1,54 +1,56 @@
-<main class="p-6 flex-1 overflow-y-auto relative">
+<main class="p-4 md:p-6 flex-1 overflow-y-auto relative">
   <div class="w-full h-full min-h-[500px]">
-    <div class="bg-gray-100 p-8 font-sans">
-      <div class="max-w-5xl mx-auto bg-white rounded-xl shadow p-6">
-        <div class="flex items-center justify-between mb-6">
+    <div class="bg-gray-100 p-4 sm:p-6 font-sans">
+      <div class="max-w-7xl mx-auto bg-white rounded-xl shadow p-4 sm:p-6">
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
           <div>
             <h2 class="text-xl font-semibold text-gray-800">Product Management</h2>
-            <p class="text-gray-500 text-sm mt-1">
-              A list of all the products you created.
-            </p>
+            <p class="text-gray-500 text-sm mt-1">A list of all the products you created.</p>
           </div>
           <button
-            class="bg-green-600 text-white text-sm px-4 py-2 rounded-md hover:bg-green-700"
+            class="bg-green-600 text-white text-sm px-4 py-2 rounded-md hover:bg-green-700 w-full sm:w-auto"
             routerLink="/addProduct">
             Create Product
           </button>
         </div>
 
+        <!-- Table Responsive Wrapper -->
         <div class="overflow-x-auto">
           <table class="min-w-full text-sm text-left text-gray-700">
             <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
               <tr>
-                <th class="px-6 py-3">ID</th>
-                <th class="px-6 py-3">Image</th>
-                <th class="px-6 py-3">Title</th>
-                <th class="px-6 py-3">Quantity</th>
-                <th class="px-6 py-3">Price</th>
-                <th class="px-6 py-3">Description</th>
-                <th class="px-6 py-3 text-right">Actions</th>
+                <th class="px-4 py-3">ID</th>
+                <th class="px-4 py-3">Image</th>
+                <th class="px-4 py-3">Title</th>
+                <th class="px-4 py-3">Quantity</th>
+                <th class="px-4 py-3">Price</th>
+                <th class="px-4 py-3">Description</th>
+                <th class="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              <tr *ngFor="let product of products; let i = index">
-                <td class="px-6 py-4">{{ i + 1 }}</td>
+              <tr *ngFor="let product of products; let i = index" class="hover:bg-gray-50 transition">
+                <td class="px-4 py-3">{{ i + 1 }}</td>
                 <td class="px-4 py-2">
                   <ng-container *ngIf="product.images">
                     <img
                       *ngFor="let img of product.images.split(',')"
                       [src]="img"
                       alt="Product Image"
-                      class="w-16 h-16 object-cover inline-block mr-2 rounded-md"
+                      class="w-14 h-14 object-cover inline-block mr-2 mb-1 rounded-md"
                     />
                   </ng-container>
                 </td>
-                <td class="px-6 py-4">{{ product.title }}</td>
-                <td class="px-6 py-4">{{ product.quantity }}</td>
-                <td class="px-6 py-4">₹{{ product.price }}</td>
-                <td class="px-6 py-4">{{ product.description }}</td>
-                <td class="px-6 py-4 text-right space-x-4">
-                  <button (click)="editProduct(product.id)" class="text-green-700 font-medium hover:underline">Edit</button>
-                  <button (click)="deleteProduct(product.id)" class="text-red-600 font-medium hover:underline">Delete</button>
+                <td class="px-4 py-3 break-words max-w-xs">{{ product.title }}</td>
+                <td class="px-4 py-3">{{ product.quantity }}</td>
+                <td class="px-4 py-3 whitespace-nowrap">₹{{ product.price }}</td>
+                <td class="px-4 py-3 break-words max-w-xs">{{ product.description }}</td>
+                <td class="px-4 py-3 text-right space-x-2">
+                  <button (click)="editProduct(product.id)"
+                    class="text-green-700 font-medium hover:underline">Edit</button>
+                  <button (click)="deleteProduct(product.id)"
+                    class="text-red-600 font-medium hover:underline">Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -62,13 +64,13 @@
   <!-- Go to Home Floating Button -->
   <a
     routerLink="/show"
-    class="fixed bottom-6 left-6 z-50 bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-full shadow-lg flex items-center gap-2 transition duration-300 ease-in-out"
+    class="fixed bottom-6 left-6 z-50 bg-green-600 hover:bg-green-700 text-white px-4 py-2 sm:px-5 sm:py-3 rounded-full shadow-lg flex items-center gap-2 transition duration-300 ease-in-out"
   >
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
       stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" />
     </svg>
-    Home
+    <span class="hidden sm:inline">Home</span>
   </a>
 </main>
