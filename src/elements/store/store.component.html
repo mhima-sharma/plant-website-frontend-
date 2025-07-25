@@ -1,16 +1,26 @@
 <!-- Header -->
 <app-header></app-header>
 
-<!-- Store Banner -->
-<div class="relative bg-cover bg-center h-[300px] md:h-[400px]" 
-     style="background-image: url('https://img.freepik.com/premium-vector/abstract-background-pastel-colors_627230-60.jpg');">
+<!-- Store Carousel Section -->
+<div class="relative bg-black h-[300px] md:h-[400px] overflow-hidden">
 
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
 
-  <!-- Banner Text -->
-  <div class="relative z-20 flex flex-col items-center justify-center text-center h-full px-4">
-    <h1 class="text-green-900 text-4xl md:text-5xl font-bold mb-4">Store</h1>
+  <!-- Carousel Content -->
+  <div class="relative z-20 h-full w-full">
+    <ngb-carousel *ngIf="carouselImages?.length" [interval]="3000" [pauseOnHover]="true" [wrap]="true" [showNavigationArrows]="false" [showNavigationIndicators]="false">
+      <ng-template ngbSlide *ngFor="let image of carouselImages">
+        <div
+          class="h-[300px] md:h-[400px] w-full bg-cover bg-center"
+          [ngStyle]="{'background-image': 'url(' + image + ')'}"
+        >
+          <div class="flex items-center justify-center h-full">
+            <h1 class="text-green-200 text-4xl md:text-5xl font-bold drop-shadow-lg">Store</h1>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
   </div>
 </div>
 
