@@ -5,3 +5,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300;1,400;1,500;1,600;1,700&display=swap');
+* {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+}
+
+/* html, body {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+} */
