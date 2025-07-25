@@ -25,6 +25,9 @@ interface CartItem {
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  logoPath: string = '../../img/logo little-leafy.png';
+  
+
   isMobileMenuOpen = false;
   isMoreMenuOpen = false;
   showLogoutModal = false;
@@ -66,6 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     );
   }
+ 
 
   openCart(): void {
     this.dialog.open(CartComponent, {

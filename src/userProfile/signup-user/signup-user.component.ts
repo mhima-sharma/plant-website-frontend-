@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 export class SignupUserComponent implements OnInit {
   signupForm!: FormGroup;
   errorMessage: any;
+  showPassword: boolean = false;
+showConfirmPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -47,4 +49,12 @@ export class SignupUserComponent implements OnInit {
       error: err => alert(err.error.message || 'Signup failed'),
     });
   }
+
+  togglePassword() {
+  this.showPassword = !this.showPassword;
+}
+
+toggleConfirmPassword() {
+  this.showConfirmPassword = !this.showConfirmPassword;
+}
 }

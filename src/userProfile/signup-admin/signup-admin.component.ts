@@ -15,6 +15,8 @@ export class SignupAdminComponent {
   signupForm!: FormGroup;
   errorMessage = '';
   loading = false;
+  showPassword: boolean = false;
+showConfirmPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -52,4 +54,11 @@ export class SignupAdminComponent {
       }
     });
   }
+  togglePassword() {
+  this.showPassword = !this.showPassword;
+}
+
+toggleConfirmPassword() {
+  this.showConfirmPassword = !this.showConfirmPassword;
+}
 }

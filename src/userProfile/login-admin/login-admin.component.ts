@@ -14,7 +14,7 @@ export class LoginAdminComponent {
   loginForm!: FormGroup;
   errorMessage = '';
   loading = false;
-
+  showPassword: boolean = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -44,4 +44,8 @@ export class LoginAdminComponent {
       }
     });
   }
+
+  togglePassword() {
+  this.showPassword = !this.showPassword;
+}
 }

@@ -22,68 +22,31 @@
     </button>
   </div>
 <!-- Contact Section -->
-<div class="container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Contact Section Styled Like Uploaded Design -->
+<div class="container mx-auto px-4 py-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white p-8 rounded-lg shadow-lg border">
 
-  <!-- Contact Details -->
-  <div>
-    <h1 class="text-3xl font-bold mb-8">Contact Details</h1>
-
-    <div class="space-y-8">
-
-      <!-- Location -->
-      <div class="flex items-start gap-4">
-        <p class="text-red-500 text-3xl">🏢</p>
-        <div>
-          <h2 class="text-xl font-semibold mb-1">Our Location</h2>
-          <p class="text-gray-500">1569 2nd Ave, New York, NY 10028, USA</p>
-        </div>
-      </div>
-
-      <!-- Phone -->
-      <div class="flex items-start gap-4">
-        <p class="text-red-500 text-3xl">📞</p>
-        <div>
-          <h2 class="text-xl font-semibold mb-1">Call Us</h2>
-          <p class="text-gray-500">+123 456 7890</p>
-          <p class="text-gray-500">+123 456 7891</p>
-        </div>
-      </div>
-
-      <!-- Email -->
-      <div class="flex items-start gap-4">
-        <p class="text-red-500 text-3xl">✉️</p>
-        <div>
-          <h2 class="text-xl font-semibold mb-1">Our Email</h2>
-          <p class="text-gray-500">infoexample.com</p>
-          <p class="text-gray-500">supportexample.com</p>
-        </div>
-      </div>
-
-    </div>
-
-    <hr class="my-8 border-gray-300">
-
-    <!-- Contact Form -->
-    <section class="bg-gray-50 p-8 rounded-2xl shadow">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Send Us a Message</h2>
+    <!-- Left: Contact Form -->
+    <div>
+      <h2 class="text-2xl font-bold mb-6">Contact Us</h2>
 
       <form class="space-y-4" (ngSubmit)="onSubmit()" #contactForm="ngForm">
         <input 
           type="text" 
           name="name" 
           [(ngModel)]="formData.name" 
-          placeholder="Name" 
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
-          required 
+          placeholder="Name *" 
+          class="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400" 
+          required
         />
 
         <input 
           type="email" 
           name="email" 
           [(ngModel)]="formData.email" 
-          placeholder="Email" 
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
-          required 
+          placeholder="Email *" 
+          class="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400" 
+          required
         />
 
         <input 
@@ -91,46 +54,72 @@
           name="subject" 
           [(ngModel)]="formData.subject" 
           placeholder="Subject" 
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
+          class="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
         />
 
         <textarea 
           name="message" 
           [(ngModel)]="formData.message" 
           placeholder="Message" 
-          rows="5" 
-          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          rows="4" 
+          class="w-full border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
           required
         ></textarea>
 
         <button 
           type="submit" 
-          class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-full transition-all duration-300"
+          class="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded w-full font-semibold transition duration-300"
         >
-          SEND MESSAGE
+          Send Message
         </button>
 
         <p *ngIf="successMessage" class="text-green-600">{{ successMessage }}</p>
         <p *ngIf="errorMessage" class="text-red-600">{{ errorMessage }}</p>
       </form>
-    </section>
-  </div>
+    </div>
 
-  <!-- Map Section -->
-  <div class="flex flex-col">
-    <h1 class="text-3xl font-bold mb-8">Find Us</h1>
-    <div class="rounded-2xl overflow-hidden shadow-lg w-full h-96">
-      <!-- You can replace the src with your actual Google Maps embed link -->
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.421421148586!2d-73.95432308459473!3d40.778644879325084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258eaa63c5a41%3A0xf9140fcbd5d7bbcf!2s1569%202nd%20Ave%2C%20New%20York%2C%20NY%2010028%2C%20USA!5e0!3m2!1sen!2sin!4v1620044678481!5m2!1sen!2sin" 
-        width="100%" 
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy">
-      </iframe>
+    <!-- Right: Contact Details + Map -->
+    <div class="space-y-6">
+      <h2 class="text-2xl font-bold">Contact Details</h2>
+
+      <div class="flex items-start gap-3">
+        <span class="text-xl">📞</span>
+        <div>
+          <p class="text-gray-700 font-medium">+91 79885__4__</p>
+          <p class="text-sm text-gray-500">Currently available via email only</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <span class="text-xl">✉️</span>
+        <div>
+          <p class="text-gray-700 font-medium">{{email}}</p>
+          <p class="text-sm text-gray-500">You can connect through the given form below</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3">
+        <span class="text-xl">📍</span>
+        <div>
+          <p class="text-gray-700 font-medium">Physical location not available at the moment</p>
+        </div>
+      </div>
+
+      <!-- Keep your original Google Map -->
+      <div class="rounded-2xl overflow-hidden shadow w-full h-64">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.421421148586!2d-73.95432308459473!3d40.778644879325084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258eaa63c5a41%3A0xf9140fcbd5d7bbcf!2s1569%202nd%20Ave%2C%20New%20York%2C%20NY%2010028%2C%20USA!5e0!3m2!1sen!2sin!4v1620044678481!5m2!1sen!2sin" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
     </div>
   </div>
 </div>
+
+
 
 <app-footer></app-footer>

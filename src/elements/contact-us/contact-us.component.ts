@@ -13,12 +13,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ContactUsComponent {
   isChatbotOpen = false;
-
+email = 'mahimasharma052002@gmail.com';
   formData = {
     name: '',
     email: '',
     subject: '',
     message: ''
+
   };
 
   successMessage = '';

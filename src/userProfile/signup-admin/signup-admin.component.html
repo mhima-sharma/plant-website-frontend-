@@ -36,25 +36,35 @@
       </div>
 
       <!-- Password -->
-      <div>
+      <div class="relative">
         <label class="block text-green-800 mb-1" for="password">Password</label>
         <input
+          [type]="showPassword ? 'text' : 'password'"
           id="password"
-          type="password"
           formControlName="password"
           placeholder="••••••••"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+        <i
+          class="fas absolute right-3 top-[38px] text-gray-500 cursor-pointer"
+          [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+          (click)="togglePassword()"
+        ></i>
       </div>
 
       <!-- Confirm Password -->
-      <div>
+      <div class="relative">
         <label class="block text-green-800 mb-1" for="confirmPassword">Confirm Password</label>
         <input
+          [type]="showConfirmPassword ? 'text' : 'password'"
           id="confirmPassword"
-          type="password"
           formControlName="confirmPassword"
           placeholder="••••••••"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+          class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" />
+        <i
+          class="fas absolute right-3 top-[38px] text-gray-500 cursor-pointer"
+          [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+          (click)="toggleConfirmPassword()"
+        ></i>
       </div>
 
       <!-- Error Message -->

@@ -16,6 +16,7 @@ import { AuthService } from '../../app/auth.service';
 })
 export class LoginUserComponent implements OnInit {
   loginForm!: FormGroup;
+  showPassword: boolean = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -39,6 +40,9 @@ export class LoginUserComponent implements OnInit {
     },
     error: (err) => alert(err.error.message || 'Login failed'),
   });
+}
+togglePassword() {
+  this.showPassword = !this.showPassword;
 }
 
 }
