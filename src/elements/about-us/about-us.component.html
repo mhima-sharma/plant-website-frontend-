@@ -1,9 +1,36 @@
 <app-header></app-header>
 
 <!-- Hero Section -->
-<div class="relative bg-cover bg-center h-[300px] md:h-[400px]" style="background-image: url('https://img.freepik.com/premium-vector/abstract-background-pastel-colors_627230-60.jpg');">
-  <div class="flex items-center justify-center h-full bg-black bg-opacity-40">
-    <h1 class="text-green-900 text-4xl md:text-6xl font-extrabold px-4 text-center">About Us</h1>
+<div class="relative bg-cover bg-center h-[300px] md:h-[400px]"
+     style="background-image: url('https://img.freepik.com/premium-vector/abstract-background-pastel-colors_627230-60.jpg');">
+
+  <!-- Image Carousel Overlay -->
+  <div class="relative overflow-hidden h-[300px] md:h-[400px]">
+    <div class="w-full h-full flex transition-all duration-700 ease-in-out" 
+         [style.transform]="'translateX(-' + (current * 100) + '%)'">
+      <div *ngFor="let banner of banners" class="min-w-full h-full flex items-center justify-center">
+        <img [src]="banner.image" alt="banner" class="w-full h-full object-cover rounded-none" />
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button (click)="prev()" 
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 rounded-full p-2">
+      ‹
+    </button>
+    <button (click)="next()" 
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 rounded-full p-2">
+      ›
+    </button>
+
+    <!-- Dots -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+      <span *ngFor="let banner of banners; let i = index"
+            class="w-3 h-3 rounded-full cursor-pointer"
+            [ngClass]="{ 'bg-white': current === i, 'bg-white/50': current !== i }"
+            (click)="goTo(i)">
+      </span>
+    </div>
   </div>
 </div>
 

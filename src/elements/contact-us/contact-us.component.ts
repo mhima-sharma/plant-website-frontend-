@@ -14,16 +14,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ContactUsComponent {
    banners = [
       {
-      image: 'https://hips.hearstapps.com/hmg-prod/images/collection-of-beautiful-houseplants-on-wooden-table-royalty-free-image-1712685460.jpg?crop=1xw:0.84415xh;0,0.195xh',
+      image: 'https://png.pngtree.com/thumb_back/fh260/background/20220906/pngtree-business-concept-contact-us-on-wall-background-project-doodle-concept-photo-image_25335972.jpg',
     
     },
     {
-      image: 'https://static.wixstatic.com/media/f86e41_caf02ba05279478b8263170b4225e1d8~mv2.jpg/v1/fill/w_640,h_674,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/f86e41_caf02ba05279478b8263170b4225e1d8~mv2.jpg',
+      image: 'https://static.vecteezy.com/system/resources/thumbnails/024/162/440/small_2x/communication-concept-with-email-message-box-and-contacts-icons-website-page-contact-connection-with-modern-network-technology-borderless-communication-business-contact-and-communication-free-photo.jpg',
    
     },
   
     {
-      image: 'https://www.thespruce.com/thmb/QfK5tJS-meUkWvIQzQw58Qe0FeA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1305874785-69013559885f43568cc6a99b6e1e42d0.jpg',
+      image: 'https://thumbs.dreamstime.com/b/three-wooden-ball-contact-icon-against-blue-background-arranging-row-over-reflecting-floor-211477031.jpg',
      
     }
   ];
