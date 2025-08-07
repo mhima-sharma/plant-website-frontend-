@@ -76,6 +76,9 @@
                 [alt]="product.title || 'Product'"
               />
             </div>
+             <div class="mt-2 text-yellow-500 text-sm">
+                  <i class="fas fa-star" *ngFor="let star of [1, 2, 3, 4, 5]"></i>
+              </div>
 
             <h3 class="text-lg font-semibold text-gray-900 truncate">
               {{ product.title || 'Untitled Plant' }}
