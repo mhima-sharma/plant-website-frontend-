@@ -59,3 +59,20 @@
 
   </nav>
 </div>
+<div *ngIf="showLogoutModal" class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+  <div class="bg-white rounded-xl p-6 shadow-lg w-80 text-center">
+    <h2 class="text-lg font-semibold mb-4 text-gray-800">
+      Are you sure you want to logout?
+    </h2>
+    <div class="flex justify-center gap-4">
+      <button (click)="confirmLogout()"
+        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+        Yes
+      </button>
+      <button (click)="closeLogoutPopup()"
+        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded">
+        No
+      </button>
+    </div>
+  </div>
+</div> 
