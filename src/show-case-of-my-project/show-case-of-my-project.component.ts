@@ -19,6 +19,7 @@ isWeatherOpen = false;
  isGameOpen = false;
  selectedGame = 'tic-tac-toe';
 
+ 
  toggleChatbot() {
     this.isChatbotOpen = !this.isChatbotOpen;
   }

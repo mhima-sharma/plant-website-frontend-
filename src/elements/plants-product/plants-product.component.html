@@ -63,42 +63,58 @@
       </div>
 
       <!-- Product Grid -->
-      <div *ngIf="filteredProducts.length > 0; else noResults">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          <div
-            class="group border border-gray-200 bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition duration-300"
-            *ngFor="let product of filteredProducts"
-          >
-            <div class="h-48 flex items-center justify-center mb-4 overflow-hidden rounded-lg">
-              <img
-                class="max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                [src]="(product.images?.split(',')[0] || 'assets/placeholder.jpg')"
-                [alt]="product.title || 'Product'"
-              />
-            </div>
-             <div class="mt-2 text-yellow-500 text-sm">
-                  <i class="fas fa-star" *ngFor="let star of [1, 2, 3, 4, 5]"></i>
-              </div>
-
-            <h3 class="text-lg font-semibold text-gray-900 truncate">
-              {{ product.title || 'Untitled Plant' }}
-            </h3>
-            <p class="text-md text-green-700 font-bold mt-1">
-              ₹{{ product.price || 'N/A' }}
-            </p>
-            <p class="text-md text-green-700 font-bold ">
-              Qnt.{{ product.quantity || 'N/A' }}
-            </p>
-
-            <button
-              (click)="viewDetails(product.id)"
-              class="mt-4 text-sm w-full font-medium text-white bg-green-700 hover:bg-green-800 px-4 py-2 rounded-full transition duration-200"
-            >
-              View Details
-            </button>
-          </div>
-        </div>
+     <!-- Product Grid -->
+<div *ngIf="filteredProducts.length > 0; else noResults">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div
+      class="group border border-gray-200 bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition duration-300"
+      *ngFor="let product of visibleProducts"
+    >
+      <div class="h-48 flex items-center justify-center mb-4 overflow-hidden rounded-lg">
+        <img
+          class="max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+          [src]="(product.images?.split(',')[0] || 'assets/placeholder.jpg')"
+          [alt]="product.title || 'Product'"
+        />
       </div>
+      <div class="mt-2 text-yellow-500 text-sm">
+        <i class="fas fa-star" *ngFor="let star of [1, 2, 3, 4, 5]"></i>
+      </div>
+
+      <h3 class="text-lg font-semibold text-gray-900 truncate">
+        {{ product.title || 'Untitled Plant' }}
+      </h3>
+      <p class="text-md text-green-700 font-bold mt-1">
+        ₹{{ product.price || 'N/A' }}
+      </p>
+      <p class="text-md text-green-700 font-bold ">
+        Qnt.{{ product.quantity || 'N/A' }}
+      </p>
+
+      <button
+        (click)="viewDetails(product.id)"
+        class="mt-4 text-sm w-full font-medium text-white bg-green-700 hover:bg-green-800 px-4 py-2 rounded-full transition duration-200"
+      >
+        View Details
+      </button>
+    </div>
+  </div>
+
+  <!-- Show More Button -->
+  <div class="mt-10 text-center" *ngIf="!showAll && filteredProducts.length > 8">
+    <button
+      (click)="toggleShowAll()"
+      class="text-sm sm:text-base font-medium px-6 py-2 bg-green-700 text-white rounded-full hover:bg-green-800 transition duration-200"
+    >
+      Show More
+    </button>
+  </div>
+</div>
+
+<ng-template #noResults>
+  <p class="text-center text-gray-500 mt-12">No matching products found.</p>
+</ng-template>
+
 
       
       <ng-template #noResults>

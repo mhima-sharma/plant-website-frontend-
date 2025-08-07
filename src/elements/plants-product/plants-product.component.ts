@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class PlantsProductComponent {
   products: any[] = [];
   searchQuery: string = '';
+  showAll: boolean = false;
 
   constructor(private productService: ProductService, private router: Router) {}
 
@@ -21,7 +22,7 @@ export class PlantsProductComponent {
     this.fetchAllProducts();
   }
 
-  fetchAllProducts() {
+  fetchAllProducts(): void {
     this.productService.getAllProducts().subscribe({
       next: (res) => {
         console.log('API Response:', res);
@@ -37,17 +38,24 @@ export class PlantsProductComponent {
     this.router.navigate(['/product', id]);
   }
 
-  onSearch(event: Event) {
+  onSearch(event: Event): void {
     event.preventDefault();
   }
 
   get filteredProducts(): any[] {
     const query = this.searchQuery.toLowerCase().trim();
     if (!query) return this.products;
-
     return this.products.filter(product =>
       (product?.name?.toLowerCase().includes(query) ?? false) ||
       (product?.description?.toLowerCase().includes(query) ?? false)
     );
+  }
+
+  get visibleProducts(): any[] {
+    return this.showAll ? this.filteredProducts : this.filteredProducts.slice(0, 8);
+  }
+
+  toggleShowAll(): void {
+    this.showAll = !this.showAll;
   }
 }
