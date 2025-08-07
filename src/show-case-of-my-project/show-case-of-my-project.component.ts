@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-show-case-of-my-project',
-  imports: [HeaderComponent, ContentComponent, FooterComponent, NeedHelpComponent, PlantsProductComponent, ChatbotComponent,CommonModule],
+  imports: [HeaderComponent, ContentComponent, FooterComponent, NeedHelpComponent, PlantsProductComponent, CommonModule],
   templateUrl: './show-case-of-my-project.component.html',
   styleUrl: './show-case-of-my-project.component.css'
 })
