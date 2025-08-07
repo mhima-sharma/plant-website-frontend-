@@ -1,0 +1,50 @@
+<!-- Sidebar -->
+<aside class="w-64 h-full bg-white border-r shadow-md fixed top-0 left-0 z-40 hidden md:block">
+  <div class="p-6">
+    <h2 class="text-2xl font-bold text-green-700 mb-8">
+      <i class="fas fa-cogs mr-2 text-green-600"></i>Admin Panel
+    </h2>
+
+    <!-- Navigation -->
+    <nav class="space-y-4 text-sm">
+      <a
+        routerLink="/admin/dashboard"
+        routerLinkActive="font-semibold text-green-600"
+        class="block py-2 px-4 rounded hover:bg-green-100 transition"
+      >
+        <i class="fas fa-tachometer-alt mr-2 text-gray-500"></i>Dashboard
+      </a>
+
+      <a
+        routerLink="/admin/products"
+        routerLinkActive="font-semibold text-green-600"
+        class="block py-2 px-4 rounded hover:bg-green-100 transition"
+      >
+        <i class="fas fa-seedling mr-2 text-gray-500"></i>Manage Products
+      </a>
+
+      <a
+        routerLink="/admin/orders"
+        routerLinkActive="font-semibold text-green-600"
+        class="block py-2 px-4 rounded hover:bg-green-100 transition"
+      >
+        <i class="fas fa-box-open mr-2 text-gray-500"></i>Manage Orders
+      </a>
+
+      <a
+        routerLink="/admin/users"
+        routerLinkActive="font-semibold text-green-600"
+        class="block py-2 px-4 rounded hover:bg-green-100 transition"
+      >
+        <i class="fas fa-users mr-2 text-gray-500"></i>Manage Users
+      </a>
+
+      <a
+        routerLink="/"
+        class="block py-2 px-4 rounded hover:bg-red-100 text-red-600 transition font-medium"
+      >
+        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+      </a>
+    </nav>
+  </div>
+</aside>
