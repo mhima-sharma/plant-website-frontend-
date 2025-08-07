@@ -22,7 +22,9 @@
       <a routerLink="/about" class="hover:text-lime-600 transition-colors">About us</a>
       <a routerLink="/contact" class="hover:text-lime-600 transition-colors">Contact us</a>
       <a routerLink="/store" class="hover:text-lime-600 transition-colors">plants</a>
-      <a (click)="showDevelopmentMessage()" class="hover:text-lime-600 transition-colors cursor-pointer">Plant Accessories</a>
+      <a  (click)="showDevelopmentMessage()" class="hover:text-lime-600 transition-colors cursor-pointer">Plant Accessories</a>
+      <!-- (click)="showDevelopmentMessage()" -->
+       <!-- routerLink="/accessories" -->
       <div>
         <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700"
         class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition">

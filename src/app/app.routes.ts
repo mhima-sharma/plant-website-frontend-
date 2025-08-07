@@ -20,6 +20,7 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
 import { IntroductionComponent } from '../elements/introduction/introduction.component';
 import { TermPolicyComponent } from '../elements/term-policy/term-policy.component';
 import { SplashComponent } from '../elements/splash/splash.component';
+import { PlantAccessoriesComponent } from './plant-accessories/plant-accessories.component';
 
 
 export const routes: Routes = [
@@ -43,6 +44,8 @@ export const routes: Routes = [
     { path: 'chat', component: ChatbotComponent},
     { path: 'intro', component: IntroductionComponent},
     { path: 'terms', component: TermPolicyComponent},
+    { path: 'accessories', component: PlantAccessoriesComponent},
+
     
 
 

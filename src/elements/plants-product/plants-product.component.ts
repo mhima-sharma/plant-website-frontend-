@@ -3,6 +3,8 @@ import { ProductService } from '../../app/service/product.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-plants-product',
