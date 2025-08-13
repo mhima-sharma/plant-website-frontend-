@@ -18,49 +18,55 @@
 
     <!-- Navigation Links -->
     <div class="hidden md:flex gap-5 text-green-700 text-sm font-medium items-center">
-      <a routerLink="/show" class=" hover:text-lime-600 transition-colors" style="color: green !important;">Home</a>
+      <a routerLink="/show" class="hover:text-lime-600 transition-colors" style="color: green !important;">Home</a>
       <a routerLink="/about" class="hover:text-lime-600 transition-colors" style="color: green !important;">About us</a>
-      <a routerLink="/contact" class="hover:text-lime-600 transition-colors" style="color: green !important;" >Contact us</a>
+      <a routerLink="/contact" class="hover:text-lime-600 transition-colors" style="color: green !important;">Contact us</a>
       <a routerLink="/store" class="hover:text-lime-600 transition-colors" style="color: green !important;">plants</a>
-      <a  routerLink="/accessories" (click)="showDevelopmentMessage()" class="hover:text-lime-600 transition-colors cursor-pointer" style="color: green !important;">Plant Accessories</a>
-      <!-- (click)="showDevelopmentMessage()" -->
-       <!-- routerLink="/accessories" -->
+      <a routerLink="/accessories" (click)="showDevelopmentMessage()" class="hover:text-lime-600 transition-colors cursor-pointer" style="color: green !important;">Plant Accessories</a>
+      
+      <!-- Auth Links -->
       <div>
+        <!-- Sign Up -->
         <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700"
-        class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition" style="color: green !important;">
-        Sign Up
-        <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
-          alt="tap here"
-          class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2" />
-      </a> 
+          class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition" style="color: green !important;">
+          Sign Up
+          <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
+            alt="tap here"
+            class="absolute w-10 h-10 pointer-events-none -bottom-8 left-1/2 transform -translate-x-1/2" />
+        </a> 
 
-      <!-- Logout (only if logged in) -->
-      <a *ngIf="isLoggedIn" (click)="openLogoutPopup()"
-        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer" style="color: green !important;   text-decoration: none !important; ">
-        Logout
-      </a>
+        <!-- Logout -->
+        <a *ngIf="isLoggedIn" (click)="openLogoutPopup()"
+          class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer"
+          style="color: green !important; text-decoration: none !important;">
+          Logout
+        </a>
       </div>
     </div>
 
-    <!-- Cart Icon -->
-    <div class="relative cursor-pointer text-green-700" (click)="openCart()">
-   <!-- ✅ Correct: use the component directly -->
-<i class="fas fa-shopping-bag text-xl hover:text-lime-600 transition-colors"></i>
+    <!-- Cart + Profile Icons -->
+    <div class="flex items-center gap-x-3 text-green-700">
+      
+      <!-- Cart Icon -->
+      <div class="relative cursor-pointer" (click)="openCart()">
+        <i class="fas fa-shopping-bag text-xl hover:text-lime-600 transition-colors"></i>
+        <span
+          class="absolute -top-2 -right-2 bg-green-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+          {{ cartCount > 0 ? cartCount : 0 }}
+        </span>
+      </div>
 
+      <!-- User Profile Icon -->
+      <div class="relative cursor-pointer" routerLink="/profile">
+        <i class="fas fa-user-circle text-2xl hover:text-lime-600 transition-colors"></i>
+      </div>
 
-
-      <span *ngIf="cartCount > 0"
-        class="absolute -top-2 -right-2 bg-green-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-        {{ cartCount }}
-      </span>
-      <span *ngIf="cartCount <= 0"
-        class="absolute -top-2 -right-2 bg-green-700 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-        0
-      </span>
     </div>
 
   </nav>
 </div>
+
+<!-- Logout Modal -->
 <div *ngIf="showLogoutModal" class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
   <div class="bg-white rounded-xl p-6 shadow-lg w-80 text-center">
     <h2 class="text-lg font-semibold mb-4 text-gray-800">
@@ -77,4 +83,4 @@
       </button>
     </div>
   </div>
-</div> 
+</div>
