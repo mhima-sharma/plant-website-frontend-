@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-createproduct',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './createproduct.component.html',
   styleUrl: './createproduct.component.css'
 })
@@ -16,7 +16,6 @@ export class CreateproductComponent {
   productForm: FormGroup;
   selectedFiles: File[] = [];
   products: any[] = [];
-  categories: string[] = ['Accessories', 'Seeds', 'Soil & Compost', 'Pots', 'Gardening Tools'];
 
   private baseUrl = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api/products'
@@ -31,7 +30,6 @@ export class CreateproductComponent {
       title: ['', Validators.required],
       quantity: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       price: ['', [Validators.required, Validators.pattern(/^[0-9.]+$/)]],
-      category: ['', Validators.required],
       description: ['', Validators.required]
     });
   }
@@ -40,6 +38,7 @@ export class CreateproductComponent {
     const files = event.target.files;
     if (files && files.length > 0) {
       this.selectedFiles = Array.from(files);
+      console.log('Selected files:', this.selectedFiles);
     }
   }
 
@@ -59,7 +58,6 @@ export class CreateproductComponent {
     formData.append('title', this.productForm.get('title')?.value);
     formData.append('quantity', this.productForm.get('quantity')?.value);
     formData.append('price', this.productForm.get('price')?.value);
-    formData.append('category', this.productForm.get('category')?.value);
     formData.append('description', this.productForm.get('description')?.value);
 
     this.selectedFiles.forEach(file => {
@@ -72,12 +70,14 @@ export class CreateproductComponent {
 
     this.http.post(this.baseUrl, formData, { headers }).subscribe({
       next: (res) => {
-        alert('✅ Product uploaded successfully');
+        console.log('✅ Product added successfully:', res);
+        alert('Product uploaded ✅');
         this.productForm.reset();
         this.selectedFiles = [];
-        this.fetchProducts();
+        this.fetchProducts(); // optional refresh
       },
       error: (err) => {
+        console.error('❌ Error uploading product:', err);
         alert(err.error?.message || 'Upload failed. Please login again.');
       }
     });
