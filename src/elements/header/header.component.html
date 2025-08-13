@@ -18,16 +18,16 @@
 
     <!-- Navigation Links -->
     <div class="hidden md:flex gap-5 text-green-700 text-sm font-medium items-center">
-      <a routerLink="/show" class="hover:text-lime-600 transition-colors">Home</a>
-      <a routerLink="/about" class="hover:text-lime-600 transition-colors">About us</a>
-      <a routerLink="/contact" class="hover:text-lime-600 transition-colors">Contact us</a>
-      <a routerLink="/store" class="hover:text-lime-600 transition-colors">plants</a>
-      <a  routerLink="/accessories" (click)="showDevelopmentMessage()" class="hover:text-lime-600 transition-colors cursor-pointer">Plant Accessories</a>
+      <a routerLink="/show" class=" hover:text-lime-600 transition-colors" style="color: green !important;">Home</a>
+      <a routerLink="/about" class="hover:text-lime-600 transition-colors" style="color: green !important;">About us</a>
+      <a routerLink="/contact" class="hover:text-lime-600 transition-colors" style="color: green !important;" >Contact us</a>
+      <a routerLink="/store" class="hover:text-lime-600 transition-colors" style="color: green !important;">plants</a>
+      <a  routerLink="/accessories" (click)="showDevelopmentMessage()" class="hover:text-lime-600 transition-colors cursor-pointer" style="color: green !important;">Plant Accessories</a>
       <!-- (click)="showDevelopmentMessage()" -->
        <!-- routerLink="/accessories" -->
       <div>
         <a *ngIf="!isLoggedIn" routerLink="/user-login" routerLinkActive="text-blue-700"
-        class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition">
+        class="relative text-green-700 text-lg font-semibold hover:text-lime-600 transition" style="color: green !important;">
         Sign Up
         <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyNzZjcmdnam1nazN4Y24yMmUwcnpwc3hneHE4NGx0bHNsMXozdDB0byZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/BMPSCLh0SQxvGQ81uP/source.gif"
           alt="tap here"
@@ -36,7 +36,7 @@
 
       <!-- Logout (only if logged in) -->
       <a *ngIf="isLoggedIn" (click)="openLogoutPopup()"
-        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer">
+        class="text-green-700 text-lg font-semibold hover:text-lime-600 transition cursor-pointer" style="color: green !important;   text-decoration: none !important; ">
         Logout
       </a>
       </div>
