@@ -69,9 +69,9 @@
       </div>
       <div *ngFor="let item of cartItems" class="flex gap-4 mb-4">
         <div class="flex items-start gap-3">
-          <input  [(ngModel)]="item.selected"
+          <!-- <input  [(ngModel)]="item.selected"
                 name="itemSelect{{ item.id }}" class="mt-1 text-green-600"
-                 (change)="updatePrice()" />
+                 (change)="updatePrice()" /> -->
           <img [src]="(item.images?.split(',')[0] || 'assets/placeholder.jpg')"
                class="w-20 h-24 object-cover rounded-lg border" />
         </div>
